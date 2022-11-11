@@ -1,0 +1,115 @@
+@import url("https://fonts.googleapis.com/css2?family=Lateef&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "Lateef", serif;
+  box-sizing: border-box;
+  font-size: 1.2rem;
+}
+section {
+  max-width: 1200px;
+  margin: auto;
+  text-align: center;
+
+}
+
+.note{
+  text-align: center;
+}
+
+#copyrightname {
+  color: #b61919;
+  font-size: 1.5rem;
+}
+h1 {
+  text-align: center;
+  color: #2b2b43;
+  top: 94px;
+  font-size: 3rem;
+  line-height: 4rem;
+  letter-spacing: 0.1rem;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+input:not([type="checkbox"]) {
+  color: black;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding-left:1rem;
+  height: 40px;
+  background: #f6f6f6;
+  border-radius: 88px;
+  
+
+}
+
+.submit{
+padding:auto 50px ;
+color: #fff;
+text-align: center;
+width: 25%;
+background: #b61919;
+box-shadow: 0px 8px 20px rgba(78, 96, 255, 0.16);
+border-radius: 8px;
+}
+
+.submit:disabled{
+    color:black;
+    background: gray;
+}
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+    color: #B61919;
+  }
+  
+  a:visited {
+    color: #B61919;
+  }
+  a:hover,
+  a:focus {
+    color: #B61919;
+  }
+  a:active {
+    color: #B61919;
+  }
+
+.signform i {
+z-index: 2;
+    margin-left: -35px;
+    cursor: pointer;
+    position: absolute;
+}
+
+nav {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #670606;
+    width: 100%;
+    top: 0;
+    z-index: 2;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  nav ul li,
+  nav a { 
+    list-style-type: none;
+    display: inline-block;
+    padding: 0px 25px;
+    color: whitesmoke !important;
+  }
+
+
+  @media screen and (max-width: 768px) {
+    .submit{
+        width: 75%;
+    }
+    nav {
+bottom: 0;
+justify-content: center;
+font-size: 1rem;
+
+    }
+  }
