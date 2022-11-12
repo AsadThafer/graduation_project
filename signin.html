@@ -16,7 +16,7 @@
 <body>
     <header>
         <header>
-            <nav>
+            <nav class="topnav">
                 <a href="index.html">
                     <div class="logo">
                         <img src="img/nav_logo.png" alt="wasselni logo for navbar" width="90px" height="90px" />
@@ -26,21 +26,26 @@
             <h1>تسجيل الدخول</h1>
             <p class="note">يرجى الدخول باستخدام بياناتك التي انشأت بها حسابك سابقا </p>
         </header>
-
         <main>
             <section>
-                <form class="signform" id="signinform" action="https://httpbin.org/post" method="post" autocomplete="off">
+                <form class="signform" id="signinform" action="https://httpbin.org/post" method="post"
+                    autocomplete="off">
                     <p> <input type="tel" name="mobile_Number" id="mobile_Number" placeholder="+970 " value="05"
                             pattern="[0-9]{10}" required></p>
-                    <p> <input type="password" placeholder="كلمة المرور" id="password"> <i class="bi bi-eye-slash" id="togglePassword"></i></p>
+                    <p>
+                        <input type="password" name="password" id="password" placeholder="كلمة المرور" required>
+                        <i class="bi bi-eye-slash" id="togglePassword"></i>
+                    </p>
                     <p><input type="checkbox">أبقني متصلا</p>
                     <p>
-                     <button class="submit" type="submit">تسجيل الدخول</button>
+                        <button class="signsubmit" type="submit">تسجيل الدخول</button>
                     </p>
                 </form>
+                <p>    ليس لديك حساب بعد ؟ <a href="signup.html">إنشاء حساب</a></p>
+
             </section>
         </main>
- <script src="js/script.js"></script>
+        <script src="js/script.js"></script>
 
 </body>
 
