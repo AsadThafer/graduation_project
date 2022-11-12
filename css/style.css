@@ -10,10 +10,9 @@ section {
   max-width: 1200px;
   margin: auto;
   text-align: center;
-
 }
 
-.note{
+.note {
   text-align: center;
 }
 
@@ -22,8 +21,7 @@ section {
   font-size: 1.5rem;
 }
 h1 {
-  margin-top: 80px;
-  margin-bottom: 50px;
+  margin-top: 70px;
   text-align: center;
   color: #2b2b43;
   top: 94px;
@@ -32,138 +30,195 @@ h1 {
   letter-spacing: 0.1rem;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
-input:not([type="checkbox"]) {
+.signform input:not([type="checkbox"]) {
   color: black;
   margin-top: 5px;
   margin-bottom: 5px;
-  padding-left:1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
   height: 40px;
   background: #f6f6f6;
   border-radius: 88px;
-  
-
 }
 
-.signsubmit{
-padding:auto 50px ;
-color: #fff;
-text-align: center;
-width: 25%;
-background: #b61919;
-box-shadow: 0px 8px 20px rgba(78, 96, 255, 0.16);
-border-radius: 8px;
+.signsubmit {
+  padding: auto 50px;
+  color: #fff;
+  text-align: center;
+  width: 25%;
+  background: #b61919;
+  box-shadow: 0px 8px 20px rgba(78, 96, 255, 0.16);
+  border-radius: 8px;
 }
 
-.signsubmit:disabled{
-    color:black;
-    background: gray;
+.signsubmit:disabled {
+  color: black;
+  background: gray;
 }
 
 a {
-    text-decoration: none;
-    cursor: pointer;
-    color: #B61919;
-  }
-  
-  a:visited {
-    color: #B61919;
-  }
-  a:hover,
-  a:focus {
-    color: #B61919;
-  }
-  a:active {
-    color: #B61919;
-  }
+  text-decoration: none;
+  cursor: pointer;
+  color: #b61919;
+}
+
+a:visited {
+  color: #b61919;
+}
+a:hover,
+a:focus {
+  color: #b61919;
+}
+a:active {
+  color: #b61919;
+}
 
 .signform i {
-z-index: 2;
-    margin-left: -35px;
-    cursor: pointer;
-    position: absolute;
+  z-index: 2;
+  margin-left: -35px;
+  cursor: pointer;
+  position: absolute;
 }
 
 nav {
-    display: flex;
-    flex-flow: row wrap;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #670606;
-    width: 100%;
-    z-index: 2;
-    width: 100%;
-    margin-bottom: 10px;
-  }
-.topnav{
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #670606;
+  width: 100%;
+  z-index: 2;
+  width: 100%;
+  margin-bottom: 10px;
+}
+.topnav {
   top: 0;
 }
-  nav ul li,
-  nav a { 
-    list-style-type: none;
-    display: inline-block;
-    padding: 0px 25px;
-    color: whitesmoke !important;
-  }
+nav ul li,
+nav a {
+  list-style-type: none;
+  display: inline-block;
+  padding: 0px 25px;
+  color: whitesmoke !important;
+}
 
-  .footernav{
-    display: none;
-  }
-  input:valid {
-    border: 2px solid green;
-  }
+.footernav {
+  display: none;
+}
+.signform input:valid {
+  border: 2px solid green;
+}
 
-  input:invalid {
-    border: 2px solid #670606;
-  }
- 
+.signform input:invalid {
+  border: 2px solid #670606;
+}
 
-.tripformflex{
+.tripformflex {
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
+  background-color: #f3f4ff;
+  border-radius: 2rem;
+  padding-bottom: 1rem;
+  width: 50%;
+  margin: auto;
 }
-.tripformflex p{
+
+.divdesign{
+  background-color: #f3f4ff;
+  border-radius: 2rem;
+  padding-bottom: 1rem;
+  width: 50%;
+  margin: auto;
+}
+.tripformflex p {
   text-align: center;
   padding-top: 1rem;
   display: flex;
   flex-flow: column nowrap;
 }
 
-.tripformflex p:last-child{
+.tripformflex p:last-child {
   flex-flow: row;
-  width: 30%;
+  width: 60%;
 }
-.tripformflex .tripsubmit{
-  margin:0px 5px;
+.tripformflex .tripsubmit {
+  margin: 0px 5px;
   padding-left: 2rem;
   padding-right: 2rem;
   width: 100%;
   color: whitesmoke;
-background: #19B63C;
-box-shadow: 0px 8px 20px rgba(78, 96, 255, 0.16);
-border-radius: 8px;
+  background: #19b63c;
+  box-shadow: 0px 8px 20px rgba(78, 96, 255, 0.16);
+  border-radius: 8px;
 }
 
-.tripformflex .cancelsubmit{
-background: #646A65;
+.tripformflex .cancelsubmit {
+  background: #646a65;
 }
 
+textarea,.tripformflex input[type="datetime-local"] {
+  resize: none;
+  border: 1px solid #c7c8d2;
+  border-radius: 8px;
+}
+
+.tripformflex select,
+.tripformflex option {
+  padding-left: 90px;
+  padding-right: 90px;
+  border: 1px solid #c7c8d2;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.mainscreendiv{
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  width: 50%;
+  margin: auto;
+  margin-bottom: 10px;
+  background: #f3f4ff;
+}
+
+.title{
+font-size: 1.5rem;
+color: #2B2B43;
+}
+
+
+.mainscreenbuttonride{
+  margin-top: 10px;
+  background: #19B63C;;
+  box-shadow: 0px 8px 20px rgba(78, 96, 255, 0.16);
+  border-radius: 8px;
+  color: white;
+  width: 50%;
+}
+
+.driverform{
+  background: #1C19B6;
+} 
+
+.rednote{
+  color: #B61919;
+}
 
 @media screen and (max-width: 768px) {
-  h1{
+  h1 {
     margin-top: 0px;
     margin-bottom: 0px;
   }
-  .signsubmit{
-      width: 75%;
+  .signsubmit {
+    width: 75%;
   }
   nav {
-bottom: 0;
-justify-content: center;
-font-size: 1rem;
-
+    bottom: 0;
+    justify-content: center;
+    font-size: 1rem;
   }
-  .footernav{
+  .footernav {
     display: flex;
     flex-wrap: nowrap;
     flex-direction: row-reverse;
@@ -175,21 +230,36 @@ font-size: 1rem;
     width: 100%;
     padding: 5px;
   }
-  .footernav a{
-    display:flex;
+  .footernav a {
+    display: flex;
     flex-flow: column nowrap;
     align-items: center;
   }
-  .footernav img{
+  .footernav img {
     filter: brightness(0) invert(1);
     width: 36px;
     height: 36px;
     display: block;
   }
-  .tripformflex .tripsubmit{
-    margin:0px 5px;
+  .tripformflex .tripsubmit {
+    margin: 0px 5px;
   }
-  .tripformflex p:last-child{
+  .tripformflex p:last-child {
     width: 80%;
+  }
+  .tripformflex {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    background-color: #f3f4ff;
+    border-radius: 2rem;
+    padding-bottom: 1rem;
+    width: 100%;
+  }
+  .mainscreendiv{
+    width: 100%;
+  }
+  .formtitle{
+    display:none;
   }
 }
