@@ -124,7 +124,7 @@ nav a {
   margin: auto;
 }
 
-.divdesign{
+.divdesign {
   background-color: #f3f4ff;
   border-radius: 2rem;
   padding-bottom: 1rem;
@@ -157,7 +157,8 @@ nav a {
   background: #646a65;
 }
 
-textarea,.tripformflex input[type="datetime-local"] {
+textarea,
+.tripformflex input[type="datetime-local"] {
   resize: none;
   border: 1px solid #c7c8d2;
   border-radius: 8px;
@@ -172,7 +173,7 @@ textarea,.tripformflex input[type="datetime-local"] {
   text-align: center;
 }
 
-.mainscreendiv{
+.mainscreendiv {
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
@@ -182,28 +183,28 @@ textarea,.tripformflex input[type="datetime-local"] {
   background: #f3f4ff;
 }
 
-.title{
-font-size: 1.5rem;
-color: #2B2B43;
+.title {
+  font-size: 1.5rem;
+  color: #2b2b43;
 }
 
-
-.mainscreenbuttonride{
+.mainscreenbuttonride {
   margin-top: 10px;
-  background: #19B63C;;
+  background: #19b63c;
   box-shadow: 0px 8px 20px rgba(78, 96, 255, 0.16);
   border-radius: 8px;
   color: white;
   width: 50%;
 }
 
-.driverform{
-  background: #1C19B6;
-} 
-
-.rednote{
-  color: #B61919;
+.driverform {
+  background: #1c19b6;
 }
+
+.rednote {
+  color: #b61919;
+}
+
 
 @media screen and (max-width: 768px) {
   h1 {
@@ -229,6 +230,7 @@ color: #2B2B43;
     bottom: 0;
     width: 100%;
     padding: 5px;
+    font-size: 1.2rem;
   }
   .footernav a {
     display: flex;
@@ -256,10 +258,13 @@ color: #2B2B43;
     padding-bottom: 1rem;
     width: 100%;
   }
-  .mainscreendiv{
+  .mainscreendiv {
     width: 100%;
   }
-  .formtitle{
-    display:none;
+  .formtitle {
+    display: none;
+  }
+  main {
+    padding-bottom: 100px;
   }
 }

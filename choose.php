@@ -1,3 +1,6 @@
+<?php 
+	include('functions.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,7 +21,7 @@
         <p>
             <h3>تحتاج لتوصيلة؟</h3>
         </p>
-        <a href="pickride.html"> <input type="button" value="املأ بيانات وجهتك الان"></a>
+        <a href="pickride.php"> <input type="button" value="املأ بيانات وجهتك الان"></a>
 
     </div>
     <div>

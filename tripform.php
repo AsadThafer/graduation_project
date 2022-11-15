@@ -16,7 +16,7 @@
 <body>
   <header>
     <nav>
-      <a href="index.html">
+      <a href="index.php">
         <div class="logo">
           <img src="img/nav_logo.png" alt="wasselni logo for navbar" width="90px" height="90px" />
         </div>
@@ -82,15 +82,15 @@
         </p>
         <p>
           <button class="submit tripsubmit" type="submit">إرسال الطلب</button>
-          <button onclick="location.href='index.html'" class="cancelsubmit tripsubmit" type="reset">إلغاء الطلب</button>
+          <button onclick="location.href='index.php'" class="cancelsubmit tripsubmit" type="reset">إلغاء الطلب</button>
         </p>
       </div>
     </form>
     <footer>
       <nav class="footernav">
-        <a href="Profile.html"><img src="img/user_512px.png" alt="profile logo">البروفايل</a>
-        <a href="orders.html"><img src="img/order_512px.png" alt="orders logo">الطلبات </a>
-        <a href="index.html"><img src="img/home_512px.png" alt="home page logo">الرئيسية</a>
+        <a href="Profile.php"><img src="img/user_512px.png" alt="profile logo">البروفايل</a>
+        <a href="orders.php"><img src="img/order_512px.png" alt="orders logo">الطلبات </a>
+        <a href="index.php"><img src="img/home_512px.png" alt="home page logo">الرئيسية</a>
       </nav>
   </main>
   </footer>

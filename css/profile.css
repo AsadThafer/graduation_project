@@ -1,0 +1,93 @@
+.profile_info{
+    width: 100%;
+    background: #FFFFFF;
+border: 1px solid #EDEEF2;
+border-radius: 16px;
+}
+.profile_image{
+    width: 160px;
+    height: 160px;
+    border-radius: 8px;
+    margin-top: 20px;
+  }
+
+.profile_details_title{
+color: #2B2B43;
+font-size: 2rem;
+line-height: 16px;
+color: #545563;
+padding: 20px ;
+
+}
+
+.profile_details{
+box-sizing: border-box;
+border: 1px solid #C7C8D2;
+border-radius: 8px;
+font-size: 2rem;
+align-items: center;
+letter-spacing: 0.1px;
+padding-top: 10px;
+padding-bottom: 10px;
+width: 80%;
+text-align: center;
+padding: auto;
+margin: auto;
+}
+
+
+.updateinfo {
+    box-sizing: content-box;
+    text-align: center;
+    padding: 10px 2rem;
+    width: 5rem;
+    border: 1px solid #B61919;
+    border-radius: 8px;
+    margin-left: 100px;
+  }
+.img_updateinfo{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    align-content: space-between;
+}
+
+#profile{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    align-content: space-between;
+    padding: auto;
+    margin: auto;
+    text-align: center;
+}
+
+.input-group{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    align-content: space-between;
+    padding: auto;
+    margin: auto;
+    text-align: center;
+}
+.input-group input{
+    text-align: center;
+}
+
+@media screen and (max-width: 768px){
+    .img_updateinfo{
+        flex-flow: column nowrap;
+    }
+    .divdesign{
+        margin-left: 0px;
+        margin-top: 10px;
+        width: 90%;
+    }
+}
