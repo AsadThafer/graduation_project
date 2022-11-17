@@ -21,15 +21,20 @@
 </head>
 
 <body>
-        <header>
-            <nav>
-                <a href="index.php">
-                    <div class="logo">
-                        <img src="img/nav_logo.png" alt="wasselni logo for navbar" width="90px" height="90px" />
-                    </div>
-                </a>
-            </nav>
-        </header>
+<header>
+        <nav id="headernav">
+            <a href="index.php">
+                <div class="logo">
+                    <img src="img/nav_logo.png" alt="wasselni logo for navbar" width="90px" height="90px" />
+                </div>
+            </a>
+            <div id="headernavlinks">
+                <a href="Profile.php">البروفايل</a>
+                <a href="orders.php">الطلبات </a>
+                <a href="index.php">الرئيسية</a>
+            </div>
+        </nav>
+    </header>
         <main>
             <section>
                 <div class="divdesign mainscreendiv">
@@ -51,13 +56,9 @@
                 <a href="Profile.php"><img src="img/user_512px.png" alt="profile logo">البروفايل</a>
                 <a href="orders.php"><img src="img/order_512px.png" alt="orders logo">الطلبات </a>
                 <a href="index.php"><img src="img/home_512px.png" alt="home page logo">الرئيسية</a>
+                
             </nav>
-            <a 
-            <?php 
-if (isLoggedIn()==false) {
-echo 'style="display:none;"';
-}
-?> href="index.php?logout='1'" name='logout'>log out the account</a>
+           
 
             <?php # echo $_SESSION['user']['displayed_Name']; ?> 
         </footer>

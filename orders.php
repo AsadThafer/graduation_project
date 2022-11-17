@@ -21,15 +21,20 @@
 </head>
 
 <body>
-        <header>
-            <nav>
-                <a href="index.php">
-                    <div class="logo">
-                        <img src="img/nav_logo.png" alt="wasselni logo for navbar" width="90px" height="90px" />
-                    </div>
-                </a>
-            </nav>
-        </header>
+<header>
+        <nav id="headernav">
+            <a href="index.php">
+                <div class="logo">
+                    <img src="img/nav_logo.png" alt="wasselni logo for navbar" width="90px" height="90px" />
+                </div>
+            </a>
+            <div id="headernavlinks">
+                <a href="Profile.php">البروفايل</a>
+                <a href="orders.php">الطلبات </a>
+                <a href="index.php">الرئيسية</a>
+            </div>
+        </nav>
+    </header>
         <main>
 
 

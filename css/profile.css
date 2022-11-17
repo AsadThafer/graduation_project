@@ -81,6 +81,11 @@ margin: auto;
     text-align: center;
 }
 
+
+#myProfileImage:hover{
+    cursor: pointer;
+}
+
 @media screen and (max-width: 768px){
     .img_updateinfo{
         flex-flow: column nowrap;

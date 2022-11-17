@@ -1,8 +1,9 @@
 <?php include('functions.php');
-  if (isLoggedIn()==False) {
+$id = $_SESSION['user']['id'];
+if (isLoggedIn() == False) {
     $_SESSION['msg'] = "You Are Logged in Already";
     header('location: signin.php');
-  }
+}
 ?>
 <!DOCTYPE html>
 <html lang="ar">
@@ -21,68 +22,97 @@
 </head>
 
 <body>
-        <header>
-            <nav>
-                <a href="index.php">
-                    <div class="logo">
-                        <img src="img/nav_logo.png" alt="wasselni logo for navbar" width="90px" height="90px" />
-                    </div>
-                </a>
-            </nav>
-        </header>
-        <main>
-            <h2>المعلومات الشخصية</h2>
+    <header>
+        <nav id="headernav">
+            <a href="index.php">
+                <div class="logo">
+                    <img src="img/nav_logo.png" alt="wasselni logo for navbar" width="90px" height="90px" />
+                </div>
+            </a>
+            <div id="headernavlinks">
+                <a href="Profile.php">البروفايل</a>
+                <a href="orders.php">الطلبات </a>
+                <a href="index.php">الرئيسية</a>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <h2>المعلومات الشخصية</h2>
         <div class="divdesign" id="profile">
-        <div class='img_updateinfo'>
-				<?php  if (isset($_SESSION['user'])) : ?>
-          <img class="profile_image" src="uploads/<?php echo $_SESSION['user']['image_url']; ?>"/>		
-          <a class="updateinfo">حذف الصورة</a>	
-          </div>
-          <br>
-		
-    
-    <form method="post" action="profile.php" >
-    <?php echo display_error(); ?>
-	<div class="input-group">
-		<label >الاسم</label>
-		<input dir=rtl type="text" name="displayed_Name" value="<?php echo $_SESSION['user']['displayed_Name']; ?>">
-	</div>
-	<div class="input-group">
-		<label> رقم الموبايل</label>
-		<input type="number" name="mobile_Number" value="<?php echo ucfirst($_SESSION['user']['mobile_Number']); ?>">
-	</div>
-	<div class="input-group">
-		<label>البريد الالكتروني</label>
-		<input type="email" name="email" value="<?php echo ucfirst($_SESSION['user']['email']); ?>">
-	</div>
-	<div class="input-group">
-		<label>الجنس</label>
-		<select name="gender" id="gender" value="<?php echo ucfirst($_SESSION['user']['gender']); ?>">
-        <option value="ذكر">ذكر</option>
-		<option value="أنثى">أنثى</option>
-        </select>
-	</div>
-    <div class="input-group">
-		<input type="hidden" name="id" value="<?php echo ucfirst($_SESSION['user']['id']); ?>"></input>
- </div>
-    <button type="submit" class="btn" name="update_btn">تعديل البيانات</button>
+            <div class='img_updateinfo'>
+                <?php if (isset($_SESSION['user'])): ?>
+                <img id="myProfileImage" class="profile_image" src="uploads/<?php echo $_SESSION['user']['image_url']; ?>" />
+                <!-- The Modal -->
+                <div id="myModal" class="modal">
+                    <!-- Modal content -->
+                    <div class="modal-content">
+                        <span class="modalclose">&times;</span>
+                        <form method="post" action="upload.php?id=<?php echo $id; ?>" enctype="multipart/form-data">
+                            <div class="input-group">
+                                <label>تعديل صورتك </label>
+                                <input type="file" name="my_image">
+                            </div>
+                            <div class="input-group">
+                                <button type="submit" class="btn" name="updateimage_submit">حفظ التغييرات </button>
+                            </div>
+                        </form>
+                        <form  method="post" action="upload.php?id=<?php echo $id; ?>" enctype="multipart/form-data">
+                        <div class="input-group">
+                                <button type="submit" class="btn" name="delete_image">حذف الصورة</button>
+                            </div>
+                    </form>
+                    </div>
 
- <?php endif ?>
-			</div>
-		</div>
-	</div>
+                </div>
+            </div>
+            <br>
 
-</form>
 
-        </main>
-        <footer>
-            <nav class="footernav">
-                <a href="Profile.php"><img src="img/user_512px.png" alt="profile logo">البروفايل</a>
-                <a href="orders.php"><img src="img/order_512px.png" alt="orders logo">الطلبات </a>
-                <a href="index.php"><img src="img/home_512px.png" alt="home page logo">الرئيسية</a>
-            </nav>
-        </footer>
-        <script src="js/script.js"></script>
+            <form class="update_profile_form" method="post" action="profile.php">
+                <?php echo display_error(); ?>
+                <div class="input-group">
+                    <label>الاسم</label>
+                    <input dir=rtl type="text" name="displayed_Name"
+                        value="<?php echo $_SESSION['user']['displayed_Name']; ?>">
+                </div>
+                <div class="input-group">
+                    <label> رقم الموبايل</label>
+                    <input type="number" name="mobile_Number"
+                        value="<?php echo ucfirst($_SESSION['user']['mobile_Number']); ?>">
+                </div>
+                <div class="input-group">
+                    <label>البريد الالكتروني</label>
+                    <input type="email" name="email" value="<?php echo ucfirst($_SESSION['user']['email']); ?>">
+                </div>
+                <div class="input-group">
+                    <label>الجنس</label>
+                    <select name="gender" id="gender" value="<?php echo ucfirst($_SESSION['user']['gender']); ?>">
+                        <option value="ذكر">ذكر</option>
+                        <option value="أنثى">أنثى</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <input type="hidden" name="id" value="<?php echo ucfirst($_SESSION['user']['id']); ?>"></input>
+                </div>
+                <button type="submit" class="btn" name="update_btn">تعديل البيانات</button>
+
+                <?php endif ?>
+        </div>
+        </div>
+        </div>
+
+        </form>
+        <a href="index.php?logout='1'" name='logout'>تسجيل الخروج</a>
+    </main>
+    <footer>
+        <nav class="footernav">
+            <a href="Profile.php"><img src="img/user_512px.png" alt="profile logo">البروفايل</a>
+            <a href="orders.php"><img src="img/order_512px.png" alt="orders logo">الطلبات </a>
+            <a href="index.php"><img src="img/home_512px.png" alt="home page logo">الرئيسية</a>
+        </nav>
+    </footer>
+    <script defer src="js/script.js"></script>
+    <script defer src="js/modal.js"></script>
 </body>
 
 </html>
