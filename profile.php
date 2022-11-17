@@ -1,5 +1,8 @@
-<?php 
-	include('functions.php');
+<?php include('functions.php');
+  if (isLoggedIn()==False) {
+    $_SESSION['msg'] = "You Are Logged in Already";
+    header('location: signin.php');
+  }
 ?>
 <!DOCTYPE html>
 <html lang="ar">
@@ -38,15 +41,15 @@
           <br>
 		
     
-    <form method="post" action="updateuser.php">
-<?php echo display_error(); ?>
+    <form method="post" action="profile.php" >
+    <?php echo display_error(); ?>
 	<div class="input-group">
 		<label >الاسم</label>
-		<input dir=rtl type="text" name="username" value="<?php echo $_SESSION['user']['displayed_Name']; ?>">
+		<input dir=rtl type="text" name="displayed_Name" value="<?php echo $_SESSION['user']['displayed_Name']; ?>">
 	</div>
 	<div class="input-group">
 		<label> رقم الموبايل</label>
-		<input type="number" name="email" value="<?php echo ucfirst($_SESSION['user']['mobile_Number']); ?>">
+		<input type="number" name="mobile_Number" value="<?php echo ucfirst($_SESSION['user']['mobile_Number']); ?>">
 	</div>
 	<div class="input-group">
 		<label>البريد الالكتروني</label>
@@ -70,13 +73,6 @@
 	</div>
 
 </form>
-
-
-
-
-
-
-
 
         </main>
         <footer>

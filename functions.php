@@ -8,7 +8,7 @@ $db = mysqli_connect('localhost', 'root', 'asad', 'wasselni');
 $username = "";
 $email    = "";
 $errors   = array();
- 
+$nameerrors= array();
 
 // call the register() function if register_btn is clicked
 if (isset($_POST['register_btn'])) {
@@ -50,6 +50,9 @@ function register(){
 	if ($password_1 != $password_2) {
 		array_push($errors, "The two passwords do not match");
 	}
+	
+	checkifduplicate();
+
 
 	// register user if there are no errors in the form
 	if (count($errors) == 0) {
@@ -174,17 +177,36 @@ function isAdmin()
 	}
 }
 
-function updateuser(){
-$username = val($_POST['username']);
-$displayed_Name = val($_POST['displayed_Name']);
-$email = val($_POST['email']);
-$user_type = val($_POST['user_type']);
-$password = val($_POST['password']);
-$mobile_Number = val($_POST['mobile_Number']);
-$id = val($_POST['id']);
 
 
+$message =array();
 
+function updatemessage() {
+	global $message;
+	array_push($message, "تم تحديث بياناتك");
+}	
+
+
+if (isset($_POST['update_btn'])) {
+	updateprofile();
+}
+
+function updateprofile(){
+	global $db, $errors,$username,$password ;
+    $displayed_Name = val($_POST['displayed_Name']);
+    $mobile_Number = val($_POST['mobile_Number']);
+    $email=  val($_POST['email']);
+    $gender= val($_POST['gender']);
+	$id = val($_POST['id']);
+	// make sure form is filled properly
+	$sql = "UPDATE users SET displayed_Name='$displayed_Name',mobile_Number='$mobile_Number',email='$email',gender='$gender' where id='$id'";
+	mysqli_query($db, $sql);
+	$_SESSION['user']['displayed_Name'] = $displayed_Name;
+	$_SESSION['user']['mobile_Number'] = $mobile_Number;
+	$_SESSION['user']['email'] = $email;
+	$_SESSION['user']['gender'] = $gender;
+	header('location:profile.php'); 
+}
 function val($data){
     $data = trim($data);
     $data = stripslashes($data);
@@ -193,17 +215,26 @@ function val($data){
 }
 
 
-
-
-// sql to update a record
-$sql = "UPDATE users SET username='$username',displayed_Name='$displayed_Name', email='$email',user_type='$user_type',mobile_Number='$mobile_Number', password='$password' where id='$id'";
-
-if ($conn->query($sql) === TRUE) {
-    header ('location:profile.php');
-} else {
-    echo "Error updating record: " . $conn->error;
+function checkifduplicate(){
+	global $db;
+	$sql_u = "SELECT * FROM users WHERE username='$username'";
+	$sql_e = "SELECT * FROM users WHERE email='$email'";
+	$sql_n = "SELECT * FROM users WHERE mobile_Number='$mobile_Number'";
+	$res_u = mysqli_query($db, $sql_u);
+	$res_e = mysqli_query($db, $sql_e);
+	$res_n = mysqli_query($db, $sql_n);
+	if (mysqli_num_rows($res_u) > 0) {
+		array_push($errors, " هذا الاسم مستخدم من قبل * ");
+		 }
+	if (mysqli_num_rows($res_e) > 0) {
+		array_push($errors, " هذا البريد الالكتروني مستخدم من قبل *");
+		 }
+	if (mysqli_num_rows($res_n) > 0) {
+		array_push($errors, " رقم الموبايل مستخدم من قبل *");
+		 }
 }
 
 
 
-}
+
+?>

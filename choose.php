@@ -1,5 +1,9 @@
 <?php 
 	include('functions.php');
+    if (isLoggedIn()==False) {
+        $_SESSION['msg'] = "You Are Logged in Already";
+        header('location: signin.php');
+      }
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -205,6 +205,28 @@ textarea,
   color: #b61919;
 }
 
+.error{
+  color: #D8000C;
+	background-color: #FFBABA;
+  border-radius: 10px;
+  width: 25%;
+  margin: auto;
+  margin-bottom: 10px;
+  border: 1px solid black;
+}
+
+
+/* .form_error span {
+  width: 80%;
+  height: 35px;
+  margin: 3px 10%;
+  font-size: 1.1em;
+  color: #D83D5A;
+}
+.form_error {
+  border: 1px solid #D83D5A !important;
+} */
+
 
 @media screen and (max-width: 768px) {
   h1 {
@@ -266,5 +288,8 @@ textarea,
   }
   main {
     padding-bottom: 100px;
+  }
+  .error{
+    width: 95%;
   }
 }

@@ -34,29 +34,32 @@
     <main>
         <section id="signup">
         <?php echo display_error(); ?>
-                <form class="signform" id="signupform" action="signup.php" method="post" autocomplete="off">
+                <form class="signform form-anticlear" id="signupform" action="signup.php" method="post" autocomplete="off">
                     <div class="signupdiv">
-                    <p>
+                    <div <?php if (isset($name_error)): ?> class="form_error" <?php endif ?> >
                         <input type="text" name="username" id="name" placeholder="اسم المستخدم" required>
-                    </p>
+                        <?php if (isset($name_error)): ?>
+	  	                <span><?php echo $name_error; ?></span>
+	                    <?php endif ?>
+  	                </div>
                     <p>
-                        <input dir="rtl" type="text" name="displayed_Name" id="displayed_Name" placeholder="الاسم بالكامل"
+                        <input dir="rtl" type="text" name="displayed_Name" id="displayed_Name"   placeholder="الاسم بالكامل"
                             required>
                     </p>
                     <p>
-                        <input type="email" name="email" id="email" placeholder="البريد الالكتروني" required>
+                        <input type="email" name="email" id="email" placeholder="البريد الالكتروني"  required>
                     </p>
                     <p>
-                         <input type="password" name="password_1" id="password_1" placeholder="كلمة المرور" required>
+                         <input type="password" name="password_1" id="password_1" placeholder="كلمة المرور"  required>
                          <i class="bi bi-eye-slash" id="togglePassword"></i>
                     </p>
                     <p>
-                         <input type="password" name="password_2" id="password_2" placeholder=" تأكيد كلمة المرور" required>
+                         <input type="password" name="password_2" id="password_2" placeholder=" تأكيد كلمة المرور"  required>
                          <i class="bi bi-eye-slash" id="togglePassword2"></i>
                     </p>
                     <p>
                         <input type="tel" name="mobile_Number" id="mobile_Number" placeholder="+970 " value="05"
-                            pattern="[0-9]{10}" required>
+                            pattern="[0-9]{10}"  required>
                     </p>
                     <p>
                     <input type="checkbox" name="terms" id="terms" onchange="activateButton(this)">  أنا أوافق على الشروط و سياسة الخصوصية
@@ -71,6 +74,7 @@
         </section>
     </main>
     <script src="js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/akjpro/form-anticlear/base.js"></script>
 </body>
 
 </html>
