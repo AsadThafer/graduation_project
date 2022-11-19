@@ -53,6 +53,7 @@
             <?php  #echo $_SESSION['user']['displayed_Name']; ?> 
         </main>
         <script src="js/script.js"></script>
+        <script src="js/signup.js"></script>
 </body>
 
 </html>

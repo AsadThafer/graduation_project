@@ -92,6 +92,8 @@ if (isLoggedIn() == False) {
                 <div class="input-group">
                     <label>الجنس</label>
                     <select name="gender" id="gender" value="<?php echo ucfirst($_SESSION['user']['gender']); ?>">
+                     <option <?php if ($_SESSION['user']['gender']=='غير محدد')
+                        echo "selected"; ?> value="غير محدد">غير محدد</option>
                         <option <?php if ($_SESSION['user']['gender']=='ذكر')
                         echo "selected"; ?> value="ذكر">ذكر</option>
                         <option <?php if ($_SESSION['user']['gender']=='أنثى')

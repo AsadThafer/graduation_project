@@ -55,26 +55,25 @@ if (!isAdmin()) {
 
     ?>
   <?php echo DisplaySuccess(); ?>
-    <div style="max-width:90%; margin :20px auto;">
-      <table class="table">
+    <div  style=" overflow-x:auto;max-width:90%; margin :20px auto;">
+      <table class='userstable'>
 
 
         <?php
         if ($result->num_rows > 0) {
 
         ?>
-        <tr class="table__head" style="background: #5668ca;
-    color: #fff;">
-          <th class="table__th">ID</td>
-          <th class="table__th">username</td>
-          <th class="table__th">displayed_Name</td>
-          <th class="table__th">Email</td>
-          <th class="table__th">user type</td>
-          <th class="table__th">Password</td>
-          <th class="table__th">Mobile Number</td>
-          <th class="table__th">gender</td>
-          <th class="table__th">Delete</td>
-          <th class="table__th">Update</td>
+        <tr class="table__head">
+          <th>ID</td>
+          <th>username</td>
+          <th>displayed_Name</td>
+          <th>Email</td>
+          <th>user type</td>
+          <th>Password</td>
+          <th>Mobile Number</td>
+          <th>gender</td>
+          <th>Delete</td>
+          <th>Update</td>
 
         </tr>
         <?php

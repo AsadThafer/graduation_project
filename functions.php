@@ -31,7 +31,6 @@ function register()
 	$mobile_Number = e($_POST['mobile_Number']);
 
 
-
 	// form validation: ensure that the form is correctly filled
 	if (empty($username)) {
 		array_push($errors, "Username is required");
@@ -66,8 +65,8 @@ function register()
 			$_SESSION['success'] = "New user successfully created!!";
 			header('location: home.php');
 		} else {
-			$query = "INSERT INTO users (username,displayed_Name,email,mobile_Number,user_type,password) 
-					  VALUES('$username','$displayed_Name','$email','$mobile_Number','user','$password')";
+			$query = "INSERT INTO users (username,displayed_Name,email,mobile_Number,user_type,gender,password) 
+					  VALUES('$username','$displayed_Name','$email','$mobile_Number','user','غير محدد','$password')";
 			mysqli_query($db, $query);
 
 			// get id of the created user
@@ -221,19 +220,18 @@ function updateprofile()
 	$id = val($_POST['id']);
 	// make sure form is filled properly
 	$sql = "UPDATE users SET displayed_Name='$displayed_Name',mobile_Number='$mobile_Number',email='$email',gender='$gender' where id='$id'";
-		$updatequery=mysqli_query($db, $sql);
-		if($updatequery){
+	$updatequery = mysqli_query($db, $sql);
+	if ($updatequery) {
 		$_SESSION['user']['displayed_Name'] = $displayed_Name;
 		$_SESSION['user']['mobile_Number'] = $mobile_Number;
 		$_SESSION['user']['email'] = $email;
 		$_SESSION['user']['gender'] = $gender;
 		header('location:profile.php');
-		}
-		else{
-			array_push($errors, " لم يتم تنفيذ طلبك يرجى التحقق من بياناتك* ");
-		}
-		
+	} else {
+		array_push($errors, " لم يتم تنفيذ طلبك يرجى التحقق من بياناتك* ");
 	}
+
+}
 
 function val($data)
 {
