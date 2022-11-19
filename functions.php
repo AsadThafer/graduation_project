@@ -9,7 +9,7 @@ $username = "";
 $email = "";
 $errors = array();
 $nameerrors = array();
-
+$successmsgs = array();
 // call the register() function if register_btn is clicked
 if (isset($_POST['register_btn'])) {
 	register();
@@ -110,6 +110,21 @@ function display_error()
 		echo '</div>';
 	}
 }
+
+
+function DisplaySuccess()
+{
+	global $successmsgs;
+
+	if (count($successmsgs) > 0) {
+		echo '<div class="successmsgs">';
+		foreach ($successmsgs as $successmsg) {
+			echo $successmsg . '<br>';
+		}
+		echo '</div>';
+	}
+}
+
 
 function isLoggedIn()
 {

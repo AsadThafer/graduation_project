@@ -40,3 +40,11 @@ togglePassword2.addEventListener("click", function () {
   this.classList.toggle("bi-eye");
 });
 
+
+var elems = document.getElementsByClassName('deleteconfirmation');
+    var confirmIt = function (e) {
+        if (!confirm('Are you sure?')) e.preventDefault();
+    };
+    for (var i = 0, l = elems.length; i < l; i++) {
+        elems[i].addEventListener('click', confirmIt, false);
+    }

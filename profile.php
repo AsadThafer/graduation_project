@@ -41,7 +41,8 @@ if (isLoggedIn() == False) {
         <div class="divdesign" id="profile">
             <div class='img_updateinfo'>
                 <?php if (isset($_SESSION['user'])): ?>
-                <img id="myProfileImage" class="profile_image" src="uploads/<?php echo $_SESSION['user']['image_url']; ?>" />
+                <img id="myProfileImage" class="profile_image"
+                    src="uploads/<?php echo $_SESSION['user']['image_url']; ?>" />
                 <!-- The Modal -->
                 <div id="myModal" class="modal">
                     <!-- Modal content -->
@@ -56,18 +57,22 @@ if (isLoggedIn() == False) {
                                 <button type="submit" class="btn" name="updateimage_submit">حفظ التغييرات </button>
                             </div>
                         </form>
-                        <form  method="post" action="upload.php?id=<?php echo $id; ?>" enctype="multipart/form-data">
-                        <div class="input-group">
+                        <form method="post" action="upload.php?id=<?php echo $id; ?>" enctype="multipart/form-data">
+                            <div class="input-group">
                                 <button type="submit" class="btn" name="delete_image">حذف الصورة</button>
                             </div>
-                    </form>
+                        </form>
                     </div>
 
                 </div>
             </div>
-            <br>
-
-
+            <div id='usertypeonprofile'>
+                <?php echo $_SESSION['user']['user_type']; ?>
+                <br>
+                <?php if (isAdmin()) {
+                        echo "<a href='UsersList.php'>قائمة المستخدمين</a>";
+                    } ?>
+            </div>
             <form class="update_profile_form" method="post" action="profile.php">
                 <?php echo display_error(); ?>
                 <div class="input-group">
@@ -77,7 +82,7 @@ if (isLoggedIn() == False) {
                 </div>
                 <div class="input-group">
                     <label> رقم الموبايل</label>
-                    <input type="number" name="mobile_Number"
+                    <input type="tel" name="mobile_Number" pattern="[0-9]{10}"
                         value="<?php echo ucfirst($_SESSION['user']['mobile_Number']); ?>">
                 </div>
                 <div class="input-group">
@@ -87,8 +92,11 @@ if (isLoggedIn() == False) {
                 <div class="input-group">
                     <label>الجنس</label>
                     <select name="gender" id="gender" value="<?php echo ucfirst($_SESSION['user']['gender']); ?>">
-                        <option value="ذكر">ذكر</option>
-                        <option value="أنثى">أنثى</option>
+                        <option <?php if ($_SESSION['user']['gender']=='ذكر')
+                        echo "selected"; ?> value="ذكر">ذكر</option>
+                        <option <?php if ($_SESSION['user']['gender']=='أنثى')
+                        echo "selected"; ?> value="أنثى">أنثى
+                        </option>
                     </select>
                 </div>
                 <div class="input-group">
