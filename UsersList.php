@@ -55,6 +55,8 @@ if (!isAdmin()) {
 
     ?>
   <?php echo DisplaySuccess(); ?>
+  <h2 style="text-align:center ;">قائمة المستخدمين - الادمن</h2>
+
     <div  style=" overflow-x:auto;max-width:90%; margin :20px auto;">
       <table class='userstable'>
 

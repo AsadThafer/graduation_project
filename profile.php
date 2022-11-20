@@ -37,7 +37,7 @@ if (isLoggedIn() == False) {
         </nav>
     </header>
     <main>
-        <h2>المعلومات الشخصية</h2>
+        <h2 style='text-align:center'>المعلومات الشخصية</h2>
         <div class="divdesign" id="profile">
             <div class='img_updateinfo'>
                 <?php if (isset($_SESSION['user'])): ?>

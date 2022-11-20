@@ -21,7 +21,7 @@
 </head>
 
 <body>
-<header>
+    <header>
         <nav id="headernav">
             <a href="index.php">
                 <div class="logo">
@@ -35,34 +35,35 @@
             </div>
         </nav>
     </header>
-        <main>
-            <section>
-                <div class="divdesign mainscreendiv">
-                    <span class="title">تحتاج لتوصيلة؟</span>
-                    <button class="mainscreenbuttonride" onclick="location.href='tripform.php'" type="button">
-                       املأ بيانات وجهتك الآن</button>
-                       <span></span>
-                </div>
-                <div class="divdesign mainscreendiv">
-                    <span class="title">تحتاج شريك لرحلتك؟</span>
-                    <button class="mainscreenbuttonride driverform" onclick="location.href='tripform.php'" type="button">
-                        املأ بيانات وجهتك الآن</button>
-                    <span class="rednote">تحتاج لتوثيق حسابك مسبقا كمالك مركبة*</span>
-                </div>
-            </section>
-        </main>
-        <footer>
-            <nav class="footernav">
-                <a href="Profile.php"><img src="img/user_512px.png" alt="profile logo">البروفايل</a>
-                <a href="orders.php"><img src="img/order_512px.png" alt="orders logo">الطلبات </a>
-                <a href="index.php"><img src="img/home_512px.png" alt="home page logo">الرئيسية</a>
-                
-            </nav>
-           
+    <main>
+        <section>
+            <div class="divdesign mainscreendiv">
+                <span class="title">تحتاج لتوصيلة؟</span>
+                <button class="mainscreenbuttonride" onclick="location.href='tripform.php'" type="button">
+                    املأ بيانات وجهتك الآن</button>
+                <span></span>
+            </div>
+            <div class="divdesign mainscreendiv">
+                <span class="title">تحتاج شريك لرحلتك؟</span>
+                <button <?php if ($_SESSION['user']['user_type']=='user'){echo 'disabled ';} ?>
+                    class="mainscreenbuttonride driverform" onclick="location.href='tripform.php'" type="button">
+                    املأ بيانات وجهتك الآن</button>
+                <span class="rednote">تحتاج لتوثيق حسابك مسبقا كمالك مركبة*</span>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <nav class="footernav">
+            <a href="Profile.php"><img src="img/user_512px.png" alt="profile logo">البروفايل</a>
+            <a href="orders.php"><img src="img/order_512px.png" alt="orders logo">الطلبات </a>
+            <a href="index.php"><img src="img/home_512px.png" alt="home page logo">الرئيسية</a>
 
-            <?php # echo $_SESSION['user']['displayed_Name']; ?> 
-        </footer>
-        <script src="js/script.js"></script>
+        </nav>
+
+
+        <?php # echo $_SESSION['user']['displayed_Name']; ?>
+    </footer>
+    <script src="js/script.js"></script>
 </body>
 
 </html>

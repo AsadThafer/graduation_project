@@ -57,7 +57,7 @@ if ($result->num_rows > 0) {
     <link rel="stylesheet" href="css/style.css" type="text/css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>المستخدمين</title>
+    <title>تحديث بيانات مستخدم -الادمن</title>
 </head>
 
 <body>
@@ -77,7 +77,7 @@ if ($result->num_rows > 0) {
     </header>
     <main>
         <div class="header">
-            <h2>تحديث بيانات المستخدم</h2>
+            <h2 style="text-align:center ;">تحديث بيانات المستخدم رقم <?php echo $id; ?></h2>
         </div>
         <div class="divdesign" id='updateusers'>
             <form class="update_profile_form" method="post" action="updateuser.php">
@@ -127,7 +127,7 @@ if ($result->num_rows > 0) {
 
 
                 <div class="input-group">
-                    <button type="submit" class="btn" name="register_btn">Update info</button>
+                    <button type="submit" class="btn" name="register_btn"> تحديث البيانات</button>
                 </div>
                 <div class="input-group">
                     <input type="hidden" name="id" value="<?php echo $id; ?>"></input>

@@ -80,13 +80,9 @@
           <textarea dir="rtl" name="destination_details" id="destination_details" cols="30" rows="2"></textarea>
         </p>
         <p>
-          <label for="passengers_num">:عدد الركاب</label>
-          <select name="passengers_num" id="passengers_num">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-          </select>
+          <label for="extra_details">:تفاصيل إضافية</label>
+          <textarea dir="rtl" name="extra_details" id="extra_details" cols="30" rows="2" ></textarea>
+           
         </p>
         <p>
           <label for="Date_Time">:موعد الرحلة</label>

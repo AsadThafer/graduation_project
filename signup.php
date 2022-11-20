@@ -72,7 +72,10 @@ if (isLoggedIn() == True) {
                     <p>
                         <button class="signsubmit" id="submit" name="register_btn" type="submit">إنشاء حساب</button>
                     </p>
+                    <div class="input-group">
+                    <input type="hidden" name="gender" value='غير محدد'></input>
                 </div>
+                </div>    
             </form>
             <p> لديك حساب بالفعل ؟ <a href="signin.php">تسجيل دخول</a></p>
 

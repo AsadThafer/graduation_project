@@ -56,7 +56,7 @@ if ($conn->connect_error) {
     </header>
     <main>
         <div class="header">
-		<h2>إنشاء حساب - الادمن</h2>
+		<h2 style="text-align:center ;">إنشاء حساب - الادمن</h2>
         </div>
         <div class="divdesign" id='updateusers'>
             <form class="update_profile_form" method="post" action="create_user.php">
