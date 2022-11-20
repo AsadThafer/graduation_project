@@ -1,7 +1,7 @@
 <?php include('functions.php');
 $id = $_SESSION['user']['id'];
 if (isLoggedIn() == False) {
-    $_SESSION['msg'] = "You Are Logged in Already";
+    $_SESSION['msg'] = "You need to Sign in first";
     header('location: signin.php');
 }
 ?>
@@ -21,7 +21,7 @@ if (isLoggedIn() == False) {
     <title>البروفايل الشخصي</title>
 </head>
 
-<body>
+<body onload=toggleFormElements(true)>
     <header>
         <nav id="headernav">
             <a href="index.php">
@@ -77,7 +77,7 @@ if (isLoggedIn() == False) {
                         echo "<a href='UsersList.php'>قائمة المستخدمين</a>";
                     } ?>
             </div>
-            <form class="update_profile_form" method="post" action="profile.php">
+            <form id='updateprofileform' class="update_profile_form" method="post" action="profile.php">
                 <?php echo display_error(); ?>
                 <div class="input-group">
                     <label>الاسم</label>
@@ -108,8 +108,10 @@ if (isLoggedIn() == False) {
                 <div class="input-group">
                     <input type="hidden" name="id" value="<?php echo ucfirst($_SESSION['user']['id']); ?>"></input>
                 </div>
-                <button type="submit" class="btn" name="update_btn">تعديل البيانات</button>
-
+                <a id='enableedit' onclick='toggleFormElements(false)' class="btn" name="update_btn">تعديل البيانات</a>
+                <button class='updatesubmit' id='submitedits' type="submit" class="btn" name="update_btn">حفظ التغييرات </button>
+                <a id='canceledits' href='profile.php' class="btn" name="update_btn">إلغاء</a>
+                
                 <?php endif ?>
         </div>
         </div>

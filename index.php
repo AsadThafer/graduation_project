@@ -1,6 +1,6 @@
 <?php include('functions.php');
   if (isLoggedIn()==False) {
-    $_SESSION['msg'] = "You Are Logged in Already";
+    $_SESSION['msg'] = "You need to Sign in first";
     header('location: signin.php');
   }
 ?>
