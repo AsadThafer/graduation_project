@@ -69,7 +69,11 @@ if (isLoggedIn() == False) {
             <div id='usertypeonprofile'>
                 <?php echo $_SESSION['user']['user_type']; ?>
                 <br>
+                <br>
                 <?php if (isAdmin()) {
+                        echo "<a <a href='create_user.php'>إضافة مستخدم جديد</a>";
+                        echo "<br>";
+                        echo "<br>";
                         echo "<a href='UsersList.php'>قائمة المستخدمين</a>";
                     } ?>
             </div>
@@ -112,7 +116,7 @@ if (isLoggedIn() == False) {
         </div>
 
         </form>
-        <a href="index.php?logout='1'" name='logout'>تسجيل الخروج</a>
+      <div style="text-align:center ;"><a href="index.php?logout='1'" name='logout'>تسجيل الخروج</a></div>  
     </main>
     <footer>
         <nav class="footernav">

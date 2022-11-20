@@ -107,7 +107,7 @@ if (!isAdmin()) {
           <td class="table__td">
             <?php echo $row["gender"]; ?>
           </td>
-          <td class="table__td"><a onclick="return confirm(' هل أنت متأكد انك تريد حذف المستخدم رقم <?php echo $row['id'] ?> ؟')" href="deluser.php?id=<?php echo $row["id"] ?>" >Delete</a></td>
+          <td class="table__td"> <a onclick="return confirm(' هل أنت متأكد انك تريد حذف المستخدم رقم <?php echo $row['id'] ?> ؟')" href="deluser.php?id=<?php echo $row["id"] ?>" >Delete</a></td>
           <td class="table__td"><a href="updateusers.php?id=<?php echo $row["id"] ?>"  >Update</a></td>
         </tr>
 

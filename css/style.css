@@ -292,7 +292,16 @@ textarea,
   opacity: 0.5;
   text-decoration: none;
 }
+.buttonToLink{
+  background: none;
+  border: none;
+  color: red
+}
 
+.buttonToLink:hover{
+  background: none;
+  text-decoration: underline;
+}
 .userstable tr:nth-child(even) {
   background-color: #f2f2f2;
 }
