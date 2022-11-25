@@ -72,6 +72,7 @@ if (!isAdmin()) {
           <th>gender </td>
           <th>license Image</td>
           <th>Vehicle Model</td>
+          <th>Vehicle Plate</td>
           <th>Request Date</td>
           <th>Reject</td>
           <th>Accept</td>
@@ -97,15 +98,18 @@ if (!isAdmin()) {
             <?php echo $row["gender"]; ?>
           </td>
           <td class="table__td">
-            <?php echo $row["license_Image"]; ?>
+            <?php echo "<a  href = uploads/".$row["license_Image"] ." target='_blank' >" . $row["license_Image"]; ?>
           </td>
           <td class="table__td">
             <?php echo $row["Vehicle_Model"]; ?>
           </td>
           <td class="table__td">
+            <?php echo $row["Vehicle_Plate"]; ?>
+          </td>
+          <td class="table__td">
             <?php echo $row["submission_Date"]; ?>
           </td>
-          <td class="table__td"><a onclick="return confirm(' هل أنت متأكد انك تريد رفض الطلب  رقم <?php echo $row['request_id'] ?> ؟')" href="decline_request.php?request_id=<?php echo $row["request_id"] ?>" >Reject</a></td>
+          <td class="table__td"><a onclick="return confirm(' هل أنت متأكد انك تريد رفض الطلب  رقم <?php echo $row['request_id'] ?> ؟')" href="decline_request.php?id=<?php echo $row["id"] ?>&request_id=<?php echo $row["request_id"] ?>" >Reject</a></td>
           <td class="table__td"><a href="upgrade_accept.php?id=<?php echo $row["id"] ?>&request_id=<?php echo $row["request_id"] ?>">Accept</a></td>
         </tr>
 

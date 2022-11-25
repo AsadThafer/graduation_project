@@ -68,6 +68,7 @@ if (isLoggedIn() == False) {
             </div>
             <div id='usertypeonprofile'>
                 <?php echo $_SESSION['user']['user_type']; ?>
+                <?php echo $_SESSION['user']['user_status']; ?>
                 <br>
                 <br>
                 <?php if (isAdmin()) {
@@ -79,6 +80,24 @@ if (isLoggedIn() == False) {
                         echo "<br>";
                         echo "<a href='DriverRequestsTable.php'>طلبات الترقية</a>";
                     } ?>
+                <?php if (!isDriver()) {
+                        if ($_SESSION['user']['user_status'] == 'pending') {
+                            echo "<p>طلبك قيد المراجعة" . "</p>";
+                        } else if ($_SESSION['user']['user_status'] == 'Upgraded') {
+                            echo "<p>تم قبول طلبك" . "</p>";
+                            echo "<br>";
+                            echo "<br>";
+                        } else if ($_SESSION['user']['user_status'] == 'rejected') {
+                            echo "<p>تم رفض طلبك" . "</p>";
+                            echo "<br>";
+                            echo "<br>";
+                            echo "<a href='becomeDriver.php?id=$id'>تقديم طلب لسائق</a>";
+                        } else {
+                            echo "<a href='becomeDriver.php?id=$id'>تقديم طلب لسائق</a>";
+                        }
+
+                    } ?>
+
             </div>
             <form id='updateprofileform' class="update_profile_form" method="post" action="profile.php">
                 <?php echo display_error(); ?>
@@ -99,12 +118,11 @@ if (isLoggedIn() == False) {
                 <div class="input-group">
                     <label>الجنس</label>
                     <select name="gender" id="gender" value="<?php echo ucfirst($_SESSION['user']['gender']); ?>">
-                     <option <?php if ($_SESSION['user']['gender']=='غير محدد')
-                        echo "selected"; ?> value="غير محدد">غير محدد</option>
-                        <option <?php if ($_SESSION['user']['gender']=='ذكر')
-                        echo "selected"; ?> value="ذكر">ذكر</option>
-                        <option <?php if ($_SESSION['user']['gender']=='أنثى')
-                        echo "selected"; ?> value="أنثى">أنثى
+                        <option <?php if ($_SESSION['user']['gender'] == 'غير محدد') echo "selected"; ?> value="غير
+                            محدد">غير محدد</option>
+                        <option <?php if ($_SESSION['user']['gender'] == 'ذكر') echo "selected"; ?> value="ذكر">ذكر
+                        </option>
+                        <option <?php if ($_SESSION['user']['gender'] == 'أنثى') echo "selected"; ?> value="أنثى">أنثى
                         </option>
                     </select>
                 </div>
@@ -112,16 +130,17 @@ if (isLoggedIn() == False) {
                     <input type="hidden" name="id" value="<?php echo ucfirst($_SESSION['user']['id']); ?>"></input>
                 </div>
                 <a id='enableedit' onclick='toggleFormElements(false)' class="btn" name="update_btn">تعديل البيانات</a>
-                <button class='updatesubmit' id='submitedits' type="submit" class="btn" name="update_btn">حفظ التغييرات </button>
+                <button class='updatesubmit' id='submitedits' type="submit" class="btn" name="update_btn">حفظ التغييرات
+                </button>
                 <a id='canceledits' href='profile.php' class="btn" name="update_btn">إلغاء</a>
-                
+
                 <?php endif ?>
         </div>
         </div>
         </div>
 
         </form>
-      <div style="text-align:center ;"><a href="index.php?logout='1'" name='logout'>تسجيل الخروج</a></div>  
+        <div style="text-align:center ;"><a href="index.php?logout='1'" name='logout'>تسجيل الخروج</a></div>
     </main>
     <footer>
         <nav class="footernav">

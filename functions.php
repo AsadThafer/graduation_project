@@ -60,14 +60,14 @@ function register()
 		$password = ($password_1);
 		if (isset($_POST['user_type'])) {
 			$user_type = e($_POST['user_type']);
-			$query = "INSERT INTO users (username,displayed_Name,email,mobile_Number,gender,user_type, password) 
-					  VALUES('$username','$displayed_Name','$email','$mobile_Number','$gender','$user_type','$password')";
+			$query = "INSERT INTO users (username,displayed_Name,email,mobile_Number,gender,user_type,user_status, password) 
+					  VALUES('$username','$displayed_Name','$email','$mobile_Number','$gender','$user_type','','$password')";
 			mysqli_query($db, $query);
 			$_SESSION['success'] = "New user successfully created!!";
 			header('location: UsersList.php');
 		} else {
-			$query = "INSERT INTO users (username,displayed_Name,email,mobile_Number,user_type,gender,password) 
-					  VALUES('$username','$displayed_Name','$email','$mobile_Number','user','غير محدد','$password')";
+			$query = "INSERT INTO users (username,displayed_Name,email,mobile_Number,user_type,gender,user_status,password) 
+					  VALUES('$username','$displayed_Name','$email','$mobile_Number','user','غير محدد','','$password')";
 			mysqli_query($db, $query);
 
 			// get id of the created user
@@ -285,6 +285,15 @@ function checkifduplicate()
 // 		return false;
 // 	}
 // }
+
+function isDriver()
+{
+	if (isset($_SESSION['user']) && $_SESSION['user']['user_type'] == 'driver') {
+		return true;
+	} else {
+		return false;
+	}
+}
 
 
 ?>

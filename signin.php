@@ -36,8 +36,7 @@
             <section>
                 <form class="signform" id="signinform" action="signin.php" method="post"
                     autocomplete="off">
-                    <p> <input type="tel" name="mobile_Number" id="mobile_Number" placeholder="+970 " value="05"
-                            pattern="[0-9]{10}" required></p>
+                    <p> <input type="tel" name="mobile_Number" id="mobile_Number" placeholder="05" pattern="[0-9]{10}" required></p>
                     <p>
                         <input type="password" name="password" id="password_1" placeholder="كلمة المرور" required>
                         <i class="bi bi-eye-slash" id="togglePassword"></i>
