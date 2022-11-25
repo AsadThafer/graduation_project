@@ -75,6 +75,9 @@ if (isLoggedIn() == False) {
                         echo "<br>";
                         echo "<br>";
                         echo "<a href='UsersList.php'>قائمة المستخدمين</a>";
+                        echo "<br>";
+                        echo "<br>";
+                        echo "<a href='DriverRequestsTable.php'>طلبات الترقية</a>";
                     } ?>
             </div>
             <form id='updateprofileform' class="update_profile_form" method="post" action="profile.php">
