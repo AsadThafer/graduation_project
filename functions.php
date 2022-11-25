@@ -19,7 +19,7 @@ if (isset($_POST['register_btn'])) {
 function register()
 {
 	// call these variables with the global keyword to make them available in function
-	global $db, $errors, $username, $email, $password_1, $password_2, $mobile_Number,$gender,$displayed_Name;
+	global $db, $errors, $username, $email, $password_1, $password_2, $mobile_Number, $gender, $displayed_Name;
 
 	// receive all input values from the form. Call the e() function
 	// defined below to escape form values
@@ -187,14 +187,7 @@ function login()
 	}
 }
 
-function isAdmin()
-{
-	if (isset($_SESSION['user']) && $_SESSION['user']['user_type'] == 'admin') {
-		return true;
-	} else {
-		return false;
-	}
-}
+
 
 
 
@@ -285,6 +278,17 @@ function checkifduplicate()
 // 		return false;
 // 	}
 // }
+
+
+function isAdmin()
+{
+	if (isset($_SESSION['user']) && $_SESSION['user']['user_type'] == 'admin') {
+		return true;
+	} else {
+		return false;
+	}
+}
+
 
 function isDriver()
 {

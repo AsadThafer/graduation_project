@@ -1,8 +1,8 @@
 <?php include('functions.php');
-  if (isLoggedIn()==False) {
+if (isLoggedIn() == False) {
     $_SESSION['msg'] = "You need to Sign in first";
     header('location: signin.php');
-  }
+}
 ?>
 
 <!DOCTYPE html>
@@ -45,10 +45,12 @@
             </div>
             <div class="divdesign mainscreendiv">
                 <span class="title">تحتاج شريك لرحلتك؟</span>
-                <button <?php if ($_SESSION['user']['user_type']=='user'){echo 'disabled ';} ?>
+                <button <?php if ($_SESSION['user']['user_type']=='user') { echo 'disabled '; } ?>
                     class="mainscreenbuttonride driverform" onclick="location.href='tripform.php'" type="button">
                     املأ بيانات وجهتك الآن</button>
-                <span class="rednote">تحتاج لتوثيق حسابك مسبقا كمالك مركبة*</span>
+                <span class="rednote" <?php if (isDriver() || isAdmin()) { echo 'style="display:none;"'; } ?>>تحتاج
+                    لتوثيق
+                    حسابك مسبقا كمالك مركبة*</span>
             </div>
         </section>
     </main>
@@ -60,8 +62,6 @@
 
         </nav>
 
-
-        <?php # echo $_SESSION['user']['displayed_Name']; ?>
     </footer>
     <script src="js/script.js"></script>
 </body>

@@ -68,7 +68,6 @@ if (isLoggedIn() == False) {
             </div>
             <div id='usertypeonprofile'>
                 <?php echo $_SESSION['user']['user_type']; ?>
-                <?php echo $_SESSION['user']['user_status']; ?>
                 <br>
                 <br>
                 <?php if (isAdmin()) {
@@ -84,9 +83,6 @@ if (isLoggedIn() == False) {
                         if ($_SESSION['user']['user_status'] == 'pending') {
                             echo "<p>طلبك قيد المراجعة" . "</p>";
                         } else if ($_SESSION['user']['user_status'] == 'Upgraded') {
-                            echo "<p>تم قبول طلبك" . "</p>";
-                            echo "<br>";
-                            echo "<br>";
                         } else if ($_SESSION['user']['user_status'] == 'rejected') {
                             echo "<p>تم رفض طلبك" . "</p>";
                             echo "<br>";
@@ -118,11 +114,14 @@ if (isLoggedIn() == False) {
                 <div class="input-group">
                     <label>الجنس</label>
                     <select name="gender" id="gender" value="<?php echo ucfirst($_SESSION['user']['gender']); ?>">
-                        <option <?php if ($_SESSION['user']['gender'] == 'غير محدد') echo "selected"; ?> value="غير
+                        <option <?php if ($_SESSION['user']['gender']=='غير محدد')
+                        echo "selected"; ?> value="غير
                             محدد">غير محدد</option>
-                        <option <?php if ($_SESSION['user']['gender'] == 'ذكر') echo "selected"; ?> value="ذكر">ذكر
+                        <option <?php if ($_SESSION['user']['gender']=='ذكر')
+                        echo "selected"; ?> value="ذكر">ذكر
                         </option>
-                        <option <?php if ($_SESSION['user']['gender'] == 'أنثى') echo "selected"; ?> value="أنثى">أنثى
+                        <option <?php if ($_SESSION['user']['gender']=='أنثى')
+                        echo "selected"; ?> value="أنثى">أنثى
                         </option>
                     </select>
                 </div>

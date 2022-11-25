@@ -54,10 +54,10 @@ if (!isAdmin()) {
     $result = $conn->query($sql);
 
     ?>
-  <?php echo DisplaySuccess(); ?>
-  <h2 style="text-align:center ;">قائمة طلبات الترقية - الادمن</h2>
+    <?php echo DisplaySuccess(); ?>
+    <h2 style="text-align:center ;">قائمة طلبات الترقية - الادمن</h2>
 
-    <div  style=" overflow-x:auto;max-width:90%; margin :20px auto;">
+    <div style=" overflow-x:auto;max-width:90%; margin :20px auto;">
       <table class='userstable'>
 
 
@@ -98,7 +98,7 @@ if (!isAdmin()) {
             <?php echo $row["gender"]; ?>
           </td>
           <td class="table__td">
-            <?php echo "<a  href = uploads/".$row["license_Image"] ." target='_blank' >" . $row["license_Image"]; ?>
+            <?php echo "<a  href = uploads/" . $row["license_Image"] . " target='_blank' >" . $row["license_Image"]; ?>
           </td>
           <td class="table__td">
             <?php echo $row["Vehicle_Model"]; ?>
@@ -109,8 +109,14 @@ if (!isAdmin()) {
           <td class="table__td">
             <?php echo $row["submission_Date"]; ?>
           </td>
-          <td class="table__td"><a onclick="return confirm(' هل أنت متأكد انك تريد رفض الطلب  رقم <?php echo $row['request_id'] ?> ؟')" href="decline_request.php?id=<?php echo $row["id"] ?>&request_id=<?php echo $row["request_id"] ?>" >Reject</a></td>
-          <td class="table__td"><a href="upgrade_accept.php?id=<?php echo $row["id"] ?>&request_id=<?php echo $row["request_id"] ?>">Accept</a></td>
+          <td class="table__td"><a
+              onclick="return confirm(' هل أنت متأكد انك تريد رفض الطلب  رقم <?php echo $row['request_id'] ?> ؟')"
+              href="decline_request.php?id=<?php echo $row["id"] ?>&request_id=<?php echo $row["request_id"] ?>">Reject</a>
+          </td>
+          <td class="table__td"><a
+              onclick="return confirm(' هل أنت متأكد انك تريد قبول الطلب  رقم <?php echo $row['request_id'] ?> ؟')"
+              href="upgrade_accept.php?id=<?php echo $row["id"] ?>&request_id=<?php echo $row["request_id"] ?>">Accept</a>
+          </td>
         </tr>
 
 
@@ -143,7 +149,7 @@ if (!isAdmin()) {
   </footer>
 
   <script src="js/script.js"></script>
-</script>
+  </script>
 </body>
 
 </html>
