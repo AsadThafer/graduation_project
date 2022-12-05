@@ -41,7 +41,7 @@
                         <input type="password" name="password" id="password_1" placeholder="كلمة المرور" required>
                         <i class="bi bi-eye-slash" id="togglePassword"></i>
                     </p>
-                    <p><input type="checkbox">أبقني متصلا</p>
+                    <p><input name="keep_me_in" type="checkbox">أبقني متصلا</p>
                     <p>
                         <button name="login_btn" class="signsubmit" type="submit">تسجيل الدخول</button>
                     </p>

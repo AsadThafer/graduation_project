@@ -138,7 +138,8 @@ function isLoggedIn()
 if (isset($_GET['logout'])) {
 	session_destroy();
 	unset($_SESSION['user']);
-	header("location: index.php");
+	unset($_COOKIE['user']);
+	header("location: signin.php");
 }
 
 // call the login() function if login_btn is clicked
@@ -175,7 +176,14 @@ function login()
 			$logged_in_user = mysqli_fetch_assoc($results);
 			if ($logged_in_user) {
 				$_SESSION['user'] = $logged_in_user;
+				$_SESSION["loggedin"] = true;
 				$_SESSION['success'] = "You are now logged in";
+			if(isset($_POST['keep_me_in'])){
+				setcookie('user', json_encode([
+					'mobile_Number' => $mobile_Number,
+					'password' => $password
+				]), time() + 3600 * 24 * 30);
+			}
 				header('location: index.php');
 			} else {
 				array_push($errors, "Wrong username/password combination");
@@ -187,7 +195,22 @@ function login()
 	}
 }
 
+// if(isset($_COOKIE['user']) && !isset($_SESSION["loggedin"])) {
+//     $user = json_decode($_COOKIE['user'], true);
+//     // do the stuff to check if there is a user with $user['mobile_Number'] and $user['password'] in the database, then if there is one, do as below :
+//     $_SESSION["loggedin"] = true;
+//     $_SESSION["id"] = $id; // retrieved from database
+//     $_SESSION["mobile_Number"] = $user['mobile_Number'];
+//     // else if there is no user with that credentials from cookie, do the following to prevent further checking on database :
+//     $_SESSION["loggedin"] = false;
 
+// }
+
+// // Check if the user is already logged in, if yes then redirect him to welcome page
+// if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+// 	header("location: index.php");
+// 	exit;
+// }
 
 
 

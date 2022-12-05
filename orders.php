@@ -15,6 +15,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="icon" href="img/wasselni_logo_trans_notext.png" type="image/x-icon">
     <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="css/modal.css" type="text/css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>الطلبات</title>
@@ -37,7 +38,61 @@
     </header>
         <main>
 
+        <section id="entry-text" class="card">
+            <p>قائمة - الطلبات</p>
+            </section>
+            <ul id="Order-list">
+            <li class="card">
+            <div class="Order-element__info">
+            <span>طلب توصيلة</span>
+            <h2>أسعد ظافر أسعد</h2>
+            <p>من : طولكرم</p>
+            <p>إلى : رام الله</p>
+            <p>التاريخ : 2021-05-01</p>
+            <p>الوقت : 12:00</p>
+            <p> ♂️ ذكر</p>
 
+            </div>
+            <div class="Order-element__actions">
+            <a href="" onclick="return confirm('hi')" class="btn btn--alt">عرض تفاصيل الطلب</a>
+            <a href="tel:+00970595681131"> 📞 </a>            
+            <a href="" onclick="return confirm('hi')" class="btn btn--alt btn--accept">قبول الطلب</a>         
+            </div> 
+            </li>
+
+
+
+            <?php
+            
+            // $collection = $db->orders;
+            // $cursor = $collection->find();
+            // foreach ($cursor as $document) {
+
+                echo '<li class="card">';
+                echo '<div class="order-info">';
+                echo `<div class="Task-element__info">
+                <h2>أسعد</h2>
+                <p>فلسطين</p>
+                <div class='Task-Options'>
+                <button class="btn btn--done">Done ✔️</button>
+                <button class="btn btn--delete">Delete 🗑️</button>
+                </div>
+            </div>`;
+            //     echo '<h3>' . $document['order_id'] . '</h3>';
+            //     echo '<p>' . $document['order_date'] . '</p>';
+            //     echo '<p>' . $document['order_status'] . '</p>';
+            //     echo '<p>' . $document['order_price'] . '</p>';
+            //     echo '<p>' . $document['order_from'] . '</p>';
+            //     echo '<p>' . $document['order_to'] . '</p>';
+            //     echo '<p>' . $document['order_user_id'] . '</p>';
+            //     echo '<p>' . $document['order_driver_id'] . '</p>';
+            //     echo '<p>' . $document['order_car_id'] . '</p>';
+            //     echo '</div>';
+              echo '</li>';
+            // }
+            ?>
+                
+            </ul>
 
 
 

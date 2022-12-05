@@ -1,4 +1,5 @@
 <?php include('functions.php');
+use function MongoDB\BSON\toJSON;
 if (isLoggedIn() == False) {
     $_SESSION['msg'] = "You need to Sign in first";
     header('location: signin.php');
@@ -21,6 +22,7 @@ if (isLoggedIn() == False) {
 </head>
 
 <body>
+
     <header>
         <nav id="headernav">
             <a href="index.php">
