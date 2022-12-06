@@ -3,8 +3,14 @@ const backdrop = document.getElementById("backdrop");
 const cancelAddMapButton = modal.querySelector(".btn--passive");
 const confirmAddMapButton = modal.querySelector(".btn--success");
 const addMapButton = document.getElementById("add-map-button");
-const CoordinatesStartLatinput = document.getElementById("tripStartCoordinatesLat");
-const CoordinatesStartLnginput = document.getElementById("tripStartCoordinatesLng");
+const CoordinatesStartLatinput = document.getElementById(
+  "tripStartCoordinatesLat"
+);
+const CoordinatesStartLnginput = document.getElementById(
+  "tripStartCoordinatesLng"
+);
+let startspan = document.querySelector("#startlocationinfospan");
+
 const StartMap = document.getElementById("map");
 const getmylocationbutton = modal.querySelector(".getmylocation");
 const modal__contentDiv = document.querySelector(".modal__content");
@@ -14,16 +20,14 @@ const toggleBackdrop = () => {
   backdrop.classList.toggle("visible");
 };
 
-const toggleStartModal = () => { 
+const toggleStartModal = () => {
   modal.classList.toggle("visible");
 };
-
 
 const SaveMapLocation = () => {
   toggleStartModalVisibility();
   saveCoordinates(newlat, newlng);
   location.reload();
-
 };
 
 const toggleStartModalVisibility = () => {
@@ -40,18 +44,13 @@ async function getLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.watchPosition(showPosition);
   } else {
-    x.innerHTML = "لا يدعم هذا المتصفح تحديد الموقع الجغرافي.";
+    startspan.innerText = "لا يدعم هذا المتصفح تحديد الموقع الجغرافي.";
   }
 }
 
 function showPosition(position) {
   let LatitudeMarker = position.coords.latitude;
   let longitudeMarker = position.coords.longitude;
-  x.innerHTML =
-    "إحداثيات موقعك : " +
-    position.coords.latitude +
-    "," +
-    position.coords.longitude;
   initMap(LatitudeMarker, longitudeMarker);
   newlat = LatitudeMarker;
   newlng = longitudeMarker;
@@ -60,7 +59,10 @@ function showPosition(position) {
 // Initialize and add the map
 function initMap(LatitudeMarker, longitudeMarker) {
   // The location of Uluru
-  const uluru = { lat: parseFloat(LatitudeMarker), lng: parseFloat(longitudeMarker) };
+  const uluru = {
+    lat: parseFloat(LatitudeMarker),
+    lng: parseFloat(longitudeMarker),
+  };
   // The map, centered at Uluru
   const map = new google.maps.Map(StartMap, {
     zoom: 16,
@@ -72,12 +74,11 @@ function initMap(LatitudeMarker, longitudeMarker) {
     map: map,
     draggable: true,
   });
-   marker.addListener("dragend", () => {
+  marker.addListener("dragend", () => {
     const lat = marker.getPosition().lat();
     const lng = marker.getPosition().lng();
-     newlat = lat;
-     newlng = lng;
-    ww.innerHTML = `Latitude: ${lat}, Longitude: ${lng}`;
+    newlat = lat;
+    newlng = lng;
   });
 }
 
@@ -88,4 +89,32 @@ function saveCoordinates(newlat, newlng) {
 
 function submitForm() {
   document.querySelector(".formtripdetails").submit();
+}
+
+function clearForm() {
+  document.querySelector(".formtripdetails").reset();
+}
+
+function submitFormFunction() {
+  return Promise.resolve(() => submitForm()).then(() => {
+    console.log('submitFormFunction');
+  });
+}
+
+function spanupdating() {
+  if (
+    CoordinatesStartLatinput.value != "" &&
+    CoordinatesStartLnginput.value != ""
+  ) {
+    startspan.innerText = `تم تحديد موقع وجهتك بنجاح`;
+  } else {
+    startspan.innerText = `لم يتم تحديد موقع وجهتك بعد`;
   }
+}
+
+
+
+window.addEventListener("load", function () {
+  spanupdating();
+  Destspanupdating();
+});

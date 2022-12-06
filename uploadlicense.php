@@ -15,8 +15,8 @@ if ($conn->connect_error) {
 <?php 
 $Vehicle_Model = $_POST['Vehicle_Model'];
 $Vehicle_Plate = $_POST['Vehicle_Plate'];
-$query = "INSERT INTO upgrade_users_requests (user_id,license_Image,Vehicle_Model,Vehicle_Plate) 
-VALUES ('$id','','$Vehicle_Model','$Vehicle_Plate')";
+$query = "INSERT INTO upgrade_users_requests (user_id,license_Image,Vehicle_Model,Vehicle_Plate,request_status) 
+VALUES ('$id','','$Vehicle_Model','$Vehicle_Plate','Pending')";
 $query2 = $sql = " UPDATE users SET user_status='pending' WHERE id='$id'";
 $insertquery = mysqli_query($conn, $query);
 $updatestatusquery = mysqli_query($conn, $query2);

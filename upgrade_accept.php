@@ -13,9 +13,10 @@ if ($conn->connect_error) {
 
 $id = $_GET["id"];
 $request_id = $_GET["request_id"];
+$Vehicle_Model = $_GET["Vehicle_Model"];
 // sql to delete a record
-$sql = " UPDATE users SET user_type='Driver',user_status='Upgraded' WHERE id='$id'";
-$sql2 = "DELETE FROM upgrade_users_requests WHERE request_id='$request_id'";
+$sql = " UPDATE users SET user_type='Driver',user_status='Upgraded',Vehicle_Model = '$Vehicle_Model' WHERE id='$id'";
+$sql2 = " UPDATE upgrade_users_requests SET request_status='Accepted' WHERE request_id='$request_id'";
 
 if ($conn->query($sql) === TRUE) {
     echo "Driver Updated successfully";

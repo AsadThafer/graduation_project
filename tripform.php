@@ -2,6 +2,7 @@
 if (isLoggedIn() == False) {
   $_SESSION['msg'] = "You need to Sign in first";
   header('location: signin.php');
+  
 }
 ?>
 
@@ -71,24 +72,16 @@ if (isLoggedIn() == False) {
     </div>
 
     <h1 class="formtitle">تحتاج توصيلة</h1>
-    <form action="https://httpbin.org/post" method="post" class="form-anticlear formtripdetails">
+    <form action="tripformfunctions.php" method="post" class="form-anticlear formtripdetails">
       <div class="divdesign tripformflex">
-        <p>
+
           <label for="tripStartCoordinatesLat"></label>
-          <input type="text" name="tripStartCoordinatesLat" id="tripStartCoordinatesLat" value='0' placeholder="x start" />
-        </p>
-        <p>
+          <input hidden type="text" name="tripStartCoordinatesLat" id="tripStartCoordinatesLat" placeholder="x start" />
+          
           <label for="tripStartCoordinatesLng"></label>
-          <input type="text" name="tripStartCoordinatesLng" id="tripStartCoordinatesLng" value='0' placeholder="y start" />
-        </p>
-        <p>
-          <label for="destinationtripCoordinatesLat"></label>
-          <input type="text" name="destinationtripCoordinatesLat" id="destinationtripCoordinatesLat" value='0' placeholder="x destination" />
-        </p>
-        <p>
-          <label for="destinationtripCoordinatesLng"></label>
-          <input type="text" name="destinationtripCoordinatesLng" id="destinationtripCoordinatesLng" value='0' placeholder="y destination" />
-        </p>
+          <input hidden type="text" name="tripStartCoordinatesLng" id="tripStartCoordinatesLng" placeholder="y start" />
+          <input hidden type="text" name="trip_type" id="trip_type" placeholder="trip_type" value=<?php echo $_GET['trip_type'];?>>
+
         <p>
           <label for="origin">:مكان الانطلاق</label>
           <select name="origin" id="origin">
@@ -112,10 +105,8 @@ if (isLoggedIn() == False) {
         <p>
           <button type="button" id="add-map-button" class="btn">تحديد موقعك على الخريطة </button>
         </p>
-        <p>
-          <label for="origin_details">:تفاصيل مكان الانطلاق</label>
-          <textarea dir="rtl" name="origin_details" id="origin_details" cols="30" rows="2"></textarea>
-        </p>
+        <span id='startlocationinfospan'></span>
+
         <p>
           <label for="destination">:الوجهة</label>
           <select name="destination" id="destination">
@@ -144,12 +135,18 @@ if (isLoggedIn() == False) {
         <p>
         <button type="button" id="add-map-destination-button" class="btn">تحديد وجهتك على الخريطة </button>
         </p>
+       
+          <label for="destinationtripCoordinatesLat"></label>
+          <input hidden  type="text" name="destinationtripCoordinatesLat" id="destinationtripCoordinatesLat"  placeholder="x destination" />
+          <label for="destinationtripCoordinatesLng"></label>
+          <input hidden type="text" name="destinationtripCoordinatesLng" id="destinationtripCoordinatesLng" placeholder="y destination" />
+          <span id='destlocationinfospan'></span>
         <p>
           <label for="Date_Time">:موعد الرحلة</label>
-          <input type="datetime-local" id="Date_Time" name="Date_Time">
+          <input type="datetime-local" id="Date_Time" name="Date_Time"  min="2018-06-07T00:00" max="2023-12-31T00:00" >
         </p>
         <p>
-          <button class="submit tripsubmit" onclick="submitForm()">إرسال الطلب</button>
+          <button name='submittrip' class="submit tripsubmit" onclick="submitFormFunction()">إرسال الطلب</button>
           <button onclick="formAntiClear.clear()" class="cancelsubmit tripsubmit" type="reset">إلغاء الطلب</button>
         </p>
       </div>

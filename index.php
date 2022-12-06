@@ -38,17 +38,18 @@ if (isLoggedIn() == False) {
         </nav>
     </header>
     <main>
+        
         <section>
             <div class="divdesign mainscreendiv">
                 <span class="title">تحتاج لتوصيلة؟</span>
-                <button class="mainscreenbuttonride" onclick="location.href='tripform.php'" type="button">
+                <button class="mainscreenbuttonride" onclick="location.href='tripform.php?trip_type=partner'" type="button">
                     املأ بيانات وجهتك الآن</button>
                 <span></span>
             </div>
             <div class="divdesign mainscreendiv">
                 <span class="title">تحتاج شريك لرحلتك؟</span>
                 <button <?php if ($_SESSION['user']['user_type']=='user') { echo 'disabled '; } ?>
-                    class="mainscreenbuttonride driverform" onclick="location.href='tripform.php'" type="button">
+                    class="mainscreenbuttonride driverform" onclick="location.href='tripform.php?trip_type=driver'" type="button">
                     املأ بيانات وجهتك الآن</button>
                 <span class="rednote" <?php if (isDriver() || isAdmin()) { echo 'style="display:none;"'; } ?>>تحتاج
                     لتوثيق

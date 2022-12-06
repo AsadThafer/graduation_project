@@ -8,12 +8,10 @@ const DestMap = document.getElementById("mapDest");
 const cancelAddMapDestButton = DestModal.querySelector(".cancel-dest");
 const backdrop2 = document.getElementById("backdrop2");
 const getMyDestButton = document.querySelector(".getDestlocation");
+let destspan = document.querySelector('#destlocationinfospan');
 let newDestlat = 0;
 let newDestlng = 0;
-const ww = document.getElementById("demo2");
-const x = document.getElementById("demo");
-const www = document.getElementById("demo3");
-const xx = document.getElementById("demo4");
+
 
 
 const SaveDestMapLocation = () => {
@@ -47,18 +45,13 @@ async function getDestLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.watchPosition(showDestPosition);
   } else {
-    xx.innerHTML = "لا يدعم هذا المتصفح تحديد الموقع الجغرافي.";
+    destspan.innerText = "لا يدعم هذا المتصفح تحديد الموقع الجغرافي.";
   }
 }
 
 function showDestPosition(position) {
   let LatitudeDestMarker = position.coords.latitude;
   let longitudeDestMarker = position.coords.longitude;
-  xx.innerHTML =
-    "إحداثيات موقعك : " +
-    position.coords.latitude +
-    "," +
-    position.coords.longitude;
   initDestMap(LatitudeDestMarker, longitudeDestMarker);
   newDestlat = LatitudeDestMarker;
   newDestlng = longitudeDestMarker;
@@ -84,7 +77,6 @@ function initDestMap(LatitudeDestMarker, longitudeDestMarker) {
     const Destlng = Destmarker.getPosition().lng();
      newDestlat = Destlat;
      newDestlng = Destlng;
-    www.innerHTML = `Destlatitude: ${Destlat}, Longitude: ${Destlng}`;
   });
 }
 
@@ -94,4 +86,21 @@ function saveDestCoordinates(newDestlat, newDestlng) {
 }
 
 
+const Destspanupdating = () => {
+  if (destinationCoordinatesLatinput.value != "" && destinationCoordinatesLnginput.value != "") {
+    destspan.innerText = `تم تحديد موقع وجهتك بنجاح`;
+  } else {
+    destspan.innerText = `لم يتم تحديد موقع وجهتك بعد`;
+
+  } 
+};
+
+
+// if (destinationCoordinatesLatinput.value == 0 && destinationCoordinatesLnginput.value == 0) {
+//   destspan.innerText= 'لم يتم تحديد موقعك الجغرافي';
+// } else {
+//   destspan.innerText= `Latitude: ${newDestlat}, Longitude: ${newDestlng}`;
+// }
+
+Destspanupdating();
 

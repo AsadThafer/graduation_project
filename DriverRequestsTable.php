@@ -115,7 +115,7 @@ if (!isAdmin()) {
           </td>
           <td class="table__td"><a
               onclick="return confirm(' هل أنت متأكد انك تريد قبول الطلب  رقم <?php echo $row['request_id'] ?> ؟')"
-              href="upgrade_accept.php?id=<?php echo $row["id"] ?>&request_id=<?php echo $row["request_id"] ?>">Accept</a>
+              href="upgrade_accept.php?id=<?php echo $row["id"] ?>&request_id=<?php echo $row["request_id"] ?>&Vehicle_Model=<?php echo $row["Vehicle_Model"] ?>">Accept</a>
           </td>
         </tr>
 
