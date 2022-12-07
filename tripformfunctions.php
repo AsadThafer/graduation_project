@@ -5,6 +5,7 @@ $username = "root";
 $password = "asad";
 $dbname = "wasselni";
 
+
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
@@ -22,7 +23,7 @@ if (isset($_POST['submittrip'])) {
 function tripsubmitted()
 {
 	// call these variables with the global keyword to make them available in function
-	global $db , $errors, $origin, $destination, $origin_details, $destination_details, $extra_details, $Date_Time, $origintripCoordinatesLat, $origintripCoordinatesLng, $destinationtripCoordinatesLat, $destinationtripCoordinatesLng; 
+	global $db , $origin, $destination, $origin_details, $destination_details, $extra_details, $Date_Time, $origintripCoordinatesLat, $origintripCoordinatesLng, $destinationtripCoordinatesLat, $destinationtripCoordinatesLng; 
 
 
 	$tripStartCoordinatesLat = e($_POST['tripStartCoordinatesLat']);
@@ -38,44 +39,45 @@ function tripsubmitted()
 	$submitter_id = $_SESSION['user']['id'];
 	$trip_type = e($_POST['trip_type']);
 
-	if (empty($tripStartCoordinatesLat )){
+	if (empty($tripStartCoordinatesLat)){
 		$tripStartCoordinatesLat = 0;
 	}
-	if (empty($tripStartCoordinatesLng )){
+	if (empty($tripStartCoordinatesLng)){
 		$tripStartCoordinatesLng = 0;
 	}
-	if (empty($destinationtripCoordinatesLat )){
+	if (empty($destinationtripCoordinatesLat)){
 		$destinationtripCoordinatesLat = 0;
 	}
-	if (empty($destinationtripCoordinatesLng )){
+	if (empty($destinationtripCoordinatesLng)){
 		$destinationtripCoordinatesLng = 0;
 	}
 
-	if (empty($origin_details )){
-		$origin_details = " ";
+	if (empty($origin_details)){
+		$origin_details = "";
 	}
-	if (empty($destination )){
-		$destination = " ";
+	if (empty($destination)){
+		$destination = "";
 	}
-	if (empty($destination_details )){
-		$destination_details = " ";
+	if (empty($destination_details)){
+		$destination_details = "";
 	}
-	if (empty($extra_details )){
-		$extra_details = " ";
+	if (empty($extra_details)){
+		$extra_details = "";
 	}
 	if (empty($Date_Time)){
-		$Date_Time = " ";
+		$Date_Time = "";
 	}
 
 	$tripquery = "INSERT INTO trips(submitter_id,joined_id,tripStartCoordinatesLat,tripStartCoordinatesLng,origin,origin_details,destination,destination_details,extra_details,destinationtripCoordinatesLat,destinationtripCoordinatesLng,Date_Time,trip_type,trip_status)
-	VALUES('$submitter_id','','$tripStartCoordinatesLat','$tripStartCoordinatesLng','$origin','$origin_details','$destination','$destination_details','$extra_details','$destinationtripCoordinatesLat','$destinationtripCoordinatesLng','$Date_Time','$trip_type','active')";
-	mysqli_query($db, 	$tripquery);
-	if($tripquery){
+	VALUES('$submitter_id',0,'$tripStartCoordinatesLat','$tripStartCoordinatesLng','$origin','$origin_details','$destination','$destination_details','$extra_details','$destinationtripCoordinatesLat','$destinationtripCoordinatesLng','$Date_Time','$trip_type','pending')";
+	$rule = mysqli_query($db,$tripquery);
+	if($rule){
 		$_SESSION['success'] = "New trip successfully created!!";
 		header('location: index.php');
+		
 	}else{
 		$_SESSION['error'] = "Something went wrong!!";
-		header('location: orders.php');
+		header('location: orders.php'); 
 	}
 }
 

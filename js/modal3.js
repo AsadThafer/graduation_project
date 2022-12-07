@@ -83,6 +83,8 @@ function initDestMap(LatitudeDestMarker, longitudeDestMarker) {
 function saveDestCoordinates(newDestlat, newDestlng) {
   destinationCoordinatesLatinput.value = `${newDestlat}`;
   destinationCoordinatesLnginput.value = `${newDestlng}`;
+  localStorage.setItem("destinationtripCoordinatesLat",newDestlat);
+  localStorage.setItem("destinationtripCoordinatesLng",newDestlng);
 }
 
 
@@ -102,5 +104,4 @@ const Destspanupdating = () => {
 //   destspan.innerText= `Latitude: ${newDestlat}, Longitude: ${newDestlng}`;
 // }
 
-Destspanupdating();
 

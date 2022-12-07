@@ -91,6 +91,9 @@ if (isLoggedIn() == False) {
                         } else {
                             echo "<a href='becomeDriver.php?id=$id'>تقديم طلب لسائق</a>";
                         }
+                        echo "<br>";
+                        echo "<br>";
+                        echo "<a href='ordersHistory.php?id=$id'>سجل طلباتك </a>";
 
                     } ?>
 

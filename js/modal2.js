@@ -85,19 +85,24 @@ function initMap(LatitudeMarker, longitudeMarker) {
 function saveCoordinates(newlat, newlng) {
   CoordinatesStartLatinput.value = `${newlat}`;
   CoordinatesStartLnginput.value = `${newlng}`;
+
+  localStorage.setItem("tripStartCoordinatesLatinput", newlat);
+  localStorage.setItem("tripStartCoordinatesLng",newlng);
 }
 
 function submitForm() {
   document.querySelector(".formtripdetails").submit();
 }
 
-function clearForm() {
+function resetForm() {
   document.querySelector(".formtripdetails").reset();
+  location.reload();
+  clearStorage();
 }
 
 function submitFormFunction() {
   return Promise.resolve(() => submitForm()).then(() => {
-    console.log('submitFormFunction');
+    clearStorage();
   });
 }
 
@@ -106,15 +111,14 @@ function spanupdating() {
     CoordinatesStartLatinput.value != "" &&
     CoordinatesStartLnginput.value != ""
   ) {
-    startspan.innerText = `تم تحديد موقع وجهتك بنجاح`;
+    startspan.innerText = `تم تحديد موقع انطلاقك  بنجاح`;
   } else {
-    startspan.innerText = `لم يتم تحديد موقع وجهتك بعد`;
+    startspan.innerText = `لم يتم تحديد موقع انطلاقك  بعد`;
   }
 }
 
-
-
 window.addEventListener("load", function () {
+  store();
   spanupdating();
   Destspanupdating();
 });

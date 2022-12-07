@@ -4,6 +4,17 @@ if (isLoggedIn() == False) {
     $_SESSION['msg'] = "You need to Sign in first";
     header('location: signin.php');
 }
+$servername = "localhost";
+$username = "root";
+$password = "asad";
+$dbname = "wasselni";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 ?>
 
 <!DOCTYPE html>
@@ -12,7 +23,7 @@ if (isLoggedIn() == False) {
 <head>
     <meta charset="UTF-8">
     <meta name="author" content="Asad Asad">
-    <meta name="description" content="Wasselni Sign in Page">
+    <meta name="description" content="Wasselni Index Page">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="icon" href="img/wasselni_logo_trans_notext.png" type="image/x-icon">
     <link rel="stylesheet" href="css/style.css" type="text/css">
@@ -56,6 +67,95 @@ if (isLoggedIn() == False) {
                     حسابك مسبقا كمالك مركبة*</span>
             </div>
         </section>
+        <?php
+
+            $activeuser = $_SESSION['user']['id'];
+            $sql = "SELECT * FROM trips INNER JOIN users ON users.id = trips.submitter_id AND (trips.trip_status = 'active' OR trips.trip_status = 'pending') AND (trips.joined_id = '$activeuser' OR trips.submitter_id = '$activeuser') ";
+            $result = $conn->query($sql);
+
+            ?>
+            <?php echo DisplaySuccess(); ?>
+
+
+            <?php
+            if ($result->num_rows > 0) {
+
+            ?>
+             <section id="entry-text" class="card">
+            <p> طلبك النشط حاليا </p>
+        </section>
+        <ul id="Order-list">
+            <?php
+                // output data of each row
+                while ($row = $result->fetch_assoc()) {
+            ?>
+       
+            <li class="card">
+                <div class="Order-element__info">
+                    <span class="spantrip<?php echo $row["trip_type"]; ?>"></span>
+                    <h2>
+                        <?php echo $row["displayed_Name"] ?>
+                    </h2>
+                    <p>من :
+                        <?php 
+                        if ($row["origin"] == "Tulkarm"){echo "طولكرم";}
+                        elseif ($row["origin"] == "Ramallah"){echo "رام الله و البيرة";}
+                        elseif ($row["origin"] == "Nablus"){echo "نابلس";}
+                        elseif ($row["origin"] == "Jericho"){echo "اريحا";}
+                        elseif ($row["origin"] == "Hebron"){echo "الخليل";}
+                        elseif ($row["origin"] == "Bethlehem"){echo "بيت لحم";}
+                        elseif ($row["origin"] == "Jenin"){echo "جنين";}
+                        elseif ($row["origin"] == "Qalqilya"){echo "قلقيلية";}
+                        elseif ($row["origin"] == "Salfit"){echo "سلفيت";}
+                        elseif ($row["origin"] == "Jerusalem"){echo "القدس";}
+                        elseif ($row["origin"] == "Tubas"){echo "طوباس";}
+                        ?>
+                    </p>
+                    <p>إلى :
+                    <?php 
+                        if ($row["destination"] == "Tulkarm"){echo "طولكرم";}
+                        elseif ($row["destination"] == "Ramallah"){echo "رام الله و البيرة";}
+                        elseif ($row["destination"] == "Nablus"){echo "نابلس";}
+                        elseif ($row["destination"] == "Jericho"){echo "اريحا";}
+                        elseif ($row["destination"] == "Hebron"){echo "الخليل";}
+                        elseif ($row["destination"] == "Bethlehem"){echo "بيت لحم";}
+                        elseif ($row["destination"] == "Jenin"){echo "جنين";}
+                        elseif ($row["destination"] == "Qalqilya"){echo "قلقيلية";}
+                        elseif ($row["destination"] == "Salfit"){echo "سلفيت";}
+                        elseif ($row["destination"] == "Jerusalem"){echo "القدس";}
+                        elseif ($row["destination"] == "Tubas"){echo "طوباس";}
+                    ?>
+                    </p>
+                    <?php
+                    $time = $row["Date_Time"];
+                    $timestamp = strtotime($time);
+
+                    $child1 = date('n.j.Y', $timestamp); // d.m.YYYY
+                    $child2 = date('H:i', $timestamp); // HH:ss
+                    ?>
+                    <p>التاريخ :
+                        <?php echo $child1; ?>
+                    </p>
+                    <p>الوقت :
+                        <?php echo $child2; ?>
+                    </p>
+                    <p>
+                        <?php echo $row["gender"]; ?>
+                    </p>
+
+                </div>
+                <div class="Order-element__actions">
+                    <a href="tripdetails.php?trip_id=<?php echo $row["trip_id"]?>" onclick="return confirm('hi')" class="btn btn--alt">عرض تفاصيل الطلب</a>
+                    <a href="tel:<?php echo $row["mobile_Number"]; ?>"> 📞 </a>
+                    <a href="FinishTrip.php?trip_id=<?php echo $row["trip_id"]?>" onclick="return confirm('هل أنت متأكد من إنهاء الطلب؟')"
+                        class="btn btn--alt btn--accept finishtripbutton">إنهاء الرحلة</a>
+                </div>
+            </li>
+
+            <?php
+                }}
+            ?>
+
     </main>
     <footer>
         <nav class="footernav">

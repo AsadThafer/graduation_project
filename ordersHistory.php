@@ -1,4 +1,5 @@
 <?php include('functions.php');
+use function MongoDB\BSON\toJSON;
 if (isLoggedIn() == False) {
     $_SESSION['msg'] = "You need to Sign in first";
     header('location: signin.php');
@@ -26,13 +27,13 @@ if ($conn->connect_error) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="icon" href="img/wasselni_logo_trans_notext.png" type="image/x-icon">
     <link rel="stylesheet" href="css/style.css" type="text/css">
-    <link rel="stylesheet" href="css/modal.css" type="text/css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الطلبات</title>
+    <title>سجل طلباتك</title>
 </head>
 
-<body onload="updateText()">
+<body>
+
     <header>
         <nav id="headernav">
             <a href="index.php">
@@ -48,34 +49,28 @@ if ($conn->connect_error) {
         </nav>
     </header>
     <main>
-
-        <section id="entry-text" class="card">
-            <p>قائمة - الطلبات</p>
-        </section>
-        <ul id="Order-list">
         <?php
 
-        ?>
-
-            <?php
             $activeuser = $_SESSION['user']['id'];
-            $sql = "SELECT * FROM trips INNER JOIN users ON users.id = trips.submitter_id AND trips.trip_status = 'pending' AND trips.joined_id = '0' AND trips.submitter_id != '$activeuser' ";
+            $sql = "SELECT * FROM trips INNER JOIN users ON users.id = trips.submitter_id AND (trips.trip_status = 'active' OR trips.trip_status = 'expired' or trips.trip_status = 'pending') AND (trips.joined_id = '$activeuser' OR trips.submitter_id = '$activeuser') ORDER BY trips.Date_Time DESC";
             $result = $conn->query($sql);
 
             ?>
             <?php echo DisplaySuccess(); ?>
 
-
+            <section id="entry-text" class="card">
+            <p> سجل طلباتك </p>
+        </section>
+        <ul id="Order-list">
             <?php
             if ($result->num_rows > 0) {
-
+                
             ?>
-
             <?php
                 // output data of each row
                 while ($row = $result->fetch_assoc()) {
             ?>
-
+        
             <li class="card">
                 <div class="Order-element__info">
                     <span class="spantrip<?php echo $row["trip_type"]; ?>"></span>
@@ -129,36 +124,41 @@ if ($conn->connect_error) {
                         <?php echo $row["gender"]; ?>
                     </p>
 
-                </div>
-                <div class="Order-element__actions">
-                    <a href="tripdetails.php?trip_id=<?php echo $row["trip_id"]?>" onclick="return confirm('hi')" class="btn btn--alt">عرض تفاصيل الطلب</a>
+                </div>                   
+                    <div class="Order-element__actions">
+
+                    <?php 
+                     if ($row["trip_status"] == "active") { ?>
+                    <a href="tripdetails.php?trip_id=<?php echo $row["trip_id"]?>" class="btn btn--alt">عرض تفاصيل الطلب</a>
                     <a href="tel:<?php echo $row["mobile_Number"]; ?>"> 📞 </a>
-                    <a href="JoinTripFun.php?joined_id=<?php echo $_SESSION["user"]["id"]?>&trip_id=<?php echo $row["trip_id"]?>" onclick="return confirm('هل أنت متأكد من قبول الطلب؟')"
-                        class="btn btn--alt btn--accept accepttrip<?php echo $row["trip_type"]; ?>button"></a>
-                </div>
+                    <a href="FinishTrip.php?trip_id=<?php echo $row["trip_id"]?>" onclick="return confirm('هل أنت متأكد من إنهاء الطلب؟')"
+                        class="btn btn--alt btn--accept finishtripbutton">إنهاء الرحلة</a>
+                    <?php } else { ?>
+
+                    <a href="" onclick="return confirm('hi')" class="btn btn--alt">عرض تفاصيل الطلب</a>
+                    <a href="tel:<?php echo $row["mobile_Number"]; ?>"> 📞 </a>
+                    <?php } ?>
+                    </div>
+                    <div class="Order-element__status">
+                        <p>
+                 
+                            <?php if ($row["trip_status"] == "active") { ?>
+                            <span class="status active">طلب فعال</span>
+                            <?php } elseif ($row["trip_status"] == "expired") { ?>
+                            <span class="status finished">طلب منتهي</span>
+                            <?php } ?>
+                        </p>
+                    </div>
+
+                    
+                    
+                 </div>
             </li>
-
             <?php
-                }
-            ?>
-
-
-            <?php
-            } else {
-                echo "لا يوجد طلبات";
-            }
-
-
-            $conn->close();
-
-            ?>
-
-
-        </ul>
-
-
-
+    }}
+    ?>
     </main>
+    
     <footer>
         <nav class="footernav">
             <a href="Profile.php"><img src="img/user_512px.png" alt="profile logo">البروفايل</a>
@@ -166,7 +166,8 @@ if ($conn->connect_error) {
             <a href="index.php"><img src="img/home_512px.png" alt="home page logo">الرئيسية</a>
         </nav>
     </footer>
-    <script defer src="js/script.js"></script>
-</body>
+    </body>
+    <script src="js/script.js"></script>
 
+                
 </html>

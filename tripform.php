@@ -2,7 +2,6 @@
 if (isLoggedIn() == False) {
   $_SESSION['msg'] = "You need to Sign in first";
   header('location: signin.php');
-  
 }
 ?>
 
@@ -10,6 +9,7 @@ if (isLoggedIn() == False) {
 <html lang="ar">
 
 <head>
+
   <meta charset="UTF-8">
   <meta name="author" content="Asad Asad">
   <meta name="description" content="Wasselni trip details form Page">
@@ -22,12 +22,13 @@ if (isLoggedIn() == False) {
   <script defer src="js/script.js"></script>
   <script defer src="js/modal2.js"></script>
   <script defer src="js/modal3.js"></script>
+  <script defer src="js/tripformLs.js"></script>
  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>البحث عن رحلة</title>
 </head>
 
-<body>
+<body onload = "load();" >
   <header>
     <nav id="headernav">
       <a href="index.php">
@@ -72,17 +73,22 @@ if (isLoggedIn() == False) {
     </div>
 
     <h1 class="formtitle">تحتاج توصيلة</h1>
-    <form action="tripformfunctions.php" method="post" class="form-anticlear formtripdetails">
+    <form action="tripformfunctions.php" method="post" class="formtripdetails">
       <div class="divdesign tripformflex">
+      
+          <input hidden type="text" name="tripStartCoordinatesLat" id="tripStartCoordinatesLat" placeholder="0"/>       
+          <input hidden type="text" name="tripStartCoordinatesLng" id="tripStartCoordinatesLng" placeholder="0"/>
+          <input type="hidden" name="trip_type" id="trip_type" placeholder="trip_type" value='<?php echo $_GET['trip_type'] ?>'> 
+          <input hidden type="text" name="tripDestCoordinatesLat" id="tripDestCoordinatesLat" placeholder="0"/>
 
-          <label for="tripStartCoordinatesLat"></label>
-          <input hidden type="text" name="tripStartCoordinatesLat" id="tripStartCoordinatesLat" placeholder="x start" />
-          
-          <label for="tripStartCoordinatesLng"></label>
-          <input hidden type="text" name="tripStartCoordinatesLng" id="tripStartCoordinatesLng" placeholder="y start" />
-          <input hidden type="text" name="trip_type" id="trip_type" placeholder="trip_type" value=<?php echo $_GET['trip_type'];?>>
 
+        
         <p>
+        <p id='OldFormDataWasSaved'>
+        <span>تم الاحتفاظ ببياناتك السابقة حيث لم تكمل طلبك , لتسهيل تعبئة الطلب هل تريد البدء من جديد ؟</span>
+        <button onclick="resetForm()" class="cancelsubmit tripsubmit" type="reset">البدء من جديد</button>
+
+        </p>
           <label for="origin">:مكان الانطلاق</label>
           <select name="origin" id="origin">
             <option value="Jenin">جنين</option>
@@ -105,6 +111,7 @@ if (isLoggedIn() == False) {
         <p>
           <button type="button" id="add-map-button" class="btn">تحديد موقعك على الخريطة </button>
         </p>
+
         <span id='startlocationinfospan'></span>
 
         <p>
@@ -136,18 +143,16 @@ if (isLoggedIn() == False) {
         <button type="button" id="add-map-destination-button" class="btn">تحديد وجهتك على الخريطة </button>
         </p>
        
-          <label for="destinationtripCoordinatesLat"></label>
-          <input hidden  type="text" name="destinationtripCoordinatesLat" id="destinationtripCoordinatesLat"  placeholder="x destination" />
-          <label for="destinationtripCoordinatesLng"></label>
-          <input hidden type="text" name="destinationtripCoordinatesLng" id="destinationtripCoordinatesLng" placeholder="y destination" />
+          <input hidden  type="text" name="destinationtripCoordinatesLat" id="destinationtripCoordinatesLat"  placeholder="0" />
+          <input hidden type="text" name="destinationtripCoordinatesLng" id="destinationtripCoordinatesLng" placeholder="0" />
           <span id='destlocationinfospan'></span>
         <p>
           <label for="Date_Time">:موعد الرحلة</label>
-          <input type="datetime-local" id="Date_Time" name="Date_Time"  min="2018-06-07T00:00" max="2023-12-31T00:00" >
+          <input required type="datetime-local" id="Date_Time" name="Date_Time" >
         </p>
         <p>
           <button name='submittrip' class="submit tripsubmit" onclick="submitFormFunction()">إرسال الطلب</button>
-          <button onclick="formAntiClear.clear()" class="cancelsubmit tripsubmit" type="reset">إلغاء الطلب</button>
+          <button onclick="resetForm()" class="cancelsubmit tripsubmit" type="reset">إلغاء الطلب</button>
         </p>
       </div>
     </form>
@@ -159,10 +164,11 @@ if (isLoggedIn() == False) {
       </nav>
   </main>
   </footer>
-  <script defer async
+ 
+
+
+           <script defer async
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCNVumAEwpkaac91aZVxJD6ShIaK8qSSc&callback=initMap&initDestMap&v=weekly"
     ></script>
-    <script src="https://cdn.jsdelivr.net/gh/akjpro/form-anticlear/base.js"></script>
 </body>
-
 </html>
