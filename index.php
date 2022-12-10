@@ -150,6 +150,16 @@ if ($conn->connect_error) {
                     <a href="FinishTrip.php?trip_id=<?php echo $row["trip_id"]?>" onclick="return confirm('هل أنت متأكد من إنهاء الطلب؟')"
                         class="btn btn--alt btn--accept finishtripbutton">إنهاء الرحلة</a>
                 </div>
+               
+                    <?php if ($row["joined_id"] == $_SESSION["user"]["id"]){ ?>
+                        <div class="Order-element__actions">
+                        <a href="LeaveTrip.php?trip_id=<?php echo $row["trip_id"]?>" onclick="return confirm('هل أنت متأكد من رغبتك بمغادرة الطلب؟')"
+                        class="btn btn--alt btn--accept finishtripbutton">مغادرة الرحلة </a>
+                        </div>
+                    <?php } ?>
+                  
+              
+                
             </li>
 
             <?php

@@ -1,4 +1,6 @@
-<?php include('tripformfunctions.php');
+<?php include('functions.php');
+use function MongoDB\BSON\toJSON;
+
 if (isLoggedIn() == False) {
     $_SESSION['msg'] = "You need to Sign in first";
     header('location: signin.php');
@@ -7,7 +9,7 @@ $servername = "localhost";
 $username = "root";
 $password = "asad";
 $dbname = "wasselni";
-
+$trip_id = $_GET['trip_id'];
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
@@ -22,17 +24,17 @@ if ($conn->connect_error) {
 <head>
     <meta charset="UTF-8">
     <meta name="author" content="Asad Asad">
-    <meta name="description" content="Wasselni Sign in Page">
+    <meta name="description" content="Wasselni Index Page">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="icon" href="img/wasselni_logo_trans_notext.png" type="image/x-icon">
     <link rel="stylesheet" href="css/style.css" type="text/css">
-    <link rel="stylesheet" href="css/modal.css" type="text/css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الطلبات</title>
+    <title>الرئيسية</title>
 </head>
 
 <body>
+
     <header>
         <nav id="headernav">
             <a href="index.php">
@@ -48,35 +50,32 @@ if ($conn->connect_error) {
         </nav>
     </header>
     <main>
+        <?php
 
-        <section id="entry-text" class="card">
-            <p>قائمة - الطلبات</p>
-        </section>
-        <ul id="Order-list">
-            <?php
+        $activeuser = $_SESSION['user']['id'];
+        $sql = "SELECT * FROM trips INNER JOIN users ON users.id = trips.submitter_id AND trip_id = $trip_id ";
+        $result = $conn->query($sql);
 
         ?>
-
-            <?php
-            $activeuser = $_SESSION['user']['id'];
-            $sql = "SELECT * FROM trips INNER JOIN users ON users.id = trips.submitter_id AND trips.trip_status = 'pending' AND trips.joined_id = '0' AND trips.submitter_id != '$activeuser' ORDER BY trips.trip_id DESC";
+        <?php echo DisplaySuccess(); ?>
 
 
-            $result = $conn->query($sql);
-
-            ?>
-
-
-            <?php
+        <?php
             if ($result->num_rows > 0) {
 
             ?>
-
+        <section id="entry-text" class="card">
+            <p>
+                تفاصيل الطلب رقم
+                <?php echo $trip_id ?>
+            </p>
+        </section>
+        <ul id="Order-list">
             <?php
                 // output data of each row
                 while ($row = $result->fetch_assoc()) {
             ?>
-            <?php echo displaytrip_error() ?>
+
             <li class="card">
                 <div class="Order-element__info">
                     <span class="spantrip<?php echo $row["trip_type"]; ?>"></span>
@@ -150,40 +149,60 @@ if ($conn->connect_error) {
                     <p>الوقت :
                         <?php echo $child2; ?>
                     </p>
+
+                    <p>
+                        <?php if ($row["origin_details"] != "") {
+                        echo "تفاصيل عنوان الانطلاق : " . $row["origin_details"];
+                    } ?>
+                    </p>
+                    <p>
+                        <?php if ($row["destination_details"] != "") {
+                        echo "تفاصيل عنوان الوجهة : " . $row["destination_details"];
+                    } ?>
+                    </p>
+                    
+                    <p>
+                        رقم الموبايل :
+                        <?php echo $row["mobile_Number"]; ?>
+                    </p>
+                    <p>
+                        <?php if ($row["extra_details"] != "") {
+                        echo "تفاصيل إضافية : " . $row["extra_details"];
+                    } ?>
+                    </p>
+
                     <p>
                         <?php echo $row["gender"]; ?>
                     </p>
 
                 </div>
                 <div class="Order-element__actions">
-                    <a href="tripdetails.php?trip_id=<?php echo $row["trip_id"] ?>" onclick="return confirm('hi')"
-                        class="btn btn--alt">عرض تفاصيل الطلب</a>
+                    <?php if ($row["tripStartCoordinatesLat"] != 0 && $row["tripStartCoordinatesLng"] != 0 && $row["destinationtripCoordinatesLat"] != 0 && $row["destinationtripCoordinatesLng"] != 0) { ?>
+                <a href="https://www.google.com/maps/dir/?api=1&origin=<?php echo $row["tripStartCoordinatesLat"],",",$row["tripStartCoordinatesLng"] ?>&destination=<?php echo $row["destinationtripCoordinatesLat"],",",$row["destinationtripCoordinatesLng"] ?>&travelmode=driving"
+                            target="_blank"> عرض الطريق من مكان الانطلاق الى الوجهة على الخارطة </a>
+                <?php } ?>
+                <?php if ($row["tripStartCoordinatesLat"] != 0 && $row["tripStartCoordinatesLng"] != 0 && $row["destinationtripCoordinatesLat"] == 0 && $row["destinationtripCoordinatesLng"] == 0) { ?>
+                <a href="https://www.google.com/maps/search/?api=1&query=<?php echo $row["tripStartCoordinatesLat"],'%2C',$row["tripStartCoordinatesLng"] ?>"
+                            target="_blank"> عرض مكان الانطلاق على الخارطة </a>
+                <?php } ?>
+                <?php if ($row["tripStartCoordinatesLat"] == 0 && $row["tripStartCoordinatesLng"] == 0 && $row["destinationtripCoordinatesLat"] != 0 && $row["destinationtripCoordinatesLng"] != 0) { ?>
+                <a href="https://www.google.com/maps/search/?api=1&query=<?php echo $row["destinationtripCoordinatesLat"],'%2C',$row["destinationtripCoordinatesLng"] ?>"
+                            target="_blank"> عرض عنوان الوجهة على الخارطة </a>
+                <?php } ?>
+                </div>
+                
+                <div class="Order-element__actions">
                     <a href="tel:<?php echo $row["mobile_Number"]; ?>"> 📞 </a>
-                    <a href="JoinTripFun.php?joined_id=<?php echo $_SESSION["user"]["id"] ?>&trip_id=<?php echo $row["trip_id"] ?>"
-                        onclick="return confirm('هل أنت متأكد من قبول الطلب؟')"
-                        class="btn btn--alt btn--accept accepttrip<?php echo $row["trip_type"]; ?>button"></a>
+                    <a href="FinishTrip.php?trip_id=<?php echo $row["trip_id"] ?>"
+                        onclick="return confirm('هل أنت متأكد من إنهاء الطلب؟')"
+                        class="btn btn--alt btn--accept finishtripbutton">إنهاء الرحلة</a>
                 </div>
             </li>
 
             <?php
                 }
-            ?>
-
-
-            <?php
-            } else {
-                echo "لا يوجد طلبات";
             }
-
-
-            $conn->close();
-
             ?>
-
-
-        </ul>
-
-
 
     </main>
     <footer>
@@ -191,9 +210,11 @@ if ($conn->connect_error) {
             <a href="Profile.php"><img src="img/user_512px.png" alt="profile logo">البروفايل</a>
             <a href="orders.php"><img src="img/order_512px.png" alt="orders logo">الطلبات </a>
             <a href="index.php"><img src="img/home_512px.png" alt="home page logo">الرئيسية</a>
+
         </nav>
+
     </footer>
-    <script defer src="js/script.js"></script>
+    <script src="js/script.js"></script>
 </body>
 
 </html>
