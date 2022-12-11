@@ -12,7 +12,7 @@ if (isLoggedIn() == False) {
 
   <meta charset="UTF-8">
   <meta name="author" content="Asad Asad">
-  <meta name="description" content="Wasselni trip details form Page">
+  <meta name="description" content="Wasselni Submit trip details form Page">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="icon" href="img/wasselni_logo_trans_notext.png" type="image/x-icon">
   <link rel="stylesheet" href="css/style.css" type="text/css">

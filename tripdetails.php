@@ -10,6 +10,10 @@ $username = "root";
 $password = "asad";
 $dbname = "wasselni";
 $trip_id = $_GET['trip_id'];
+
+if($trip_id == NULL){
+    header('location: orders.php');
+}
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
@@ -82,6 +86,8 @@ if ($conn->connect_error) {
                     <h2>
                         <?php echo $row["displayed_Name"] ?>
                     </h2>
+                    <img id="submitter_image" class="submitter_image" alt="<?php echo $row["displayed_Name"]?> image"
+                    src="uploads/<?php echo $row['image_url']; ?>" />
                     <p>من :
                         <?php
                     if ($row["origin"] == "Tulkarm") {
@@ -170,10 +176,17 @@ if ($conn->connect_error) {
                         echo "تفاصيل إضافية : " . $row["extra_details"];
                     } ?>
                     </p>
-
+                    <p>
+                    <?php if ($row["Vehicle_Model"] != "") { ?>
+                        نوع المركبة : 
+                        <?php echo $row["Vehicle_Model"]; ?>
+                    <?php } ?>
+                    </p>
+                    
                     <p>
                         <?php echo $row["gender"]; ?>
                     </p>
+
 
                 </div>
                 <div class="Order-element__actions">
@@ -193,10 +206,40 @@ if ($conn->connect_error) {
                 
                 <div class="Order-element__actions">
                     <a href="tel:<?php echo $row["mobile_Number"]; ?>"> 📞 </a>
+                    <?php if ($row['submitter_id'] == $_SESSION['user']['id']) { ?>
                     <a href="FinishTrip.php?trip_id=<?php echo $row["trip_id"] ?>"
                         onclick="return confirm('هل أنت متأكد من إنهاء الطلب؟')"
                         class="btn btn--alt btn--accept finishtripbutton">إنهاء الرحلة</a>
+                    <?php } ?>
+                    <?php
+                if ($row['submitter_id'] != $_SESSION['user']['id']) {
+                    if ($row['trip_status'] != 'active') { ?>
+                            <a href="JoinTripFun.php?joined_id=<?php echo $_SESSION["user"]["id"] ?>&trip_id=<?php echo $row["trip_id"] ?>"
+                        onclick="return confirm('هل أنت متأكد من قبول الطلب؟')"
+                        class="btn btn--alt btn--accept accepttrip<?php echo $row["trip_type"]; ?>button"></a>
+                        <?php }
+                } ?>
+
+                                    <?php if ($row["joined_id"] == $_SESSION["user"]["id"]){ ?>
+                                        <a href="LeaveTrip.php?trip_id=<?php echo $row["trip_id"]?>" onclick="return confirm('هل أنت متأكد من رغبتك بمغادرة الطلب؟')"
+                                        class="btn btn--alt btn--accept finishtripbutton">مغادرة الرحلة </a>
+                                    <?php } ?>
+
                 </div>
+                <?php if ($row["joined_id"] != 0) { ?>
+                    <div class="Order-element__actions">
+                            <p>
+                                <?php
+                        $sql3 = "SELECT * FROM trips INNER JOIN users ON users.id = trips.joined_id AND (trips.trip_status = 'active' OR trips.trip_status = 'pending') AND (trips.joined_id = '$activeuser' OR trips.submitter_id = '$activeuser') ";
+                        $result3 = $conn->query($sql3); ?>
+        <?php while ($rowjoined = $result3->fetch_assoc()) { ?>
+                            <p> 
+                                قام بالانضمام : 
+                                <?php echo $rowjoined['displayed_Name']; ?>
+
+                            </p>
+                        <?php }
+                    } ?>
             </li>
 
             <?php

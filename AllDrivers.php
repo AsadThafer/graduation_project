@@ -12,13 +12,13 @@ if (!isAdmin()) {
 <head>
   <meta charset="UTF-8">
   <meta name="author" content="Asad Asad">
-  <meta name="description" content="Wasselni Driver Requests Table Page for Admin Use Only">
+  <meta name="description" content="Wasselni All Accepted Drivers Table Page for Admin Use Only">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="icon" href="img/wasselni_logo_trans_notext.png" type="image/x-icon">
   <link rel="stylesheet" href="css/style.css" type="text/css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>طلبات الترقية</title>
+  <title>السائقين الموثقين</title>
 </head>
 
 <body>
@@ -50,12 +50,12 @@ if (!isAdmin()) {
       die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "SELECT * FROM users INNER JOIN upgrade_users_requests ON users.id = upgrade_users_requests.user_id AND users.user_status = 'pending'";
+    $sql = "SELECT * FROM users INNER JOIN upgrade_users_requests ON users.id = upgrade_users_requests.user_id AND users.user_status = 'Upgraded'";
     $result = $conn->query($sql);
 
     ?>
     <?php echo DisplaySuccess(); ?>
-    <h2 style="text-align:center ;">قائمة طلبات الترقية - الادمن</h2>
+    <h2 style="text-align:center ;">قائمة السائقين الموثقين - الادمن</h2>
 
     <div style=" overflow-x:auto;max-width:90%; margin :20px auto;">
       <table class='userstable'>
@@ -74,8 +74,7 @@ if (!isAdmin()) {
           <th>Vehicle Model</td>
           <th>Vehicle Plate</td>
           <th>Request Date</td>
-          <th>Reject</td>
-          <th>Accept</td>
+          <th>Revoke Driver</td>
 
         </tr>
         <?php
@@ -111,11 +110,7 @@ if (!isAdmin()) {
           </td>
           <td class="table__td"><a
               onclick="return confirm(' هل أنت متأكد انك تريد رفض الطلب  رقم <?php echo $row['request_id'] ?> ؟')"
-              href="decline_request.php?id=<?php echo $row["id"] ?>&request_id=<?php echo $row["request_id"] ?>">Reject</a>
-          </td>
-          <td class="table__td"><a
-              onclick="return confirm(' هل أنت متأكد انك تريد قبول الطلب  رقم <?php echo $row['request_id'] ?> ؟')"
-              href="upgrade_accept.php?id=<?php echo $row["id"] ?>&request_id=<?php echo $row["request_id"] ?>&Vehicle_Model=<?php echo $row["Vehicle_Model"] ?>">Accept</a>
+              href="decline_request.php?id=<?php echo $row["id"] ?>&request_id=<?php echo $row["request_id"] ?>">Revoke Driver</a>
           </td>
         </tr>
 

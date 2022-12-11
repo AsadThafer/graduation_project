@@ -15,10 +15,12 @@ $id = $_GET["id"];
 $request_id = $_GET["request_id"];
 
 
-// sql to delete a record
+// sql to revoke driver
 
-$sql = "UPDATE upgrade_users_requests SET request_status ='rejected' WHERE request_id='$request_id'";
-$sql2 = "UPDATE users SET user_status='rejected' WHERE id='$id'";
+
+$sql = " UPDATE users SET user_type='user',user_status='rejected',Vehicle_Model = '' WHERE id='$id'";
+$sql2 = " UPDATE upgrade_users_requests SET request_status='rejected' WHERE request_id='$request_id'";
+
 
 if ($conn->query($sql) === TRUE) {
     $conn->query($sql2);
@@ -30,3 +32,4 @@ if ($conn->query($sql) === TRUE) {
 
 $conn->close();
 ?>
+

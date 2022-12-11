@@ -26,6 +26,10 @@ if ($conn->connect_error) {
 
 $id = $_GET["id"];
 
+if ($id == "") {
+    header('location: UsersList.php');
+}
+
 $sql = "SELECT * FROM users WHERE id = " . "$id";
 
 $result = $conn->query($sql);
@@ -51,7 +55,7 @@ if ($result->num_rows > 0) {
 <head>
     <meta charset="UTF-8">
     <meta name="author" content="Asad Asad">
-    <meta name="description" content="Wasselni Sign in Page">
+    <meta name="description" content="Wasselni Update Users Page for Admin Use Only">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="icon" href="img/wasselni_logo_trans_notext.png" type="image/x-icon">
     <link rel="stylesheet" href="css/style.css" type="text/css">

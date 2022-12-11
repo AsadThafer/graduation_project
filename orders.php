@@ -14,6 +14,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +23,7 @@ if ($conn->connect_error) {
 <head>
     <meta charset="UTF-8">
     <meta name="author" content="Asad Asad">
-    <meta name="description" content="Wasselni Sign in Page">
+    <meta name="description" content="Wasselni All Pending Trips Page with Filter Option according to gender,destination place, origin place">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="icon" href="img/wasselni_logo_trans_notext.png" type="image/x-icon">
     <link rel="stylesheet" href="css/style.css" type="text/css">
@@ -52,23 +53,144 @@ if ($conn->connect_error) {
         <section id="entry-text" class="card">
             <p>قائمة - الطلبات</p>
         </section>
+        <form  name="filter" method="POST" action="">
+            <div class='filtertripsForm'>
+            <div>
+        <label  for="originfilter"> مكان الانطلاق :</label>
+          <select name="originfilter" id="originfilter" >
+          <option value=""></option>
+            <option value="Jenin">جنين</option>
+            <option value="Nablus">نابلس</option>
+            <option value="Jerusalem">القدس</option>
+            <option value="Ramallah">رام الله والبيرة</option>
+            <option value="Tubas">طوباس</option>
+            <option value="Tulkarm">طولكرم</option>
+            <option value="Qalqilya">قلقيلية</option>
+            <option value="Salfit">سلفيت</option>
+            <option value="Jericho">أريحا</option>
+            <option value="Bethlehem">بيت لحم</option>
+            <option value="Hebron">الخليل</option>
+          </select>
+          </div>
+          <div>
+          <label for="destinationfilter"> الوجهة :</label>
+          <select name="destinationfilter" id="destinationfilter">
+            <option value=""></option>
+            <option value="Jenin">جنين</option>
+            <option value="Nablus">نابلس</option>
+            <option value="Jerusalem">القدس</option>
+            <option value="Ramallah">رام الله والبيرة</option>
+            <option value="Tubas">طوباس</option>
+            <option value="Tulkarm">طولكرم</option>
+            <option value="Qalqilya">قلقيلية</option>
+            <option value="Salfit">سلفيت</option>
+            <option value="Jericho">أريحا</option>
+            <option value="Bethlehem">بيت لحم</option>
+            <option value="Hebron">الخليل</option>
+          </select>
+          </div>
+          <div>
+            <label for="genderfilter"> الجنس :</label>
+            <select name="genderfilter" id="genderfilter">
+            <option  value=""></option>
+                        <option value="ذكر">ذكر
+                        </option>
+                        <option value="أنثى">أنثى
+                        </option>
+            </select>
+            </div>
+            <div>
+            <input class='btn' type="submit" name="submit" value="البحث">
+            </div>
+            </div>
+        </form>
         <ul id="Order-list">
             <?php
 
         ?>
 
             <?php
-            $activeuser = $_SESSION['user']['id'];
-            $sql = "SELECT * FROM trips INNER JOIN users ON users.id = trips.submitter_id AND trips.trip_status = 'pending' AND trips.joined_id = '0' AND trips.submitter_id != '$activeuser' ORDER BY trips.trip_id DESC";
+             $activeuser = $_SESSION['user']['id'];
+             $user_typpe = $_SESSION['user']['user_type'];
+             if ($user_typpe == 'user'){
+                 $trip_typpe = 'driver';
+                 $trip_typpe2 = '';
+             }
+             else{
+                 $trip_typpe = 'partner';
+                 $trip_typpe2 = 'driver';
+             }
+            // if (isset($_POST['submit'])) {
+            //     $originfilter = $_POST['originfilter'];
+            //     $destinationfilter = $_POST['destinationfilter'];
+            //     $genderfilter = $_POST['genderfilter'];
+            //     $sql = "SELECT * FROM trips INNER JOIN users ON users.id = trips.submitter_id AND trips.trip_status = 'pending' AND trips.joined_id = '0' AND trips.submitter_id != '$activeuser' AND (trip_type='$trip_typpe' OR trip_type = '$trip_typpe2') WHERE (users.gender='$genderfilter' OR trips.origin='$originfilter' OR trips.destination='$destinationfilter')  ORDER BY trips.trip_id DESC";
+            //     $result = $conn->query($sql);
+            
+            // }
+            if ((isset($_POST['originfilter']) && $_POST['originfilter']!= '') && (isset($_POST['destinationfilter']) && $_POST['destinationfilter']!= '')&& (isset($_POST['genderfilter']) && $_POST['genderfilter']!= '') ){
+                $originfilter = $_POST['originfilter'];
+                $destinationfilter = $_POST['destinationfilter'];
+                $genderfilter = $_POST['genderfilter'];
+                $sql = "SELECT * FROM trips INNER JOIN users ON users.id = trips.submitter_id AND trips.trip_status = 'pending' AND trips.joined_id = '0' AND trips.submitter_id != '$activeuser' AND (trip_type='$trip_typpe' OR trip_type = '$trip_typpe2') WHERE (trips.origin='$originfilter' AND users.gender='$genderfilter' AND trips.destination='$destinationfilter' )  ORDER BY trips.trip_id DESC";
+                $result = $conn->query($sql);
+                
+            }
+            elseif ((isset($_POST['originfilter']) && $_POST['originfilter']!= '') && (isset($_POST['destinationfilter']) && $_POST['destinationfilter']!= '')){
+                $originfilter = $_POST['originfilter'];
+                $destinationfilter = $_POST['destinationfilter'];
+                $sql = "SELECT * FROM trips INNER JOIN users ON users.id = trips.submitter_id AND trips.trip_status = 'pending' AND trips.joined_id = '0' AND trips.submitter_id != '$activeuser' AND (trip_type='$trip_typpe' OR trip_type = '$trip_typpe2') WHERE (trips.origin='$originfilter' AND trips.destination='$destinationfilter' )  ORDER BY trips.trip_id DESC";
+                $result = $conn->query($sql);
+                
+            }
+            elseif ((isset($_POST['originfilter']) && $_POST['originfilter']!= '') && (isset($_POST['genderfilter']) && $_POST['genderfilter']!= '') ){
+                $originfilter = $_POST['originfilter'];
+                $genderfilter = $_POST['genderfilter'];
+                $sql = "SELECT * FROM trips INNER JOIN users ON users.id = trips.submitter_id AND trips.trip_status = 'pending' AND trips.joined_id = '0' AND trips.submitter_id != '$activeuser' AND (trip_type='$trip_typpe' OR trip_type = '$trip_typpe2') WHERE (trips.origin='$originfilter' AND users.gender='$genderfilter' )  ORDER BY trips.trip_id DESC";
+                $result = $conn->query($sql);
+                
+            }
+            elseif ( (isset($_POST['destinationfilter']) && $_POST['destinationfilter']!= '')&& (isset($_POST['genderfilter']) && $_POST['genderfilter']!= '') ){
+                $destinationfilter = $_POST['destinationfilter'];
+                $genderfilter = $_POST['genderfilter'];
+                $sql = "SELECT * FROM trips INNER JOIN users ON users.id = trips.submitter_id AND trips.trip_status = 'pending' AND trips.joined_id = '0' AND trips.submitter_id != '$activeuser' AND (trip_type='$trip_typpe' OR trip_type = '$trip_typpe2') WHERE ( users.gender='$genderfilter' AND trips.destination='$destinationfilter' )  ORDER BY trips.trip_id DESC";
+                $result = $conn->query($sql);
+                
+            }
+            elseif (isset($_POST['originfilter']) && $_POST['originfilter']!= '') {
+                $originfilter = $_POST['originfilter'];
+                $sql = "SELECT * FROM trips INNER JOIN users ON users.id = trips.submitter_id AND trips.trip_status = 'pending' AND trips.joined_id = '0' AND trips.submitter_id != '$activeuser' AND (trip_type='$trip_typpe' OR trip_type = '$trip_typpe2') WHERE (trips.origin='$originfilter' )  ORDER BY trips.trip_id DESC";
+                $result = $conn->query($sql);
+                
+            }
+            elseif (isset($_POST['destinationfilter']) && $_POST['destinationfilter']!= '') {
+                $destinationfilter = $_POST['destinationfilter'] ;
+                $sql = "SELECT * FROM trips INNER JOIN users ON users.id = trips.submitter_id AND trips.trip_status = 'pending' AND trips.joined_id = '0' AND trips.submitter_id != '$activeuser' AND (trip_type='$trip_typpe' OR trip_type = '$trip_typpe2') WHERE (trips.destination='$destinationfilter' )  ORDER BY trips.trip_id DESC";
+                $result = $conn->query($sql);
+                
+            }
+            elseif (isset($_POST['genderfilter']) && $_POST['genderfilter']!= '') {
+                $genderfilter = $_POST['genderfilter'];
+                $sql = "SELECT * FROM trips INNER JOIN users ON users.id = trips.submitter_id AND trips.trip_status = 'pending' AND trips.joined_id = '0' AND trips.submitter_id != '$activeuser' AND (trip_type='$trip_typpe' OR trip_type = '$trip_typpe2') WHERE (users.gender='$genderfilter' )  ORDER BY trips.trip_id DESC";
+                $result = $conn->query($sql);
+                
+            }
 
+           
+            
+            else{
+                $sql = "SELECT * FROM trips INNER JOIN users ON users.id = trips.submitter_id AND trips.trip_status = 'pending' AND trips.joined_id = '0' AND trips.submitter_id != '$activeuser' AND (trip_type='$trip_typpe' OR trip_type = '$trip_typpe2')  ORDER BY trips.trip_id DESC";
+                $result = $conn->query($sql);
 
-            $result = $conn->query($sql);
+            }
+
+           
 
             ?>
 
 
             <?php
-            if ($result->num_rows > 0) {
+            if (isset($result->num_rows) && $result->num_rows > 0) {
 
             ?>
 
@@ -83,6 +205,8 @@ if ($conn->connect_error) {
                     <h2>
                         <?php echo $row["displayed_Name"] ?>
                     </h2>
+                    <img id="submitter_image" class="submitter_image" alt="<?php echo $row["displayed_Name"]?> image"
+                    src="uploads/<?php echo $row['image_url']; ?>" />
                     <p>من :
                         <?php
                     if ($row["origin"] == "Tulkarm") {
@@ -156,12 +280,22 @@ if ($conn->connect_error) {
 
                 </div>
                 <div class="Order-element__actions">
-                    <a href="tripdetails.php?trip_id=<?php echo $row["trip_id"] ?>" onclick="return confirm('hi')"
+                    <a href="tripdetails.php?trip_id=<?php echo $row["trip_id"] ?>" onclick="return confirm('هل تريد مشاهدة تفاصيل الطلب؟')"
                         class="btn btn--alt">عرض تفاصيل الطلب</a>
                     <a href="tel:<?php echo $row["mobile_Number"]; ?>"> 📞 </a>
-                    <a href="JoinTripFun.php?joined_id=<?php echo $_SESSION["user"]["id"] ?>&trip_id=<?php echo $row["trip_id"] ?>"
+                    <?php if ($row['submitter_id'] == $_SESSION['user']['id']) { ?>
+                    <a href="FinishTrip.php?trip_id=<?php echo $row["trip_id"] ?>"
+                        onclick="return confirm('هل أنت متأكد من إنهاء الطلب؟')"
+                        class="btn btn--alt btn--accept finishtripbutton">إنهاء الرحلة</a>
+                    <?php } ?>
+                    <?php
+                if ($row['submitter_id'] != $_SESSION['user']['id']) {
+                    if ($row['trip_status'] != 'active') { ?>
+                            <a href="JoinTripFun.php?joined_id=<?php echo $_SESSION["user"]["id"] ?>&trip_id=<?php echo $row["trip_id"] ?>"
                         onclick="return confirm('هل أنت متأكد من قبول الطلب؟')"
                         class="btn btn--alt btn--accept accepttrip<?php echo $row["trip_type"]; ?>button"></a>
+                        <?php }
+                } ?>
                 </div>
             </li>
 

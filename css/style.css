@@ -16,7 +16,7 @@ section {
   text-align: center;
 }
 
-#OldFormDataWasSaved{
+#OldFormDataWasSaved {
   width: 50%;
   margin-bottom: 10px;
 }
@@ -70,7 +70,7 @@ h1 {
   box-shadow: 0px 8px 20px rgba(78, 96, 255, 0.16);
   border-radius: 8px;
 }
-.updatesubmit:hover{
+.updatesubmit:hover {
   cursor: pointer;
   color: white;
 }
@@ -312,13 +312,13 @@ textarea,
   opacity: 0.5;
   text-decoration: none;
 }
-.buttonToLink{
+.buttonToLink {
   background: none;
   border: none;
   color: red;
 }
 
-.buttonToLink:hover{
+.buttonToLink:hover {
   background: none;
   text-decoration: underline;
 }
@@ -327,11 +327,37 @@ textarea,
 }
 
 button:disabled,
-button[disabled]{
+button[disabled] {
   border: 1px solid #999999;
   background-color: #cccccc;
   color: #666666;
 }
+
+.filtertripsForm {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 1rem;
+  border-top: 1px solid #ccc;
+
+  width: 50%;
+  flex-flow: row-reverse nowrap;
+  margin: auto;
+  direction: rtl;
+  /* top: 10px; */
+  margin-top: 20px;
+}
+
+.update_profile_form {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  width: 70%;
+  margin: auto;
+  margin-bottom: 10px;
+  background: #f3f4ff;
+}
+
 
 @media screen and (max-width: 768px) {
   h1 {
@@ -398,11 +424,13 @@ button[disabled]{
   #headernav a {
     margin: auto;
   }
-  .tripformflex.divdesign{
-    width:80%;
+  .tripformflex.divdesign {
+    width: 80%;
+  }
+  .filtertripsForm{
+    width: 100%;
   }
 }
-
 
 #Order-list {
   list-style: none;
@@ -412,7 +440,6 @@ button[disabled]{
   padding: 0;
 }
 
-
 .Order-element {
   margin: auto;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
@@ -421,7 +448,7 @@ button[disabled]{
   background-color: white;
   border: 4px solid #670606;
 }
-.Order-element.DONE{
+.Order-element.DONE {
   background-color: lightgreen;
 }
 
@@ -434,10 +461,8 @@ button[disabled]{
 .Order-element__info h2 {
   flex-basis: 100%;
   color: #383838;
-  margin-top: 25px; 
+  margin-top: 25px;
 }
-
-
 
 .Order-element__info {
   border-radius: 10px 0 0 10px;
@@ -451,17 +476,15 @@ button[disabled]{
   position: relative;
 }
 
-
 .Order-element__info p {
   color: black;
   display: inline;
   width: 50%;
 }
 
-.Order-element__info p:last-child{
+.Order-element__info p:last-child {
   width: 100%;
 }
-
 
 .card {
   background: white;
@@ -470,17 +493,13 @@ button[disabled]{
   margin-top: 1.5rem;
 }
 
-
-.Order-element__actions{
+.Order-element__actions {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   padding: 1rem;
   border-top: 1px solid #ccc;
-  
 }
-
-
 
 .btn {
   font: inherit;
@@ -494,21 +513,19 @@ button[disabled]{
   margin: 0 0.5rem;
 }
 
-.btn.btn--alt{
+.btn.btn--alt {
   background-color: rgba(94, 90, 90, 0.548);
   color: white;
   border: none;
   border-radius: 10px;
 }
 
-.btn.btn--accept{
+.btn.btn--accept {
   background-color: green;
   color: white;
   border: none;
   border-radius: 10px;
 }
-
-
 
 /* .btn:hover,
 .btn:active {
@@ -553,45 +570,48 @@ button[disabled]{
   padding: 0.25rem 0.5rem;
 }
 
-
-
-.Order-element__info .spantripdriver{
-  background: #1C19B6;
+.Order-element__info .spantripdriver {
+  background: #1c19b6;
 }
 
-.Order-element__info .spantrippartner{
+.Order-element__info .spantrippartner {
   background: rgba(0, 128, 0, 0.712);
 }
 
-
-.Order-element__info .spantrippartner::after{
-  content: 'طلب توصيلة';
+.Order-element__info .spantrippartner::after {
+  content: "طلب توصيلة";
 }
-.Order-element__info .spantripdriver::after{
-  content: 'طلب شريك';
-}
-
-.accepttripdriverbutton::after{
-  content: 'الإنضمام للرحلة';
+.Order-element__info .spantripdriver::after {
+  content: "طلب شريك";
 }
 
-
-.btn.accepttripdriverbutton{
-  background: #1C19B6;
+.accepttripdriverbutton::after {
+  content: "الإنضمام للرحلة";
 }
-.btn.finishtripbutton{
+
+.btn.accepttripdriverbutton {
+  background: #1c19b6;
+}
+.btn.finishtripbutton {
   background: #670606;
 }
-.accepttrippartnerbutton::after{
-  content: 'قبول الطلب';
-
+.accepttrippartnerbutton::after {
+  content: "قبول الطلب";
 }
 
-
-.Order-element__status{
+.Order-element__status {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   padding: 1rem;
-  
 }
+
+.submitter_image {
+  width: 15%;
+  position: absolute;
+  border: 25%;
+  border-radius: 50%;
+  top: 10px;
+  right: 10px;
+}
+

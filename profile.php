@@ -11,7 +11,7 @@ if (isLoggedIn() == False) {
 <head>
     <meta charset="UTF-8">
     <meta name="author" content="Asad Asad">
-    <meta name="description" content="Wasselni Sign in Page">
+    <meta name="description" content="Wasselni Personal Profile Page">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="icon" href="img/wasselni_logo_trans_notext.png" type="image/x-icon">
     <link rel="stylesheet" href="css/style.css" type="text/css">
@@ -78,6 +78,9 @@ if (isLoggedIn() == False) {
                         echo "<br>";
                         echo "<br>";
                         echo "<a href='DriverRequestsTable.php'>طلبات الترقية</a>";
+                        echo "<br>";
+                        echo "<br>";
+                        echo "<a href='AllDrivers.php?'>قائمة السائقين الموثقين </a>";
                     } ?>
                 <?php if (!isDriver()) {
                         if ($_SESSION['user']['user_status'] == 'pending') {
@@ -89,7 +92,11 @@ if (isLoggedIn() == False) {
                             echo "<br>";
                             echo "<a href='becomeDriver.php?id=$id'>تقديم طلب لسائق</a>";
                         } else {
-                            echo "<a href='becomeDriver.php?id=$id'>تقديم طلب لسائق</a>";
+                            if (!isAdmin()) {
+                                echo "<br>";
+                                echo "<br>";
+                                echo "<a href='becomeDriver.php?id=$id'>تقديم طلب لسائق</a>";
+                            }
                         }
                         echo "<br>";
                         echo "<br>";

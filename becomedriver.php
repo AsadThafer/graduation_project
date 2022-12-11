@@ -4,7 +4,7 @@ $id = $_SESSION['user']['id'];
     $_SESSION['msg'] = "You need to Sign in first";
     header('location: signin.php');
   }
-  if ($_SESSION['user']['user_type'] != 'user' && $_SESSION['user']['user_status'] != 'rejected') {
+  if ($_SESSION['user']['user_type'] != 'user' || $_SESSION['user']['user_status'] != 'rejected') {
     header('location: profile.php');
   }
 ?>
@@ -15,7 +15,7 @@ $id = $_SESSION['user']['id'];
 <head>
   <meta charset="UTF-8">
   <meta name="author" content="Asad Asad">
-  <meta name="description" content="Wasselni Become driver form Page">
+  <meta name="description" content="Wasselni Become driver form Page for Normal Users Use Only">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="icon" href="img/wasselni_logo_trans_notext.png" type="image/x-icon">
   <link rel="stylesheet" href="css/style.css" type="text/css">

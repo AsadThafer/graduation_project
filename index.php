@@ -23,7 +23,7 @@ if ($conn->connect_error) {
 <head>
     <meta charset="UTF-8">
     <meta name="author" content="Asad Asad">
-    <meta name="description" content="Wasselni Index Page">
+    <meta name="description" content="Wasselni Home Page Where you can find your current Active Trip and you can Choose to create new Trip">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="icon" href="img/wasselni_logo_trans_notext.png" type="image/x-icon">
     <link rel="stylesheet" href="css/style.css" type="text/css">
@@ -86,6 +86,8 @@ if ($conn->connect_error) {
         </section>
         <ul id="Order-list">
             <?php
+            echo "<script>console.log('Active Orders: " . $result->num_rows . "');</script>";
+
                 // output data of each row
                 while ($row = $result->fetch_assoc()) {
             ?>
@@ -96,6 +98,8 @@ if ($conn->connect_error) {
                     <h2>
                         <?php echo $row["displayed_Name"] ?>
                     </h2>
+                    <img id="submitter_image" class="submitter_image" alt="<?php echo $row["displayed_Name"]?> image"
+                    src="uploads/<?php echo $row['image_url']; ?>" />
                     <p>من :
                         <?php 
                         if ($row["origin"] == "Tulkarm"){echo "طولكرم";}
@@ -145,18 +149,35 @@ if ($conn->connect_error) {
 
                 </div>
                 <div class="Order-element__actions">
-                    <a href="tripdetails.php?trip_id=<?php echo $row["trip_id"]?>" onclick="return confirm('hi')" class="btn btn--alt">عرض تفاصيل الطلب</a>
+                    <a href="tripdetails.php?trip_id=<?php echo $row["trip_id"]?>" onclick="return confirm('هل تريد مشاهدة تفاصيل الطلب؟')" class="btn btn--alt">عرض تفاصيل الطلب</a>
                     <a href="tel:<?php echo $row["mobile_Number"]; ?>"> 📞 </a>
+                    <?php if ($row['submitter_id'] == $_SESSION['user']['id']) { ?>
                     <a href="FinishTrip.php?trip_id=<?php echo $row["trip_id"]?>" onclick="return confirm('هل أنت متأكد من إنهاء الطلب؟')"
                         class="btn btn--alt btn--accept finishtripbutton">إنهاء الرحلة</a>
-                </div>
-               
+                    <?php } ?>
                     <?php if ($row["joined_id"] == $_SESSION["user"]["id"]){ ?>
-                        <div class="Order-element__actions">
                         <a href="LeaveTrip.php?trip_id=<?php echo $row["trip_id"]?>" onclick="return confirm('هل أنت متأكد من رغبتك بمغادرة الطلب؟')"
                         class="btn btn--alt btn--accept finishtripbutton">مغادرة الرحلة </a>
-                        </div>
+                </div>
+               
+                   
                     <?php } ?>
+                    <?php if ($row["joined_id"] != 0) { ?>
+                    <div class="Order-element__actions">
+                            <p>
+                                <?php
+                        $sql3 = "SELECT * FROM trips INNER JOIN users ON users.id = trips.joined_id AND (trips.trip_status = 'active' OR trips.trip_status = 'pending') AND (trips.joined_id = '$activeuser' OR trips.submitter_id = '$activeuser') ";
+                        $result3 = $conn->query($sql3); ?>
+        <?php while ($rowjoined = $result3->fetch_assoc()) { ?>
+                            <p> 
+                                قام بالانضمام : 
+                                <?php echo $rowjoined['displayed_Name']; ?>
+
+                            </p>
+                        <?php }
+                    } ?>
+                    
+                </div>
                   
               
                 

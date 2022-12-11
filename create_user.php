@@ -30,13 +30,13 @@ if ($conn->connect_error) {
 <head>
     <meta charset="UTF-8">
     <meta name="author" content="Asad Asad">
-    <meta name="description" content="Wasselni Sign in Page">
+    <meta name="description" content="Wasselni Create New User for Admin Use Only">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="icon" href="img/wasselni_logo_trans_notext.png" type="image/x-icon">
     <link rel="stylesheet" href="css/style.css" type="text/css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إنشاء حساب جديد</title>
+    <title>إنشاء حساب جديد -الادمن</title>
 </head>
 
 <body>

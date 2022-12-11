@@ -14,12 +14,12 @@ if ($conn->connect_error) {
 $trip_id = $_GET["trip_id"];
 
 // sql to delete a Finish Trip
-$sql = "UPDATE trips Set trip_status='pending' AND joined_id = 0 WHERE trip_id='$trip_id' ";
+$sql = "UPDATE trips Set trip_status='pending',joined_id = '0' WHERE trip_id='$trip_id' ";
 if ($conn->query($sql) === TRUE) {
     echo " تم مغادرة الرحلة بنجاح ";
     header ('location:index.php');
 } else {
-    echo "Join Failed: " . $conn->error;
+    echo "Join Failed: " . $conn->error;  
 }
 
 $conn->close();

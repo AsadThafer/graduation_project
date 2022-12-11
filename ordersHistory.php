@@ -23,7 +23,7 @@ if ($conn->connect_error) {
 <head>
     <meta charset="UTF-8">
     <meta name="author" content="Asad Asad">
-    <meta name="description" content="Wasselni Sign in Page">
+    <meta name="description" content="Wasselni Your Trips History Page">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="icon" href="img/wasselni_logo_trans_notext.png" type="image/x-icon">
     <link rel="stylesheet" href="css/style.css" type="text/css">
@@ -56,9 +56,9 @@ if ($conn->connect_error) {
             $result = $conn->query($sql);
 
             ?>
-            <?php echo DisplaySuccess(); ?>
+        <?php echo DisplaySuccess(); ?>
 
-            <section id="entry-text" class="card">
+        <section id="entry-text" class="card">
             <p> سجل طلباتك </p>
         </section>
         <ul id="Order-list">
@@ -70,13 +70,15 @@ if ($conn->connect_error) {
                 // output data of each row
                 while ($row = $result->fetch_assoc()) {
             ?>
-        
+
             <li class="card">
                 <div class="Order-element__info">
                     <span class="spantrip<?php echo $row["trip_type"]; ?>"></span>
                     <h2>
                         <?php echo $row["displayed_Name"] ?>
                     </h2>
+                    <img id="submitter_image" class="submitter_image" alt="<?php echo $row["displayed_Name"]?> image"
+                    src="uploads/<?php echo $row['image_url']; ?>" />
                     <p>من :
                         <?php 
                         if ($row["origin"] == "Tulkarm"){echo "طولكرم";}
@@ -93,7 +95,7 @@ if ($conn->connect_error) {
                         ?>
                     </p>
                     <p>إلى :
-                    <?php 
+                        <?php 
                         if ($row["destination"] == "Tulkarm"){echo "طولكرم";}
                         elseif ($row["destination"] == "Ramallah"){echo "رام الله و البيرة";}
                         elseif ($row["destination"] == "Nablus"){echo "نابلس";}
@@ -124,41 +126,45 @@ if ($conn->connect_error) {
                         <?php echo $row["gender"]; ?>
                     </p>
 
-                </div>                   
-                    <div class="Order-element__actions">
+                </div>
+                <div class="Order-element__actions">
 
                     <?php 
                      if ($row["trip_status"] == "active") { ?>
-                    <a href="tripdetails.php?trip_id=<?php echo $row["trip_id"]?>" class="btn btn--alt">عرض تفاصيل الطلب</a>
+                    <a href="tripdetails.php?trip_id=<?php echo $row["trip_id"]?>"
+                        onclick="return confirm('هل تريد مشاهدة تفاصيل الطلب؟')" class="btn btn--alt">عرض تفاصيل
+                        الطلب</a>
                     <a href="tel:<?php echo $row["mobile_Number"]; ?>"> 📞 </a>
-                    <a href="FinishTrip.php?trip_id=<?php echo $row["trip_id"]?>" onclick="return confirm('هل أنت متأكد من إنهاء الطلب؟')"
+                    <a href="FinishTrip.php?trip_id=<?php echo $row["trip_id"]?>"
+                        onclick="return confirm('هل أنت متأكد من إنهاء الطلب؟')"
                         class="btn btn--alt btn--accept finishtripbutton">إنهاء الرحلة</a>
                     <?php } else { ?>
 
-                    <a href="" onclick="return confirm('hi')" class="btn btn--alt">عرض تفاصيل الطلب</a>
+                    <a href="tripdetails.php?trip_id=<?php echo $row["trip_id"]?>"
+                        onclick="return confirm('هل أنت متأكد من إنهاء الطلب؟')" class="btn btn--alt">عرض تفاصيل
+                        الطلب</a>
                     <a href="tel:<?php echo $row["mobile_Number"]; ?>"> 📞 </a>
                     <?php } ?>
-                    </div>
-                    <div class="Order-element__status">
-                        <p>
-                 
-                            <?php if ($row["trip_status"] == "active") { ?>
-                            <span class="status active">طلب فعال</span>
-                            <?php } elseif ($row["trip_status"] == "expired") { ?>
-                            <span class="status finished">طلب منتهي</span>
-                            <?php } ?>
-                        </p>
-                    </div>
+                </div>
+                <div class="Order-element__status">
+                        <?php if ($row["trip_status"] == "active") { ?>
+                        <span>طلب فعال</span>
+                        <?php } if ($row["trip_status"] == "expired") { ?>
+                        <span >طلب منتهي</span>
+                        <?php} if ($row["trip_status"] == "pending") { ?>
+                        <span class="status pending">طلب بالانتظار</span>
+                        <?php } ?>
+                </div>
 
-                    
-                    
-                 </div>
+
+
+ 
             </li>
             <?php
     }}
     ?>
     </main>
-    
+
     <footer>
         <nav class="footernav">
             <a href="Profile.php"><img src="img/user_512px.png" alt="profile logo">البروفايل</a>
@@ -166,8 +172,8 @@ if ($conn->connect_error) {
             <a href="index.php"><img src="img/home_512px.png" alt="home page logo">الرئيسية</a>
         </nav>
     </footer>
-    </body>
-    <script src="js/script.js"></script>
+</body>
+<script src="js/script.js"></script>
 
-                
+
 </html>
