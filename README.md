@@ -33,6 +33,6 @@ This is a ride sharing application built with HTML, CSS, JavaScript and PHP. It 
 
 ## Contributions
 
-This Project was built with the help of my partner @KholoudThabet
+This Project was built with the help of my partner <a href ="https://github.com/KholoudThabet" >KholoudThabet</a>
 
 Pull requests and contributions to the project are welcome. For more information, please refer to the [contributing guidelines](./CONTRIBUTING.md).
