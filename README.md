@@ -1,6 +1,4 @@
-# Still Under Deployment
-
-#  Graduation Project Ride Sharing App
+#  Graduation Project Ride Sharing App  *  Still Under Deployment
 
 This is a ride sharing application built with HTML, CSS, JavaScript and PHP. It is a graduation project by Asad Asad and Kholoud Thabet.
 
