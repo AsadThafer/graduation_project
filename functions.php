@@ -138,8 +138,8 @@ function isLoggedIn()
 
 if (isset($_GET['logout'])) {
 	session_destroy();
-	unset($_SESSION['user']);
 	unset($_COOKIE['user']);
+	setcookie("user", "", time()-3600);
 	header("location: signin.php");
 }
 
@@ -175,40 +175,63 @@ function login()
 		if (mysqli_num_rows($results) == 1) { // user found
 			// check if user is admin or user
 			$logged_in_user = mysqli_fetch_assoc($results);
-			if ($logged_in_user) {
-				$_SESSION['user'] = $logged_in_user;
-				$_SESSION["loggedin"] = true;
-				$_SESSION['success'] = "You are now logged in";
 			if(isset($_POST['keep_me_in'])){
 				setcookie('user', json_encode([
 					'mobile_Number' => $mobile_Number,
 					'password' => $password
 				]), time() + 3600 * 24 * 30);
 			}
+			if ($logged_in_user) {
+				$_SESSION['user'] = $logged_in_user;
+				$_SESSION["loggedin"] = true;
+				$_SESSION['success'] = "You are now logged in";
 				header('location: index.php');
-			} else {
-				array_push($errors, "Wrong username/password combination");
-			}
+			} 
 			if ($logged_in_user['user_type'] == 'admin') {
-				header('location: home.php');
+				header('location: index.php');
+			}
+			else {
+				array_push($errors, "Wrong username/password combination");
 			}
 		}
 	}
 }
 
-// if(isset($_COOKIE['user']) && !isset($_SESSION["loggedin"])) {
-//     $user = json_decode($_COOKIE['user'], true);
-//     // do the stuff to check if there is a user with $user['mobile_Number'] and $user['password'] in the database, then if there is one, do as below :
-//     $_SESSION["loggedin"] = true;
-//     $_SESSION["id"] = $id; // retrieved from database
-//     $_SESSION["mobile_Number"] = $user['mobile_Number'];
-//     // else if there is no user with that credentials from cookie, do the following to prevent further checking on database :
-//     $_SESSION["loggedin"] = false;
 
-// }
+if(isset($_COOKIE['user']) && !isset($_SESSION["loggedin"])) {
+    $user = json_decode($_COOKIE['user'], true);
+    // do the stuff to check if there is a user with $user['mobile_Number'] and $user['password'] in the database, then if there is one, do as below :
+    $mobile_Number = $user['mobile_Number'];
+    $password = $user['password'];
 
-// // Check if the user is already logged in, if yes then redirect him to welcome page
-// if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+    // else if there is no user with that credentials from cookie, do the following to prevent further checking on database 
+
+	$query = "SELECT * FROM users WHERE mobile_Number='$mobile_Number' AND password='$password' LIMIT 1";
+		$results = mysqli_query($db, $query);
+
+		if (mysqli_num_rows($results) == 1) { // user found
+			// check if user is admin or user
+			$logged_in_user = mysqli_fetch_assoc($results);
+			if ($logged_in_user) {
+				$_SESSION['user'] = $logged_in_user;
+				$_SESSION["loggedin"] = true;
+				$_SESSION['success'] = "You are now logged in";
+				header('location: index.php');
+			} 
+			if ($logged_in_user['user_type'] == 'admin') {
+				header('location: index.php');
+			}
+			else {
+				array_push($errors, "Wrong username/password combination");
+			}
+		}
+		if(!isset($_COOKIE['user']) && !isset($_SESSION["loggedin"])){
+			session_destroy();
+		}
+}
+
+// Check if the user is already logged in, if yes then redirect him to welcome page
+// if(isset($_SESSION["loggedin"])){
 // 	header("location: index.php");
 // 	exit;
 // }

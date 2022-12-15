@@ -33,7 +33,6 @@ if ($conn->connect_error) {
 </head>
 
 <body>
-
     <header>
         <nav id="headernav">
             <a href="index.php">
