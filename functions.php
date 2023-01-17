@@ -32,6 +32,8 @@ function register()
 	$mobile_Number = e($_POST['mobile_Number']);
 
 
+
+
 	// form validation: ensure that the form is correctly filled
 	if (empty($username)) {
 		array_push($errors, "Username is required");
@@ -58,16 +60,18 @@ function register()
 	// register user if there are no errors in the form
 	if (count($errors) == 0) {
 		$password = ($password_1);
+		$encrypted_pwd = md5($password);
+		$mobile_Number = e($_POST['mobile_Number']);
 		if (isset($_POST['user_type'])) {
 			$user_type = e($_POST['user_type']);
 			$query = "INSERT INTO users (username,displayed_Name,email,mobile_Number,gender,user_type,user_status,Vehicle_Model, password) 
-					  VALUES('$username','$displayed_Name','$email','$mobile_Number','$gender','$user_type','','','$password')";
+					  VALUES('$username','$displayed_Name','$email','$mobile_Number','$gender','$user_type','','',''$encrypted_pwd')";
 			mysqli_query($db, $query);
 			$_SESSION['success'] = "New user successfully created!!";
 			header('location: UsersList.php');
 		} else {
 			$query = "INSERT INTO users (username,displayed_Name,email,mobile_Number,user_type,gender,user_status,Vehicle_Model,password)
-					  VALUES('$username','$displayed_Name','$email','$mobile_Number','user','غير محدد','','','$password')";
+					  VALUES('$username','$displayed_Name','$email','$mobile_Number','user','غير محدد','','','$encrypted_pwd')";
 			mysqli_query($db, $query);
 
 			// get id of the created user
@@ -139,7 +143,7 @@ function isLoggedIn()
 if (isset($_GET['logout'])) {
 	session_destroy();
 	unset($_COOKIE['user']);
-	setcookie("user", "", time()-3600);
+	setcookie("user", "", time() - 3600);
 	header("location: signin.php");
 }
 
@@ -157,6 +161,7 @@ function login()
 	// grap form values
 	$mobile_Number = e($_POST['mobile_Number']);
 	$password = e($_POST['password']);
+	$decrypted_pwd = md5($password);
 
 	// make sure form is filled properly
 	if (empty($mobile_Number)) {
@@ -169,16 +174,16 @@ function login()
 	// attempt login if no errors on form
 	if (count($errors) == 0) {
 		$password = $password;
-		$query = "SELECT * FROM users WHERE username='$username' or mobile_Number='$mobile_Number' AND password='$password' LIMIT 1";
+		$query = "SELECT * FROM users WHERE username='$username' or mobile_Number='$mobile_Number' AND password='$decrypted_pwd' LIMIT 1";
 		$results = mysqli_query($db, $query);
 
 		if (mysqli_num_rows($results) == 1) { // user found
 			// check if user is admin or user
 			$logged_in_user = mysqli_fetch_assoc($results);
-			if(isset($_POST['keep_me_in'])){
+			if (isset($_POST['keep_me_in'])) {
 				setcookie('user', json_encode([
 					'mobile_Number' => $mobile_Number,
-					'password' => $password
+					'password' => $decrypted_pwd
 				]), time() + 3600 * 24 * 30);
 			}
 			if ($logged_in_user) {
@@ -186,11 +191,10 @@ function login()
 				$_SESSION["loggedin"] = true;
 				$_SESSION['success'] = "You are now logged in";
 				header('location: index.php');
-			} 
+			}
 			if ($logged_in_user['user_type'] == 'admin') {
 				header('location: index.php');
-			}
-			else {
+			} else {
 				array_push($errors, "Wrong username/password combination");
 			}
 		}
@@ -198,36 +202,35 @@ function login()
 }
 
 
-if(isset($_COOKIE['user']) && !isset($_SESSION["loggedin"])) {
-    $user = json_decode($_COOKIE['user'], true);
-    // do the stuff to check if there is a user with $user['mobile_Number'] and $user['password'] in the database, then if there is one, do as below :
-    $mobile_Number = $user['mobile_Number'];
-    $password = $user['password'];
+if (isset($_COOKIE['user']) && !isset($_SESSION["loggedin"])) {
+	$user = json_decode($_COOKIE['user'], true);
+	// do the stuff to check if there is a user with $user['mobile_Number'] and $user['password'] in the database, then if there is one, do as below :
+	$mobile_Number = $user['mobile_Number'];
+	$password = $user['password'];
 
-    // else if there is no user with that credentials from cookie, do the following to prevent further checking on database 
+	// else if there is no user with that credentials from cookie, do the following to prevent further checking on database 
 
 	$query = "SELECT * FROM users WHERE mobile_Number='$mobile_Number' AND password='$password' LIMIT 1";
-		$results = mysqli_query($db, $query);
+	$results = mysqli_query($db, $query);
 
-		if (mysqli_num_rows($results) == 1) { // user found
-			// check if user is admin or user
-			$logged_in_user = mysqli_fetch_assoc($results);
-			if ($logged_in_user) {
-				$_SESSION['user'] = $logged_in_user;
-				$_SESSION["loggedin"] = true;
-				$_SESSION['success'] = "You are now logged in";
-				header('location: index.php');
-			} 
-			if ($logged_in_user['user_type'] == 'admin') {
-				header('location: index.php');
-			}
-			else {
-				array_push($errors, "Wrong username/password combination");
-			}
+	if (mysqli_num_rows($results) == 1) { // user found
+		// check if user is admin or user
+		$logged_in_user = mysqli_fetch_assoc($results);
+		if ($logged_in_user) {
+			$_SESSION['user'] = $logged_in_user;
+			$_SESSION["loggedin"] = true;
+			$_SESSION['success'] = "You are now logged in";
+			header('location: index.php');
 		}
-		if(!isset($_COOKIE['user']) && !isset($_SESSION["loggedin"])){
-			session_destroy();
+		if ($logged_in_user['user_type'] == 'admin') {
+			header('location: index.php');
+		} else {
+			array_push($errors, "Wrong username/password combination");
 		}
+	}
+	if (!isset($_COOKIE['user']) && !isset($_SESSION["loggedin"])) {
+		session_destroy();
+	}
 }
 
 // Check if the user is already logged in, if yes then redirect him to welcome page
@@ -354,4 +357,3 @@ function isDriver()
 
 
 ?>
-
