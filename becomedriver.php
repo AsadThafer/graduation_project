@@ -4,9 +4,9 @@ $id = $_SESSION['user']['id'];
     $_SESSION['msg'] = "You need to Sign in first";
     header('location: signin.php');
   }
-  if ($_SESSION['user']['user_type'] != 'user' || $_SESSION['user']['user_status'] != 'rejected') {
-    header('location: profile.php');
-  }
+  // if ($_SESSION['user']['user_type'] != 'user' || $_SESSION['user']['user_status'] != 'rejected') {
+  //   header('location: profile.php');
+  // }
 ?>
 
 <!DOCTYPE html>
