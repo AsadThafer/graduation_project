@@ -168,7 +168,7 @@ if (isLoggedIn() == False) {
 
 
            <script defer async
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCNVumAEwpkaac91aZVxJD6ShIaK8qSSc&callback=initMap&initDestMap&v=weekly"
+    src="MAP KEY IS HERE with google API"
     ></script>
 </body>
 </html>
