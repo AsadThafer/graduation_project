@@ -1,8 +1,8 @@
 <?php include('functions.php');
-  if (isLoggedIn()==True) {
+if (isLoggedIn() == True) {
     $_SESSION['msg'] = "You Are Logged in Already";
     header('location: index.php');
-  }
+}
 ?>
 <!DOCTYPE html>
 <html lang="ar">
@@ -34,9 +34,9 @@
         </header>
         <main>
             <section>
-                <form class="signform" id="signinform" action="signin.php" method="post"
-                    autocomplete="off">
-                    <p> <input type="tel" name="mobile_Number" id="mobile_Number" placeholder="05" pattern="[0-9]{10}" required></p>
+                <form class="signform" id="signinform" action="signin.php" method="post" autocomplete="off">
+                    <p> <input type="tel" name="mobile_Number" id="mobile_Number" placeholder="05" pattern="[0-9]{10}"
+                            required></p>
                     <p>
                         <input type="password" name="password" id="password_1" placeholder="كلمة المرور" required>
                         <i class="bi bi-eye-slash" id="togglePassword"></i>
@@ -49,7 +49,7 @@
                 <p> ليس لديك حساب بعد ؟ <a href="signup.php">إنشاء حساب</a></p>
 
             </section>
-            <?php  #echo $_SESSION['user']['displayed_Name']; ?> 
+            <?php #echo $_SESSION['user']['displayed_Name']; ?>
         </main>
         <script src="js/script.js"></script>
         <script src="js/signup.js"></script>

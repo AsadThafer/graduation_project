@@ -54,74 +54,76 @@ if (!isAdmin()) {
     $result = $conn->query($sql);
 
     ?>
-  <?php echo DisplaySuccess(); ?>
-  <h2 style="text-align:center ;">قائمة المستخدمين - الادمن</h2>
+    <?php echo DisplaySuccess(); ?>
+    <h2 style="text-align:center ;">قائمة المستخدمين - الادمن</h2>
 
-    <div  style=" overflow-x:auto;max-width:90%; margin :20px auto;">
+    <div style=" overflow-x:auto;max-width:90%; margin :20px auto;">
       <table class='userstable'>
 
 
         <?php
         if ($result->num_rows > 0) {
 
-        ?>
-        <tr class="table__head">
-          <th>ID</td>
-          <th>username</td>
-          <th>displayed_Name</td>
-          <th>Email</td>
-          <th>user type</td>
-          <th>Password</td>
-          <th>Mobile Number</td>
-          <th>gender</td>
-          <th>Delete</td>
-          <th>Update</td>
+          ?>
+          <tr class="table__head">
+            <th>ID</td>
+            <th>username</td>
+            <th>displayed_Name</td>
+            <th>Email</td>
+            <th>user type</td>
+            <th>Password</td>
+            <th>Mobile Number</td>
+            <th>gender</td>
+            <th>Delete</td>
+            <th>Update</td>
 
-        </tr>
-        <?php
+          </tr>
+          <?php
           // output data of each row
           while ($row = $result->fetch_assoc()) {
-        ?>
+            ?>
 
 
-        <tr class="table__tr">
-          <td class="table__td">
-            <?php echo $row["id"]; ?>
-          </td>
-          <td class="table__td">
-            <?php echo $row["username"]; ?>
-          </td>
-          <td class="table__td">
-            <?php echo $row["displayed_Name"]; ?>
-          </td>
-          <td class="table__td">
-            <?php echo $row["email"]; ?>
-          </td>
-          <td class="table__td">
-            <?php echo $row["user_type"]; ?>
-          </td>
-          <td class="table__td">
-            <?php echo $row["password"]; ?>
-          </td>
-          <td class="table__td">
-            <?php echo $row["mobile_Number"]; ?>
-          </td>
-          <td class="table__td">
-            <?php echo $row["gender"]; ?>
-          </td>
-          <td class="table__td"> <a onclick="return confirm(' هل أنت متأكد انك تريد حذف المستخدم رقم <?php echo $row['id'] ?> ؟')" href="deluser.php?id=<?php echo $row["id"] ?>" >Delete</a></td>
-          <td class="table__td"><a href="updateusers.php?id=<?php echo $row["id"] ?>"  >Update</a></td>
-        </tr>
+            <tr class="table__tr">
+              <td class="table__td">
+                <?php echo $row["id"]; ?>
+              </td>
+              <td class="table__td">
+                <?php echo $row["username"]; ?>
+              </td>
+              <td class="table__td">
+                <?php echo $row["displayed_Name"]; ?>
+              </td>
+              <td class="table__td">
+                <?php echo $row["email"]; ?>
+              </td>
+              <td class="table__td">
+                <?php echo $row["user_type"]; ?>
+              </td>
+              <td class="table__td">
+                <?php echo $row["password"]; ?>
+              </td>
+              <td class="table__td">
+                <?php echo $row["mobile_Number"]; ?>
+              </td>
+              <td class="table__td">
+                <?php echo $row["gender"]; ?>
+              </td>
+              <td class="table__td"> <a
+                  onclick="return confirm(' هل أنت متأكد انك تريد حذف المستخدم رقم <?php echo $row['id'] ?> ؟')"
+                  href="deluser.php?id=<?php echo $row["id"] ?>">Delete</a></td>
+              <td class="table__td"><a href="updateusers.php?id=<?php echo $row["id"] ?>">Update</a></td>
+            </tr>
 
 
 
-        <?php
+            <?php
           }
-        ?>
-      </table>
-    </div>
+          ?>
+        </table>
+      </div>
 
-    <?php
+      <?php
         } else {
           echo "0 results";
         }
@@ -143,7 +145,7 @@ if (!isAdmin()) {
   </footer>
 
   <script src="js/script.js"></script>
-</script>
+  </script>
 </body>
 
 </html>

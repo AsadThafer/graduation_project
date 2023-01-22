@@ -23,7 +23,8 @@ if ($conn->connect_error) {
 <head>
     <meta charset="UTF-8">
     <meta name="author" content="Asad Asad">
-    <meta name="description" content="Wasselni All Pending Trips Page with Filter Option according to gender,destination place, origin place">
+    <meta name="description"
+        content="Wasselni All Pending Trips Page with Filter Option according to gender,destination place, origin place">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="icon" href="img/wasselni_logo_trans_notext.png" type="image/x-icon">
     <link rel="stylesheet" href="css/style.css" type="text/css">
@@ -53,258 +54,278 @@ if ($conn->connect_error) {
         <section id="entry-text" class="card">
             <p>قائمة - الطلبات</p>
         </section>
-        <form  name="filter" method="POST" action="">
+        <form name="filter" method="POST" action="">
             <div class='filtertripsForm'>
-            <div>
-        <label  for="originfilter"> مكان الانطلاق :</label>
-          <select name="originfilter" id="originfilter" >
-          <option value=""></option>
-            <option value="Jenin">جنين</option>
-            <option value="Nablus">نابلس</option>
-            <option value="Jerusalem">القدس</option>
-            <option value="Ramallah">رام الله والبيرة</option>
-            <option value="Tubas">طوباس</option>
-            <option value="Tulkarm">طولكرم</option>
-            <option value="Qalqilya">قلقيلية</option>
-            <option value="Salfit">سلفيت</option>
-            <option value="Jericho">أريحا</option>
-            <option value="Bethlehem">بيت لحم</option>
-            <option value="Hebron">الخليل</option>
-          </select>
-          </div>
-          <div>
-          <label for="destinationfilter"> الوجهة :</label>
-          <select name="destinationfilter" id="destinationfilter">
-            <option value=""></option>
-            <option value="Jenin">جنين</option>
-            <option value="Nablus">نابلس</option>
-            <option value="Jerusalem">القدس</option>
-            <option value="Ramallah">رام الله والبيرة</option>
-            <option value="Tubas">طوباس</option>
-            <option value="Tulkarm">طولكرم</option>
-            <option value="Qalqilya">قلقيلية</option>
-            <option value="Salfit">سلفيت</option>
-            <option value="Jericho">أريحا</option>
-            <option value="Bethlehem">بيت لحم</option>
-            <option value="Hebron">الخليل</option>
-          </select>
-          </div>
-          <div>
-            <label for="genderfilter"> الجنس :</label>
-            <select name="genderfilter" id="genderfilter">
-            <option  value=""></option>
-                        <option value="ذكر">ذكر
+                <div>
+                    <label for="originfilter"> مكان الانطلاق :</label>
+                    <select name="originfilter" id="originfilter">
+                        <option value="" <?php if (isset($_POST['originfilter']) && $_POST['originfilter'] == '')
+                            echo 'selected="selected"'; ?>></option>
+                        <option value="Jenin" <?php if (isset($_POST['originfilter']) && $_POST['originfilter'] == 'Jenin')
+                            echo 'selected="selected"'; ?>>جنين</option>
+                        <option value="Nablus" <?php if (isset($_POST['originfilter']) && $_POST['originfilter'] == 'Nablus')
+                            echo 'selected="selected"'; ?>>نابلس</option>
+                        <option value="Jerusalem" <?php if (isset($_POST['originfilter']) && $_POST['originfilter'] == 'Jerusalem')
+                            echo 'selected="selected"'; ?>>القدس</option>
+                        <option value="Ramallah" <?php if (isset($_POST['originfilter']) && $_POST['originfilter'] == 'Ramallah')
+                            echo 'selected="selected"'; ?>>رام الله والبيرة</option>
+                        <option value="Tubas" <?php if (isset($_POST['originfilter']) && $_POST['originfilter'] == 'Tubas')
+                            echo 'selected="selected"'; ?>>طوباس</option>
+                        <option value="Tulkarm" <?php if (isset($_POST['originfilter']) && $_POST['originfilter'] == 'Tulkarm')
+                            echo 'selected="selected"'; ?>>طولكرم</option>
+
+                        <option value="Qalqilya" <?php if (isset($_POST['originfilter']) && $_POST['originfilter'] == 'Qalqilya')
+                            echo 'selected="selected"'; ?>>قلقيلية</option>
+                        <option value="Salfit" <?php if (isset($_POST['originfilter']) && $_POST['originfilter'] == 'Salfit')
+                            echo 'selected="selected"'; ?>>سلفيت</option>
+                        <option value="Jericho" <?php if (isset($_POST['originfilter']) && $_POST['originfilter'] == 'Jericho')
+                            echo 'selected="selected"'; ?>>اريحا</option>
+                        <option value="Bethlehem" <?php if (isset($_POST['originfilter']) && $_POST['originfilter'] == 'Bethlehem')
+                            echo 'selected="selected"'; ?>>بيت لحم</option>
+                        <option value="Hebron" <?php if (isset($_POST['originfilter']) && $_POST['originfilter'] == 'Hebron')
+                            echo 'selected="selected"'; ?>>الخليل</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="destinationfilter"> الوجهة :</label>
+                    <select name="destinationfilter" id="destinationfilter">
+                        <option value="" <?php if (isset($_POST['destinationfilter']) && $_POST['destinationfilter'] == '')
+                            echo 'selected="selected"'; ?>></option>
+                        <option value="Jenin" <?php if (isset($_POST['destinationfilter']) && $_POST['destinationfilter'] == 'Jenin')
+                            echo 'selected="selected"'; ?>>جنين</option>
+                        <option value="Nablus" <?php if (isset($_POST['destinationfilter']) && $_POST['destinationfilter'] == 'Nablus')
+                            echo 'selected="selected"'; ?>>نابلس</option>
+                        <option value="Jerusalem" <?php if (isset($_POST['destinationfilter']) && $_POST['destinationfilter'] == 'Jerusalem')
+                            echo 'selected="selected"'; ?>>القدس</option>
+                        <option value="Ramallah" <?php if (isset($_POST['destinationfilter']) && $_POST['destinationfilter'] == 'Ramallah')
+                            echo 'selected="selected"'; ?>>رام الله والبيرة
                         </option>
-                        <option value="أنثى">أنثى
+
+                        <option value="Tubas" <?php if (isset($_POST['destinationfilter']) && $_POST['destinationfilter'] == 'Tubas')
+                            echo 'selected="selected"'; ?>>
+                            طوباس</option>
+                        <option value="Tulkarm" <?php if (isset($_POST['destinationfilter']) && $_POST['destinationfilter'] == 'Tulkarm')
+                            echo 'selected="selected"'; ?>>طولكرم</option>
+                        <option value="Qalqilya" <?php if (isset($_POST['destinationfilter']) && $_POST['destinationfilter'] == 'Qalqilya')
+                            echo 'selected="selected"'; ?>>قلقيلية</option>
+                        <option value="Salfit" <?php if (isset($_POST['destinationfilter']) && $_POST['destinationfilter'] == 'Salfit')
+                            echo 'selected="selected"'; ?>>سلفيت</option>
+                        <option value="Jericho" <?php if (isset($_POST['destinationfilter']) && $_POST['destinationfilter'] == 'Jericho')
+                            echo 'selected="selected"'; ?>>أريحا</option>
+                        <option value="Bethlehem" <?php if (isset($_POST['destinationfilter']) && $_POST['destinationfilter'] == 'Bethlehem')
+                            echo 'selected="selected"'; ?>>بيت لحم</option>
+                        <option value="Hebron" <?php if (isset($_POST['destinationfilter']) && $_POST['destinationfilter'] == 'Hebron')
+                            echo 'selected="selected"'; ?>>الخليل</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="genderfilter"> الجنس :</label>
+                    <select name="genderfilter" id="genderfilter">
+                        <option value="" <?php if (isset($_POST['genderfilter']) && $_POST['genderfilter'] == '')
+                            echo 'selected="selected"'; ?>></option>
+                        <option value="ذكر" <?php if (isset($_POST['genderfilter']) && $_POST['genderfilter'] == 'ذكر')
+                            echo 'selected="selected"'; ?>>ذكر
                         </option>
-            </select>
-            </div>
-            <div>
-            <input class='btn' type="submit" name="submit" value="البحث">
-            </div>
+                        <option value="أنثى" <?php if (isset($_POST['genderfilter']) && $_POST['genderfilter'] == 'أنثى')
+                            echo 'selected="selected"'; ?>>أنثى
+                        </option>
+                    </select>
+                </div>
+                <div>
+
+                    <input class='btn' type="submit" name="submit" value="البحث">
+                </div>
             </div>
         </form>
         <ul id="Order-list">
             <?php
 
-        ?>
+            ?>
 
             <?php
-             $activeuser = $_SESSION['user']['id'];
-             $user_typpe = $_SESSION['user']['user_type'];
-             if ($user_typpe == 'user'){
-                 $trip_typpe = 'driver';
-                 $trip_typpe2 = '';
-             }
-             else{
-                 $trip_typpe = 'partner';
-                 $trip_typpe2 = 'driver';
-             }
-            // if (isset($_POST['submit'])) {
-            //     $originfilter = $_POST['originfilter'];
-            //     $destinationfilter = $_POST['destinationfilter'];
-            //     $genderfilter = $_POST['genderfilter'];
-            //     $sql = "SELECT * FROM trips INNER JOIN users ON users.id = trips.submitter_id AND trips.trip_status = 'pending' AND trips.joined_id = '0' AND trips.submitter_id != '$activeuser' AND (trip_type='$trip_typpe' OR trip_type = '$trip_typpe2') WHERE (users.gender='$genderfilter' OR trips.origin='$originfilter' OR trips.destination='$destinationfilter')  ORDER BY trips.trip_id DESC";
-            //     $result = $conn->query($sql);
-            
-            // }
-            if ((isset($_POST['originfilter']) && $_POST['originfilter']!= '') && (isset($_POST['destinationfilter']) && $_POST['destinationfilter']!= '')&& (isset($_POST['genderfilter']) && $_POST['genderfilter']!= '') ){
+            $activeuser = $_SESSION['user']['id'];
+            $user_typpe = $_SESSION['user']['user_type'];
+
+            if ($user_typpe == 'user') {
+                $trip_typpe = 'driver';
+                $trip_typpe2 = '';
+            } else {
+                $trip_typpe = 'partner';
+                $trip_typpe2 = 'driver';
+            }
+
+
+            if ((isset($_POST['originfilter']) && $_POST['originfilter'] != '') && (isset($_POST['destinationfilter']) && $_POST['destinationfilter'] != '') && (isset($_POST['genderfilter']) && $_POST['genderfilter'] != '')) {
                 $originfilter = $_POST['originfilter'];
                 $destinationfilter = $_POST['destinationfilter'];
                 $genderfilter = $_POST['genderfilter'];
                 $sql = "SELECT * FROM trips INNER JOIN users ON users.id = trips.submitter_id AND trips.trip_status = 'pending' AND trips.joined_id = '0' AND trips.submitter_id != '$activeuser' AND (trip_type='$trip_typpe' OR trip_type = '$trip_typpe2') WHERE (trips.origin='$originfilter' AND users.gender='$genderfilter' AND trips.destination='$destinationfilter' )  ORDER BY trips.trip_id DESC";
                 $result = $conn->query($sql);
-                
-            }
-            elseif ((isset($_POST['originfilter']) && $_POST['originfilter']!= '') && (isset($_POST['destinationfilter']) && $_POST['destinationfilter']!= '')){
+
+            } elseif ((isset($_POST['originfilter']) && $_POST['originfilter'] != '') && (isset($_POST['destinationfilter']) && $_POST['destinationfilter'] != '')) {
                 $originfilter = $_POST['originfilter'];
                 $destinationfilter = $_POST['destinationfilter'];
                 $sql = "SELECT * FROM trips INNER JOIN users ON users.id = trips.submitter_id AND trips.trip_status = 'pending' AND trips.joined_id = '0' AND trips.submitter_id != '$activeuser' AND (trip_type='$trip_typpe' OR trip_type = '$trip_typpe2') WHERE (trips.origin='$originfilter' AND trips.destination='$destinationfilter' )  ORDER BY trips.trip_id DESC";
                 $result = $conn->query($sql);
-                
-            }
-            elseif ((isset($_POST['originfilter']) && $_POST['originfilter']!= '') && (isset($_POST['genderfilter']) && $_POST['genderfilter']!= '') ){
+
+            } elseif ((isset($_POST['originfilter']) && $_POST['originfilter'] != '') && (isset($_POST['genderfilter']) && $_POST['genderfilter'] != '')) {
                 $originfilter = $_POST['originfilter'];
                 $genderfilter = $_POST['genderfilter'];
                 $sql = "SELECT * FROM trips INNER JOIN users ON users.id = trips.submitter_id AND trips.trip_status = 'pending' AND trips.joined_id = '0' AND trips.submitter_id != '$activeuser' AND (trip_type='$trip_typpe' OR trip_type = '$trip_typpe2') WHERE (trips.origin='$originfilter' AND users.gender='$genderfilter' )  ORDER BY trips.trip_id DESC";
                 $result = $conn->query($sql);
-                
-            }
-            elseif ( (isset($_POST['destinationfilter']) && $_POST['destinationfilter']!= '')&& (isset($_POST['genderfilter']) && $_POST['genderfilter']!= '') ){
+
+            } elseif ((isset($_POST['destinationfilter']) && $_POST['destinationfilter'] != '') && (isset($_POST['genderfilter']) && $_POST['genderfilter'] != '')) {
                 $destinationfilter = $_POST['destinationfilter'];
                 $genderfilter = $_POST['genderfilter'];
                 $sql = "SELECT * FROM trips INNER JOIN users ON users.id = trips.submitter_id AND trips.trip_status = 'pending' AND trips.joined_id = '0' AND trips.submitter_id != '$activeuser' AND (trip_type='$trip_typpe' OR trip_type = '$trip_typpe2') WHERE ( users.gender='$genderfilter' AND trips.destination='$destinationfilter' )  ORDER BY trips.trip_id DESC";
                 $result = $conn->query($sql);
-                
-            }
-            elseif (isset($_POST['originfilter']) && $_POST['originfilter']!= '') {
+
+            } elseif (isset($_POST['originfilter']) && $_POST['originfilter'] != '') {
                 $originfilter = $_POST['originfilter'];
                 $sql = "SELECT * FROM trips INNER JOIN users ON users.id = trips.submitter_id AND trips.trip_status = 'pending' AND trips.joined_id = '0' AND trips.submitter_id != '$activeuser' AND (trip_type='$trip_typpe' OR trip_type = '$trip_typpe2') WHERE (trips.origin='$originfilter' )  ORDER BY trips.trip_id DESC";
                 $result = $conn->query($sql);
-                
-            }
-            elseif (isset($_POST['destinationfilter']) && $_POST['destinationfilter']!= '') {
-                $destinationfilter = $_POST['destinationfilter'] ;
+
+            } elseif (isset($_POST['destinationfilter']) && $_POST['destinationfilter'] != '') {
+                $destinationfilter = $_POST['destinationfilter'];
                 $sql = "SELECT * FROM trips INNER JOIN users ON users.id = trips.submitter_id AND trips.trip_status = 'pending' AND trips.joined_id = '0' AND trips.submitter_id != '$activeuser' AND (trip_type='$trip_typpe' OR trip_type = '$trip_typpe2') WHERE (trips.destination='$destinationfilter' )  ORDER BY trips.trip_id DESC";
                 $result = $conn->query($sql);
-                
-            }
-            elseif (isset($_POST['genderfilter']) && $_POST['genderfilter']!= '') {
+
+            } elseif (isset($_POST['genderfilter']) && $_POST['genderfilter'] != '') {
                 $genderfilter = $_POST['genderfilter'];
                 $sql = "SELECT * FROM trips INNER JOIN users ON users.id = trips.submitter_id AND trips.trip_status = 'pending' AND trips.joined_id = '0' AND trips.submitter_id != '$activeuser' AND (trip_type='$trip_typpe' OR trip_type = '$trip_typpe2') WHERE (users.gender='$genderfilter' )  ORDER BY trips.trip_id DESC";
                 $result = $conn->query($sql);
-                
-            }
 
-           
-            
-            else{
+            } else {
                 $sql = "SELECT * FROM trips INNER JOIN users ON users.id = trips.submitter_id AND trips.trip_status = 'pending' AND trips.joined_id = '0' AND trips.submitter_id != '$activeuser' AND (trip_type='$trip_typpe' OR trip_type = '$trip_typpe2')  ORDER BY trips.trip_id DESC";
                 $result = $conn->query($sql);
 
             }
 
-           
+
+
+
 
             ?>
+
 
 
             <?php
             if (isset($result->num_rows) && $result->num_rows > 0) {
 
-            ?>
+                ?>
 
-            <?php
+                <?php
                 // output data of each row
                 while ($row = $result->fetch_assoc()) {
-            ?>
-            <?php echo displaytrip_error() ?>
-            <li class="card">
-                <div class="Order-element__info">
-                    <span class="spantrip<?php echo $row["trip_type"]; ?>"></span>
-                    <h2>
-                        <?php echo $row["displayed_Name"] ?>
-                    </h2>
-                    <img id="submitter_image" class="submitter_image" alt="<?php echo $row["displayed_Name"]?> image"
-                    src="uploads/<?php echo $row['image_url']; ?>" />
-                    <p>من :
-                        <?php
-                    if ($row["origin"] == "Tulkarm") {
-                        echo "طولكرم";
-                    } elseif ($row["origin"] == "Ramallah") {
-                        echo "رام الله و البيرة";
-                    } elseif ($row["origin"] == "Nablus") {
-                        echo "نابلس";
-                    } elseif ($row["origin"] == "Jericho") {
-                        echo "اريحا";
-                    } elseif ($row["origin"] == "Hebron") {
-                        echo "الخليل";
-                    } elseif ($row["origin"] == "Bethlehem") {
-                        echo "بيت لحم";
-                    } elseif ($row["origin"] == "Jenin") {
-                        echo "جنين";
-                    } elseif ($row["origin"] == "Qalqilya") {
-                        echo "قلقيلية";
-                    } elseif ($row["origin"] == "Salfit") {
-                        echo "سلفيت";
-                    } elseif ($row["origin"] == "Jerusalem") {
-                        echo "القدس";
-                    } elseif ($row["origin"] == "Tubas") {
-                        echo "طوباس";
-                    }
-                        ?>
-                    </p>
-                    <p>إلى :
-                        <?php
-                    if ($row["destination"] == "Tulkarm") {
-                        echo "طولكرم";
-                    } elseif ($row["destination"] == "Ramallah") {
-                        echo "رام الله و البيرة";
-                    } elseif ($row["destination"] == "Nablus") {
-                        echo "نابلس";
-                    } elseif ($row["destination"] == "Jericho") {
-                        echo "اريحا";
-                    } elseif ($row["destination"] == "Hebron") {
-                        echo "الخليل";
-                    } elseif ($row["destination"] == "Bethlehem") {
-                        echo "بيت لحم";
-                    } elseif ($row["destination"] == "Jenin") {
-                        echo "جنين";
-                    } elseif ($row["destination"] == "Qalqilya") {
-                        echo "قلقيلية";
-                    } elseif ($row["destination"] == "Salfit") {
-                        echo "سلفيت";
-                    } elseif ($row["destination"] == "Jerusalem") {
-                        echo "القدس";
-                    } elseif ($row["destination"] == "Tubas") {
-                        echo "طوباس";
-                    }
                     ?>
-                    </p>
+                    <?php echo displaytrip_error() ?>
+                    <li class="card">
+                        <div class="Order-element__info">
+                            <span class="spantrip<?php echo $row["trip_type"]; ?>"></span>
+                            <h2>
+                                <?php echo $row["displayed_Name"] ?>
+                            </h2>
+                            <img id="submitter_image" class="submitter_image" alt="<?php echo $row["displayed_Name"] ?> image"
+                                src="uploads/<?php echo $row['image_url']; ?>" />
+                            <p>من :
+                                <?php
+                                if ($row["origin"] == "Tulkarm") {
+                                    echo "طولكرم";
+                                } elseif ($row["origin"] == "Ramallah") {
+                                    echo "رام الله و البيرة";
+                                } elseif ($row["origin"] == "Nablus") {
+                                    echo "نابلس";
+                                } elseif ($row["origin"] == "Jericho") {
+                                    echo "اريحا";
+                                } elseif ($row["origin"] == "Hebron") {
+                                    echo "الخليل";
+                                } elseif ($row["origin"] == "Bethlehem") {
+                                    echo "بيت لحم";
+                                } elseif ($row["origin"] == "Jenin") {
+                                    echo "جنين";
+                                } elseif ($row["origin"] == "Qalqilya") {
+                                    echo "قلقيلية";
+                                } elseif ($row["origin"] == "Salfit") {
+                                    echo "سلفيت";
+                                } elseif ($row["origin"] == "Jerusalem") {
+                                    echo "القدس";
+                                } elseif ($row["origin"] == "Tubas") {
+                                    echo "طوباس";
+                                }
+                                ?>
+                            </p>
+                            <p>إلى :
+                                <?php
+                                if ($row["destination"] == "Tulkarm") {
+                                    echo "طولكرم";
+                                } elseif ($row["destination"] == "Ramallah") {
+                                    echo "رام الله و البيرة";
+                                } elseif ($row["destination"] == "Nablus") {
+                                    echo "نابلس";
+                                } elseif ($row["destination"] == "Jericho") {
+                                    echo "اريحا";
+                                } elseif ($row["destination"] == "Hebron") {
+                                    echo "الخليل";
+                                } elseif ($row["destination"] == "Bethlehem") {
+                                    echo "بيت لحم";
+                                } elseif ($row["destination"] == "Jenin") {
+                                    echo "جنين";
+                                } elseif ($row["destination"] == "Qalqilya") {
+                                    echo "قلقيلية";
+                                } elseif ($row["destination"] == "Salfit") {
+                                    echo "سلفيت";
+                                } elseif ($row["destination"] == "Jerusalem") {
+                                    echo "القدس";
+                                } elseif ($row["destination"] == "Tubas") {
+                                    echo "طوباس";
+                                }
+                                ?>
+                            </p>
+                            <?php
+                            $time = $row["Date_Time"];
+                            $timestamp = strtotime($time);
+
+                            $child1 = date('n.j.Y', $timestamp); // d.m.YYYY
+                            $child2 = date('H:i', $timestamp); // HH:ss
+                            ?>
+                            <p>التاريخ :
+                                <?php echo $child1; ?>
+                            </p>
+                            <p>الوقت :
+                                <?php echo $child2; ?>
+                            </p>
+                            <p>
+                                <?php echo $row["gender"]; ?>
+                            </p>
+
+                        </div>
+                        <div class="Order-element__actions">
+                            <a href="tripdetails.php?trip_id=<?php echo $row["trip_id"] ?>"
+                                onclick="return confirm('هل تريد مشاهدة تفاصيل الطلب؟')" class="btn btn--alt">عرض تفاصيل
+                                الطلب</a>
+                            <a href="tel:<?php echo $row["mobile_Number"]; ?>"> 📞 </a>
+                            <?php if ($row['submitter_id'] == $_SESSION['user']['id']) { ?>
+                                <a href="FinishTrip.php?trip_id=<?php echo $row["trip_id"] ?>"
+                                    onclick="return confirm('هل أنت متأكد من إنهاء الطلب؟')"
+                                    class="btn btn--alt btn--accept finishtripbutton">إنهاء الرحلة</a>
+                            <?php } ?>
+                            <?php
+                            if ($row['submitter_id'] != $_SESSION['user']['id']) {
+                                if ($row['trip_status'] != 'active') { ?>
+                                    <a href="JoinTripFun.php?joined_id=<?php echo $_SESSION["user"]["id"] ?>&trip_id=<?php echo $row["trip_id"] ?>"
+                                        onclick="return confirm('هل أنت متأكد من قبول الطلب؟')"
+                                        class="btn btn--alt btn--accept accepttrip<?php echo $row["trip_type"]; ?>button"></a>
+                                <?php }
+                            } ?>
+                        </div>
+                    </li>
+
                     <?php
-                    $time = $row["Date_Time"];
-                    $timestamp = strtotime($time);
-
-                    $child1 = date('n.j.Y', $timestamp); // d.m.YYYY
-                    $child2 = date('H:i', $timestamp); // HH:ss
-                    ?>
-                    <p>التاريخ :
-                        <?php echo $child1; ?>
-                    </p>
-                    <p>الوقت :
-                        <?php echo $child2; ?>
-                    </p>
-                    <p>
-                        <?php echo $row["gender"]; ?>
-                    </p>
-
-                </div>
-                <div class="Order-element__actions">
-                    <a href="tripdetails.php?trip_id=<?php echo $row["trip_id"] ?>" onclick="return confirm('هل تريد مشاهدة تفاصيل الطلب؟')"
-                        class="btn btn--alt">عرض تفاصيل الطلب</a>
-                    <a href="tel:<?php echo $row["mobile_Number"]; ?>"> 📞 </a>
-                    <?php if ($row['submitter_id'] == $_SESSION['user']['id']) { ?>
-                    <a href="FinishTrip.php?trip_id=<?php echo $row["trip_id"] ?>"
-                        onclick="return confirm('هل أنت متأكد من إنهاء الطلب؟')"
-                        class="btn btn--alt btn--accept finishtripbutton">إنهاء الرحلة</a>
-                    <?php } ?>
-                    <?php
-                if ($row['submitter_id'] != $_SESSION['user']['id']) {
-                    if ($row['trip_status'] != 'active') { ?>
-                            <a href="JoinTripFun.php?joined_id=<?php echo $_SESSION["user"]["id"] ?>&trip_id=<?php echo $row["trip_id"] ?>"
-                        onclick="return confirm('هل أنت متأكد من قبول الطلب؟')"
-                        class="btn btn--alt btn--accept accepttrip<?php echo $row["trip_type"]; ?>button"></a>
-                        <?php }
-                } ?>
-                </div>
-            </li>
-
-            <?php
                 }
-            ?>
+                ?>
 
 
-            <?php
+                <?php
             } else {
                 echo "لا يوجد طلبات";
             }

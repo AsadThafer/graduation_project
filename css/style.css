@@ -130,6 +130,7 @@ nav a {
 
 .signform input:invalid {
   border: 2px solid #670606;
+  text-align: left;
 }
 
 .tripformflex.divdesign {
@@ -177,21 +178,21 @@ nav a {
   background: #646a65;
 }
 
-textarea,
+/* textarea,
 .tripformflex input[type="datetime-local"] {
   resize: none;
   border: 1px solid #c7c8d2;
   border-radius: 8px;
-}
+} */
 
-.tripformflex select,
+/* .tripformflex select,
 .tripformflex option {
   padding-left: 90px;
   padding-right: 90px;
   border: 1px solid #c7c8d2;
   border-radius: 8px;
   text-align: center;
-}
+} */
 
 .mainscreendiv {
   display: flex;
@@ -358,7 +359,6 @@ button[disabled] {
   background: #f3f4ff;
 }
 
-
 @media screen and (max-width: 768px) {
   h1 {
     margin-top: 0px;
@@ -427,7 +427,7 @@ button[disabled] {
   .tripformflex.divdesign {
     width: 80%;
   }
-  .filtertripsForm{
+  .filtertripsForm {
     width: 100%;
   }
 }
@@ -486,6 +486,41 @@ button[disabled] {
   width: 100%;
 }
 
+input[type="text"],
+input[type="tel"],
+input[type="email"],
+textarea,
+input[type="datetime-local"],
+select,
+input[type="password"] {
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 2px solid #670606;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  color: #670606;
+  text-align: center;
+}
+
+input[type="file"] {
+  display: block;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 2px solid #670606;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  color: #670606;
+}
+
+#canceledits {
+  background-color: gray;
+  color: white;
+  border: 2px solid gray;
+
+  text-align: center;
+}
+
 .card {
   background: white;
   border-radius: 10px;
@@ -499,6 +534,8 @@ button[disabled] {
   align-items: center;
   padding: 1rem;
   border-top: 1px solid #ccc;
+  text-align: center;
+  font-size: 1rem;
 }
 
 .btn {
@@ -614,4 +651,3 @@ button[disabled] {
   top: 10px;
   right: 10px;
 }
-

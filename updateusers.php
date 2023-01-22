@@ -105,22 +105,23 @@ if ($result->num_rows > 0) {
                 <div class="input-group">
                     <label>User type</label>
                     <select name="user_type" id="user_type" value="<?php echo $usser_type; ?>">
-                        <option <?php if ($usser_type=='User')
-                        echo "selected"; ?> value="user">User</option>
-                        <option <?php if ($usser_type=='Driver')
-                        echo "selected"; ?> value="Driver">Driver</option>
-                        <option <?php if ($usser_type=='admin')
-                        echo "selected"; ?> value="admin">Admin</option>
+                        <option <?php if ($usser_type == 'User')
+                            echo "selected"; ?> value="user">User</option>
+                        <option <?php if ($usser_type == 'Driver')
+                            echo "selected"; ?> value="Driver">Driver</option>
+                        <option <?php if ($usser_type == 'admin')
+                            echo "selected"; ?> value="admin">Admin</option>
                     </select>
                 </div>
                 <div class="input-group">
                     <label>gender </label>
                     <select name="gender" id="gender" value="<?php echo $user_type; ?>">
-                        <option <?php if ($_SESSION['user']['gender'] == 'غير محدد') echo "selected"; ?> value="غير
+                        <option <?php if ($_SESSION['user']['gender'] == 'غير محدد')
+                            echo "selected"; ?> value="غير
                             محدد">غير محدد</option>
-                        <option <?php if ($ugender=='ذكر')
+                        <option <?php if ($ugender == 'ذكر')
                             echo "selected"; ?> value="ذكر">ذكر</option>
-                        <option <?php if ($ugender=='أنثى')
+                        <option <?php if ($ugender == 'أنثى')
                             echo "selected"; ?> value="أنثى">أنثى</option>
                     </select>
                 </div>

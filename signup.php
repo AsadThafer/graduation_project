@@ -36,18 +36,17 @@ if (isLoggedIn() == True) {
             <?php echo display_error(); ?>
             <form class="signform form-anticlear" id="signupform" action="signup.php" method="post" autocomplete="off">
                 <div class="signupdiv">
-                    <div <?php if (isset($name_error)): ?> class="form_error"
-                        <?php endif ?> >
+                    <div <?php if (isset($name_error)): ?> class="form_error" <?php endif ?>>
                         <input type="text" name="username" id="name" placeholder="اسم المستخدم" required>
                         <?php if (isset($name_error)): ?>
-                        <span>
-                            <?php echo $name_error; ?>
-                        </span>
+                            <span>
+                                <?php echo $name_error; ?>
+                            </span>
                         <?php endif ?>
                     </div>
                     <p>
                         <input dir="rtl" type="text" name="displayed_Name" id="displayed_Name"
-                            placeholder="الاسم بالكامل" required>
+                            placeholder="الاسم الظاهر" required>
                     </p>
                     <p>
                         <input type="email" name="email" id="email" placeholder="البريد الالكتروني" required>
@@ -62,7 +61,7 @@ if (isLoggedIn() == True) {
                         <i class="bi bi-eye-slash" id="togglePassword2"></i>
                     </p>
                     <p>
-                        <input type="tel" name="mobile_Number" id="mobile_Number" placeholder="+970 " value="05"
+                        <input type="tel" name="mobile_Number" id="mobile_Number" placeholder="05" value="05"
                             pattern="[0-9]{10}" required>
                     </p>
                     <p>

@@ -23,12 +23,12 @@ if (isLoggedIn() == False) {
   <script defer src="js/modal2.js"></script>
   <script defer src="js/modal3.js"></script>
   <script defer src="js/tripformLs.js"></script>
- 
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>البحث عن رحلة</title>
 </head>
 
-<body onload = "load();" >
+<body onload="load();">
   <header>
     <nav id="headernav">
       <a href="index.php">
@@ -45,14 +45,14 @@ if (isLoggedIn() == False) {
   </header>
   <main>
 
-    <div id="backdrop" ></div>
-    <div id="backdrop2" ></div>
+    <div id="backdrop"></div>
+    <div id="backdrop2"></div>
     <div class="mapmodal" id="map-modal">
       <div class="modal__content">
         <div id="map"></div>
-        <p  id="demo"></p>
-        <p  id="demo2"></p>
-        <button type="button" class="btn mapbtn getmylocation" >تحديد موقعك الحالي</button>
+        <p id="demo"></p>
+        <p id="demo2"></p>
+        <button type="button" class="btn mapbtn getmylocation">تحديد موقعك الحالي</button>
       </div>
       <div class="modal__actions">
         <button class="btn btn--passive">إلغاء</button>
@@ -75,34 +75,35 @@ if (isLoggedIn() == False) {
     <h1 class="formtitle">تحتاج توصيلة</h1>
     <form action="tripformfunctions.php" method="post" class="formtripdetails">
       <div class="divdesign tripformflex">
-      
-          <input hidden type="text" name="tripStartCoordinatesLat" id="tripStartCoordinatesLat" placeholder="0"/>       
-          <input hidden type="text" name="tripStartCoordinatesLng" id="tripStartCoordinatesLng" placeholder="0"/>
-          <input type="hidden" name="trip_type" id="trip_type" placeholder="trip_type" value='<?php echo $_GET['trip_type'] ?>'> 
-          <input hidden type="text" name="tripDestCoordinatesLat" id="tripDestCoordinatesLat" placeholder="0"/>
+
+        <input hidden type="text" name="tripStartCoordinatesLat" id="tripStartCoordinatesLat" placeholder="0" />
+        <input hidden type="text" name="tripStartCoordinatesLng" id="tripStartCoordinatesLng" placeholder="0" />
+        <input type="hidden" name="trip_type" id="trip_type" placeholder="trip_type"
+          value='<?php echo $_GET['trip_type'] ?>'>
+        <input hidden type="text" name="tripDestCoordinatesLat" id="tripDestCoordinatesLat" placeholder="0" />
 
 
-        
+
         <p>
         <p id='OldFormDataWasSaved'>
-        <span>تم الاحتفاظ ببياناتك السابقة حيث لم تكمل طلبك , لتسهيل تعبئة الطلب هل تريد البدء من جديد ؟</span>
-        <button onclick="resetForm()" class="cancelsubmit tripsubmit" type="reset">البدء من جديد</button>
+          <span>تم الاحتفاظ ببياناتك السابقة حيث لم تكمل طلبك , لتسهيل تعبئة الطلب هل تريد البدء من جديد ؟</span>
+          <button onclick="resetForm()" class="cancelsubmit tripsubmit" type="reset">البدء من جديد</button>
 
         </p>
-          <label for="origin">:مكان الانطلاق</label>
-          <select name="origin" id="origin">
-            <option value="Jenin">جنين</option>
-            <option value="Nablus">نابلس</option>
-            <option value="Jerusalem">القدس</option>
-            <option value="Ramallah">رام الله والبيرة</option>
-            <option value="Tubas">طوباس</option>
-            <option value="Tulkarm">طولكرم</option>
-            <option value="Qalqilya">قلقيلية</option>
-            <option value="Salfit">سلفيت</option>
-            <option value="Jericho">أريحا</option>
-            <option value="Bethlehem">بيت لحم</option>
-            <option value="Hebron">الخليل</option>
-          </select>
+        <label for="origin">:مكان الانطلاق</label>
+        <select required name="origin" id="origin">
+          <option value="Jenin">جنين</option>
+          <option value="Nablus">نابلس</option>
+          <option value="Jerusalem">القدس</option>
+          <option value="Ramallah">رام الله والبيرة</option>
+          <option value="Tubas">طوباس</option>
+          <option value="Tulkarm">طولكرم</option>
+          <option value="Qalqilya">قلقيلية</option>
+          <option value="Salfit">سلفيت</option>
+          <option value="Jericho">أريحا</option>
+          <option value="Bethlehem">بيت لحم</option>
+          <option value="Hebron">الخليل</option>
+        </select>
         </p>
         <p>
           <label for="origin_details">:تفاصيل مكان الانطلاق</label>
@@ -116,7 +117,7 @@ if (isLoggedIn() == False) {
 
         <p>
           <label for="destination">:الوجهة</label>
-          <select name="destination" id="destination">
+          <select required name="destination" id="destination">
             <option value="Jenin">جنين</option>
             <option value="Nablus">نابلس</option>
             <option value="Jerusalem">القدس</option>
@@ -140,15 +141,17 @@ if (isLoggedIn() == False) {
 
         </p>
         <p>
-        <button type="button" id="add-map-destination-button" class="btn">تحديد وجهتك على الخريطة </button>
+          <button type="button" id="add-map-destination-button" class="btn">تحديد وجهتك على الخريطة </button>
         </p>
-       
-          <input hidden  type="text" name="destinationtripCoordinatesLat" id="destinationtripCoordinatesLat"  placeholder="0" />
-          <input hidden type="text" name="destinationtripCoordinatesLng" id="destinationtripCoordinatesLng" placeholder="0" />
-          <span id='destlocationinfospan'></span>
+
+        <input hidden type="text" name="destinationtripCoordinatesLat" id="destinationtripCoordinatesLat"
+          placeholder="0" />
+        <input hidden type="text" name="destinationtripCoordinatesLng" id="destinationtripCoordinatesLng"
+          placeholder="0" />
+        <span id='destlocationinfospan'></span>
         <p>
           <label for="Date_Time">:موعد الرحلة</label>
-          <input required type="datetime-local" id="Date_Time" name="Date_Time" >
+          <input required type="datetime-local" id="Date_Time" name="Date_Time">
         </p>
         <p>
           <button name='submittrip' class="submit tripsubmit" onclick="submitFormFunction()">إرسال الطلب</button>
@@ -164,11 +167,11 @@ if (isLoggedIn() == False) {
       </nav>
   </main>
   </footer>
- 
 
 
-           <script defer async
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCNVumAEwpkaac91aZVxJD6ShIaK8qSSc&callback=initMap&initDestMap&v=weekly"
-    ></script>
+
+  <script defer async
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC92svt2-dbLAhoTiRWgMQBJJglOTow9IY&callback=initMap&initDestMap&v=weekly"></script>
 </body>
+
 </html>

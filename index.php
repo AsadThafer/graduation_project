@@ -1,5 +1,6 @@
 <?php include('functions.php');
 use function MongoDB\BSON\toJSON;
+
 if (isLoggedIn() == False) {
     $_SESSION['msg'] = "You need to Sign in first";
     header('location: signin.php');
@@ -23,7 +24,8 @@ if ($conn->connect_error) {
 <head>
     <meta charset="UTF-8">
     <meta name="author" content="Asad Asad">
-    <meta name="description" content="Wasselni Home Page Where you can find your current Active Trip and you can Choose to create new Trip">
+    <meta name="description"
+        content="Wasselni Home Page Where you can find your current Active Trip and you can Choose to create new Trip">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="icon" href="img/wasselni_logo_trans_notext.png" type="image/x-icon">
     <link rel="stylesheet" href="css/style.css" type="text/css">
@@ -48,143 +50,177 @@ if ($conn->connect_error) {
         </nav>
     </header>
     <main>
-        
+
         <section>
             <div class="divdesign mainscreendiv">
                 <span class="title">تحتاج لتوصيلة؟</span>
-                <button class="mainscreenbuttonride" onclick="location.href='tripform.php?trip_type=partner'" type="button">
+                <button class="mainscreenbuttonride" onclick="location.href='tripform.php?trip_type=partner'"
+                    type="button">
                     املأ بيانات وجهتك الآن</button>
                 <span></span>
             </div>
             <div class="divdesign mainscreendiv">
                 <span class="title">تحتاج شريك لرحلتك؟</span>
-                <button <?php if ($_SESSION['user']['user_type']=='user') { echo 'disabled '; } ?>
-                    class="mainscreenbuttonride driverform" onclick="location.href='tripform.php?trip_type=driver'" type="button">
+                <button <?php if ($_SESSION['user']['user_type'] == 'user') {
+                    echo 'disabled ';
+                } ?>
+                    class="mainscreenbuttonride driverform" onclick="location.href='tripform.php?trip_type=driver'"
+                    type="button">
                     املأ بيانات وجهتك الآن</button>
-                <span class="rednote" <?php if (isDriver() || isAdmin()) { echo 'style="display:none;"'; } ?>>تحتاج
+                <span class="rednote" <?php if (isDriver() || isAdmin()) {
+                    echo 'style="display:none;"';
+                } ?>>تحتاج
                     لتوثيق
                     حسابك مسبقا كمالك مركبة*</span>
             </div>
         </section>
         <?php
 
-            $activeuser = $_SESSION['user']['id'];
-            $sql = "SELECT * FROM trips INNER JOIN users ON users.id = trips.submitter_id AND (trips.trip_status = 'active' OR trips.trip_status = 'pending') AND (trips.joined_id = '$activeuser' OR trips.submitter_id = '$activeuser') ";
-            $result = $conn->query($sql);
+        $activeuser = $_SESSION['user']['id'];
+        $sql = "SELECT * FROM trips INNER JOIN users ON users.id = trips.submitter_id AND (trips.trip_status = 'active' OR trips.trip_status = 'pending') AND (trips.joined_id = '$activeuser' OR trips.submitter_id = '$activeuser') ";
+        $result = $conn->query($sql);
+
+        ?>
+        <?php echo DisplaySuccess(); ?>
+
+
+        <?php
+        if ($result->num_rows > 0) {
 
             ?>
-            <?php echo DisplaySuccess(); ?>
-
-
-            <?php
-            if ($result->num_rows > 0) {
-
-            ?>
-             <section id="entry-text" class="card">
-            <p> طلبك النشط حاليا </p>
-        </section>
-        <ul id="Order-list">
-            <?php
-            echo "<script>console.log('Active Orders: " . $result->num_rows . "');</script>";
+            <section id="entry-text" class="card">
+                <p> طلبك النشط حاليا </p>
+            </section>
+            <ul id="Order-list">
+                <?php
+                echo "<script>console.log('Active Orders: " . $result->num_rows . "');</script>";
 
                 // output data of each row
                 while ($row = $result->fetch_assoc()) {
-            ?>
-       
-            <li class="card">
-                <div class="Order-element__info">
-                    <span class="spantrip<?php echo $row["trip_type"]; ?>"></span>
-                    <h2>
-                        <?php echo $row["displayed_Name"] ?>
-                    </h2>
-                    <img id="submitter_image" class="submitter_image" alt="<?php echo $row["displayed_Name"]?> image"
-                    src="uploads/<?php echo $row['image_url']; ?>" />
-                    <p>من :
-                        <?php 
-                        if ($row["origin"] == "Tulkarm"){echo "طولكرم";}
-                        elseif ($row["origin"] == "Ramallah"){echo "رام الله و البيرة";}
-                        elseif ($row["origin"] == "Nablus"){echo "نابلس";}
-                        elseif ($row["origin"] == "Jericho"){echo "اريحا";}
-                        elseif ($row["origin"] == "Hebron"){echo "الخليل";}
-                        elseif ($row["origin"] == "Bethlehem"){echo "بيت لحم";}
-                        elseif ($row["origin"] == "Jenin"){echo "جنين";}
-                        elseif ($row["origin"] == "Qalqilya"){echo "قلقيلية";}
-                        elseif ($row["origin"] == "Salfit"){echo "سلفيت";}
-                        elseif ($row["origin"] == "Jerusalem"){echo "القدس";}
-                        elseif ($row["origin"] == "Tubas"){echo "طوباس";}
-                        ?>
-                    </p>
-                    <p>إلى :
-                    <?php 
-                        if ($row["destination"] == "Tulkarm"){echo "طولكرم";}
-                        elseif ($row["destination"] == "Ramallah"){echo "رام الله و البيرة";}
-                        elseif ($row["destination"] == "Nablus"){echo "نابلس";}
-                        elseif ($row["destination"] == "Jericho"){echo "اريحا";}
-                        elseif ($row["destination"] == "Hebron"){echo "الخليل";}
-                        elseif ($row["destination"] == "Bethlehem"){echo "بيت لحم";}
-                        elseif ($row["destination"] == "Jenin"){echo "جنين";}
-                        elseif ($row["destination"] == "Qalqilya"){echo "قلقيلية";}
-                        elseif ($row["destination"] == "Salfit"){echo "سلفيت";}
-                        elseif ($row["destination"] == "Jerusalem"){echo "القدس";}
-                        elseif ($row["destination"] == "Tubas"){echo "طوباس";}
                     ?>
-                    </p>
-                    <?php
-                    $time = $row["Date_Time"];
-                    $timestamp = strtotime($time);
 
-                    $child1 = date('n.j.Y', $timestamp); // d.m.YYYY
-                    $child2 = date('H:i', $timestamp); // HH:ss
-                    ?>
-                    <p>التاريخ :
-                        <?php echo $child1; ?>
-                    </p>
-                    <p>الوقت :
-                        <?php echo $child2; ?>
-                    </p>
-                    <p>
-                        <?php echo $row["gender"]; ?>
-                    </p>
-
-                </div>
-                <div class="Order-element__actions">
-                    <a href="tripdetails.php?trip_id=<?php echo $row["trip_id"]?>" onclick="return confirm('هل تريد مشاهدة تفاصيل الطلب؟')" class="btn btn--alt">عرض تفاصيل الطلب</a>
-                    <a href="tel:<?php echo $row["mobile_Number"]; ?>"> 📞 </a>
-                    <?php if ($row['submitter_id'] == $_SESSION['user']['id']) { ?>
-                    <a href="FinishTrip.php?trip_id=<?php echo $row["trip_id"]?>" onclick="return confirm('هل أنت متأكد من إنهاء الطلب؟')"
-                        class="btn btn--alt btn--accept finishtripbutton">إنهاء الرحلة</a>
-                    <?php } ?>
-                    <?php if ($row["joined_id"] == $_SESSION["user"]["id"]){ ?>
-                        <a href="LeaveTrip.php?trip_id=<?php echo $row["trip_id"]?>" onclick="return confirm('هل أنت متأكد من رغبتك بمغادرة الطلب؟')"
-                        class="btn btn--alt btn--accept finishtripbutton">مغادرة الرحلة </a>
-                </div>
-               
-                   
-                    <?php } ?>
-                    <?php if ($row["joined_id"] != 0) { ?>
-                    <div class="Order-element__actions">
-                            <p>
+                    <li class="card">
+                        <div class="Order-element__info">
+                            <span class="spantrip<?php echo $row["trip_type"]; ?>"></span>
+                            <h2>
+                                <?php echo $row["displayed_Name"] ?>
+                            </h2>
+                            <img id="submitter_image" class="submitter_image" alt="<?php echo $row["displayed_Name"] ?> image"
+                                src="uploads/<?php echo $row['image_url']; ?>" />
+                            <p>من :
                                 <?php
-                        $sql3 = "SELECT * FROM trips INNER JOIN users ON users.id = trips.joined_id AND (trips.trip_status = 'active' OR trips.trip_status = 'pending') AND (trips.joined_id = '$activeuser' OR trips.submitter_id = '$activeuser') ";
-                        $result3 = $conn->query($sql3); ?>
-        <?php while ($rowjoined = $result3->fetch_assoc()) { ?>
-                            <p> 
-                                قام بالانضمام : 
-                                <?php echo $rowjoined['displayed_Name']; ?>
-
+                                if ($row["origin"] == "Tulkarm") {
+                                    echo "طولكرم";
+                                } elseif ($row["origin"] == "Ramallah") {
+                                    echo "رام الله و البيرة";
+                                } elseif ($row["origin"] == "Nablus") {
+                                    echo "نابلس";
+                                } elseif ($row["origin"] == "Jericho") {
+                                    echo "اريحا";
+                                } elseif ($row["origin"] == "Hebron") {
+                                    echo "الخليل";
+                                } elseif ($row["origin"] == "Bethlehem") {
+                                    echo "بيت لحم";
+                                } elseif ($row["origin"] == "Jenin") {
+                                    echo "جنين";
+                                } elseif ($row["origin"] == "Qalqilya") {
+                                    echo "قلقيلية";
+                                } elseif ($row["origin"] == "Salfit") {
+                                    echo "سلفيت";
+                                } elseif ($row["origin"] == "Jerusalem") {
+                                    echo "القدس";
+                                } elseif ($row["origin"] == "Tubas") {
+                                    echo "طوباس";
+                                }
+                                ?>
                             </p>
-                        <?php }
-                    } ?>
-                    
-                </div>
-                  
-              
-                
-            </li>
+                            <p>إلى :
+                                <?php
+                                if ($row["destination"] == "Tulkarm") {
+                                    echo "طولكرم";
+                                } elseif ($row["destination"] == "Ramallah") {
+                                    echo "رام الله و البيرة";
+                                } elseif ($row["destination"] == "Nablus") {
+                                    echo "نابلس";
+                                } elseif ($row["destination"] == "Jericho") {
+                                    echo "اريحا";
+                                } elseif ($row["destination"] == "Hebron") {
+                                    echo "الخليل";
+                                } elseif ($row["destination"] == "Bethlehem") {
+                                    echo "بيت لحم";
+                                } elseif ($row["destination"] == "Jenin") {
+                                    echo "جنين";
+                                } elseif ($row["destination"] == "Qalqilya") {
+                                    echo "قلقيلية";
+                                } elseif ($row["destination"] == "Salfit") {
+                                    echo "سلفيت";
+                                } elseif ($row["destination"] == "Jerusalem") {
+                                    echo "القدس";
+                                } elseif ($row["destination"] == "Tubas") {
+                                    echo "طوباس";
+                                }
+                                ?>
+                            </p>
+                            <?php
+                            $time = $row["Date_Time"];
+                            $timestamp = strtotime($time);
 
-            <?php
-                }}
-            ?>
+                            $child1 = date('n.j.Y', $timestamp); // d.m.YYYY
+                            $child2 = date('H:i', $timestamp); // HH:ss
+                            ?>
+                            <p>التاريخ :
+                                <?php echo $child1; ?>
+                            </p>
+                            <p>الوقت :
+                                <?php echo $child2; ?>
+                            </p>
+                            <p>
+                                <?php echo $row["gender"]; ?>
+                            </p>
+
+                        </div>
+                        <div class="Order-element__actions">
+                            <a href="tripdetails.php?trip_id=<?php echo $row["trip_id"] ?>"
+                                onclick="return confirm('هل تريد مشاهدة تفاصيل الطلب؟')" class="btn btn--alt">عرض التفاصيل </a>
+                            <a href="tel:<?php echo $row["mobile_Number"]; ?>"> 📞 </a>
+                            <?php if ($row['submitter_id'] == $_SESSION['user']['id']) { ?>
+                                <a href="FinishTrip.php?trip_id=<?php echo $row["trip_id"] ?>"
+                                    onclick="return confirm('هل أنت متأكد من إنهاء الطلب؟')"
+                                    class="btn btn--alt btn--accept finishtripbutton">إنهاء الرحلة</a>
+                            <?php } ?>
+                            <?php if ($row["joined_id"] == $_SESSION["user"]["id"]) { ?>
+                                <a href="LeaveTrip.php?trip_id=<?php echo $row["trip_id"] ?>"
+                                    onclick="return confirm('هل أنت متأكد من رغبتك بمغادرة الطلب؟')"
+                                    class="btn btn--alt btn--accept finishtripbutton">مغادرة الرحلة </a>
+                            </div>
+
+
+                        <?php } ?>
+                        <?php if ($row["joined_id"] != 0) { ?>
+                            <div class="Order-element__actions">
+                                <p>
+                                    <?php
+                                    $sql3 = "SELECT * FROM trips INNER JOIN users ON users.id = trips.joined_id AND (trips.trip_status = 'active' OR trips.trip_status = 'pending') AND (trips.joined_id = '$activeuser' OR trips.submitter_id = '$activeuser') ";
+                                    $result3 = $conn->query($sql3); ?>
+                                    <?php while ($rowjoined = $result3->fetch_assoc()) { ?>
+                                    <p>
+                                        قام بالانضمام :
+                                        <?php echo $rowjoined['displayed_Name']; ?>
+
+                                    </p>
+                                <?php }
+                        } ?>
+
+                        </div>
+
+
+
+                    </li>
+
+                    <?php
+                }
+        }
+        ?>
 
     </main>
     <footer>

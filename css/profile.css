@@ -7,7 +7,7 @@
 .profile_image {
   width: 160px;
   height: 160px;
-  border-radius: 8px;
+  border-radius: 50%;
   margin-top: 20px;
 }
 
@@ -17,6 +17,24 @@
   line-height: 16px;
   color: #545563;
   padding: 20px;
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="email"],
+select {
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 2px solid #670606;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  color: #670606;
+}
+
+#delete_image {
+  margin: 15px;
+  background-color: gray;
+  border: gray;
 }
 
 .profile_details {

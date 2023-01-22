@@ -38,39 +38,40 @@ if (isLoggedIn() == False) {
     </header>
     <main>
         <h2 style='text-align:center'>المعلومات الشخصية</h2>
-        <div class="divdesign" id="profile">
+        <div class="divdesign uploadimageform" id="profile">
             <div class='img_updateinfo'>
                 <?php if (isset($_SESSION['user'])): ?>
-                <img id="myProfileImage" class="profile_image"
-                    src="uploads/<?php echo $_SESSION['user']['image_url']; ?>" />
-                <!-- The Modal -->
-                <div id="myModal" class="modal">
-                    <!-- Modal content -->
-                    <div class="modal-content">
-                        <span class="modalclose">&times;</span>
-                        <form method="post" action="upload.php?id=<?php echo $id; ?>" enctype="multipart/form-data">
-                            <div class="input-group">
-                                <label>تعديل صورتك </label>
-                                <input type="file" name="my_image">
-                            </div>
-                            <div class="input-group">
-                                <button type="submit" class="btn" name="updateimage_submit">حفظ التغييرات </button>
-                            </div>
-                        </form>
-                        <form method="post" action="upload.php?id=<?php echo $id; ?>" enctype="multipart/form-data">
-                            <div class="input-group">
-                                <button type="submit" class="btn" name="delete_image">حذف الصورة</button>
-                            </div>
-                        </form>
-                    </div>
+                    <img id="myProfileImage" class="profile_image"
+                        src="uploads/<?php echo $_SESSION['user']['image_url']; ?>" />
+                    <!-- The Modal -->
+                    <div id="myModal" class="modal">
+                        <!-- Modal content -->
+                        <div class="modal-content">
+                            <span class="modalclose">&times;</span>
+                            <form method="post" action="upload.php?id=<?php echo $id; ?>" enctype="multipart/form-data">
+                                <div class="input-group">
+                                    <label>تعديل صورتك </label>
+                                    <input type="file" name="my_image">
+                                </div>
+                                <div class="input-group">
+                                    <button type="submit" class="btn" name="updateimage_submit">حفظ التغييرات </button>
+                                </div>
+                            </form>
+                            <form method="post" action="upload.php?id=<?php echo $id; ?>" enctype="multipart/form-data">
+                                <div class="input-group">
+                                    <button type="submit" class="btn" id="delete_image" name="delete_image">حذف
+                                        الصورة</button>
+                                </div>
+                            </form>
+                        </div>
 
+                    </div>
                 </div>
-            </div>
-            <div id='usertypeonprofile'>
-                <?php echo $_SESSION['user']['user_type']; ?>
-                <br>
-                <br>
-                <?php if (isAdmin()) {
+                <div id='usertypeonprofile'>
+                    <?php echo $_SESSION['user']['user_type']; ?>
+                    <br>
+                    <br>
+                    <?php if (isAdmin()) {
                         echo "<a <a href='create_user.php'>إضافة مستخدم جديد</a>";
                         echo "<br>";
                         echo "<br>";
@@ -82,7 +83,7 @@ if (isLoggedIn() == False) {
                         echo "<br>";
                         echo "<a href='AllDrivers.php?'>قائمة السائقين الموثقين </a>";
                     } ?>
-                <?php if (!isDriver()) {
+                    <?php if (!isDriver()) {
                         if ($_SESSION['user']['user_status'] == 'pending') {
                             echo "<p>طلبك قيد المراجعة" . "</p>";
                         } else if ($_SESSION['user']['user_status'] == 'Upgraded') {
@@ -104,44 +105,44 @@ if (isLoggedIn() == False) {
 
                     } ?>
 
-            </div>
-            <form id='updateprofileform' class="update_profile_form" method="post" action="profile.php">
-                <?php echo display_error(); ?>
-                <div class="input-group">
-                    <label>الاسم</label>
-                    <input dir=rtl type="text" name="displayed_Name"
-                        value="<?php echo $_SESSION['user']['displayed_Name']; ?>">
                 </div>
-                <div class="input-group">
-                    <label> رقم الموبايل</label>
-                    <input type="tel" name="mobile_Number" pattern="[0-9]{10}"
-                        value="<?php echo ucfirst($_SESSION['user']['mobile_Number']); ?>">
-                </div>
-                <div class="input-group">
-                    <label>البريد الالكتروني</label>
-                    <input type="email" name="email" value="<?php echo ucfirst($_SESSION['user']['email']); ?>">
-                </div>
-                <div class="input-group">
-                    <label>الجنس</label>
-                    <select name="gender" id="gender" value="<?php echo ucfirst($_SESSION['user']['gender']); ?>">
-                        <option <?php if ($_SESSION['user']['gender']=='غير محدد')
-                        echo "selected"; ?> value="غير
-                            محدد">غير محدد</option>
-                        <option <?php if ($_SESSION['user']['gender']=='ذكر')
-                        echo "selected"; ?> value="ذكر">ذكر
-                        </option>
-                        <option <?php if ($_SESSION['user']['gender']=='أنثى')
-                        echo "selected"; ?> value="أنثى">أنثى
-                        </option>
-                    </select>
-                </div>
-                <div class="input-group">
-                    <input type="hidden" name="id" value="<?php echo ucfirst($_SESSION['user']['id']); ?>"></input>
-                </div>
-                <a id='enableedit' onclick='toggleFormElements(false)' class="btn" name="update_btn">تعديل البيانات</a>
-                <button class='updatesubmit' id='submitedits' type="submit" class="btn" name="update_btn">حفظ التغييرات
-                </button>
-                <a id='canceledits' href='profile.php' class="btn" name="update_btn">إلغاء</a>
+                <form id='updateprofileform' class="update_profile_form" method="post" action="profile.php">
+                    <?php echo display_error(); ?>
+                    <div class="input-group">
+                        <label>الاسم</label>
+                        <input dir=rtl type="text" name="displayed_Name"
+                            value="<?php echo $_SESSION['user']['displayed_Name']; ?>">
+                    </div>
+                    <div class="input-group">
+                        <label> رقم الموبايل</label>
+                        <input type="tel" name="mobile_Number" pattern="[0-9]{10}"
+                            value="<?php echo ucfirst($_SESSION['user']['mobile_Number']); ?>">
+                    </div>
+                    <div class="input-group">
+                        <label>البريد الالكتروني</label>
+                        <input type="email" name="email" value="<?php echo ucfirst($_SESSION['user']['email']); ?>">
+                    </div>
+                    <div class="input-group">
+                        <label>الجنس</label>
+                        <select name="gender" id="gender" value="<?php echo ucfirst($_SESSION['user']['gender']); ?>">
+                            <option <?php if ($_SESSION['user']['gender'] == 'غير محدد')
+                                echo "selected"; ?> value="غير
+                                        محدد">غير محدد</option>
+                            <option <?php if ($_SESSION['user']['gender'] == 'ذكر')
+                                echo "selected"; ?> value="ذكر">ذكر
+                            </option>
+                            <option <?php if ($_SESSION['user']['gender'] == 'أنثى')
+                                echo "selected"; ?> value="أنثى">أنثى
+                            </option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <input type="hidden" name="id" value="<?php echo ucfirst($_SESSION['user']['id']); ?>"></input>
+                    </div>
+                    <a id='enableedit' onclick='toggleFormElements(false)' class="btn" name="update_btn">تعديل البيانات</a>
+                    <button class='updatesubmit' id='submitedits' type="submit" class="btn" name="update_btn">حفظ التغييرات
+                    </button>
+                    <a id='canceledits' href='profile.php' class="btn" name="update_btn">إلغاء</a>
 
                 <?php endif ?>
         </div>
