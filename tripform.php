@@ -169,9 +169,8 @@ if (isLoggedIn() == False) {
   </footer>
 
 
-
   <script defer async
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC92svt2-dbLAhoTiRWgMQBJJglOTow9IY&callback=initMap&initDestMap&v=weekly"></script>
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCNVumAEwpkaac91aZVxJD6ShIaK8qSSc&callback=initMap&initDestMap&v=weekly"></script>
 </body>
 
 </html>
